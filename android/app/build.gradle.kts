@@ -30,16 +30,23 @@ android {
         versionName = flutter.versionName
     }
 
-    flavorDimensions = ["default"]
+    flavorDimensions += "default"
 
     productFlavors {
-        development {
-            dimension "default"
-            applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
+        create("development") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Vaultly development")
+            applicationIdSuffix = ".dev"
         }
-        production {
-            dimension "default"
+        create("production") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Vaultly")
         }
     } 
 
