@@ -18,6 +18,7 @@ dependencies:
 
   # UI
   flutter_svg:
+  google_fonts: ^6.2.1
   
   # Data Storage
   shared_preferences: ^2.5.5
