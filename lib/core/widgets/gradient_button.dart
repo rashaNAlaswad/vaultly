@@ -16,12 +16,14 @@ class GradientButton extends StatefulWidget {
     required this.onTap,
     this.icon,
     this.enabled = true,
+    this.isLoading = false,
   });
 
   final String label;
   final VoidCallback onTap;
   final IconData? icon;
   final bool enabled;
+  final bool isLoading;
 
   @override
   State<GradientButton> createState() => _GradientButtonState();
@@ -36,69 +38,71 @@ class _GradientButtonState extends State<GradientButton> {
       label: widget.label,
       button: true,
       enabled: widget.enabled,
-      child: GestureDetector(
-        onTapDown: widget.enabled
-            ? (_) => setState(() => _pressed = true)
-            : null,
-        onTapUp: widget.enabled
-            ? (_) {
-                setState(() => _pressed = false);
-                widget.onTap();
-              }
-            : null,
-        onTapCancel: () => setState(() => _pressed = false),
-        child: AnimatedScale(
-          scale: _pressed ? 0.97 : 1.0,
-          duration: const Duration(milliseconds: 100),
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 20.h),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: widget.enabled
-                    ? [AppColors.primary, AppColors.primaryContainer]
-                    : [
-                        AppColors.surfaceContainerHigh,
-                        AppColors.surfaceContainerHighest,
-                      ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(12.r),
-              boxShadow: widget.enabled
-                  ? const [
-                      BoxShadow(
-                        color: AppColors.primaryContainerGlow40,
-                        blurRadius: 25,
-                        offset: Offset(0, 8),
-                      ),
-                    ]
+      child: widget.isLoading
+          ? SizedBox(child: Center(child: CircularProgressIndicator()))
+          : GestureDetector(
+              onTapDown: widget.enabled && !widget.isLoading
+                  ? (_) => setState(() => _pressed = true)
                   : null,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  widget.label,
-                  style: widget.enabled
-                      ? TextStyles.buttonLabel
-                      : TextStyles.buttonLabelDisabled,
-                ),
-                if (widget.icon != null) ...[
-                  12.horizontalSpace,
-                  Icon(
-                    widget.icon,
-                    color: widget.enabled
-                        ? AppColors.onPrimary
-                        : AppColors.subtleText,
-                    size: 20,
+              onTapUp: widget.enabled && !widget.isLoading
+                  ? (_) {
+                      setState(() => _pressed = false);
+                      widget.onTap();
+                    }
+                  : null,
+              onTapCancel: () => setState(() => _pressed = false),
+              child: AnimatedScale(
+                scale: _pressed ? 0.97 : 1.0,
+                duration: const Duration(milliseconds: 100),
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: widget.enabled
+                          ? [AppColors.primary, AppColors.primaryContainer]
+                          : [
+                              AppColors.surfaceContainerHigh,
+                              AppColors.surfaceContainerHighest,
+                            ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(12.r),
+                    boxShadow: widget.enabled
+                        ? const [
+                            BoxShadow(
+                              color: AppColors.primaryContainerGlow40,
+                              blurRadius: 25,
+                              offset: Offset(0, 8),
+                            ),
+                          ]
+                        : null,
                   ),
-                ],
-              ],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.label,
+                        style: widget.enabled
+                            ? TextStyles.buttonLabel
+                            : TextStyles.buttonLabelDisabled,
+                      ),
+                      if (widget.icon != null) ...[
+                        12.horizontalSpace,
+                        Icon(
+                          widget.icon,
+                          color: widget.enabled
+                              ? AppColors.onPrimary
+                              : AppColors.subtleText,
+                          size: 20,
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
