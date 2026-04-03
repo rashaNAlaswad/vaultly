@@ -36,11 +36,12 @@ class TextStyles {
   );
 
   //Hero section
-  static final heroTitle = _jakarta(36, AppColors.onSurface, FontWeight.w800);
+  static final heroTitle = _jakarta(30, AppColors.onSurface, FontWeight.w800);
   static final heroSubtitle = _inter(
     14,
     AppColors.onSurfaceVariant,
     FontWeight.w400,
+    height: 1.6,
   );
 
   //Form
@@ -64,4 +65,33 @@ class TextStyles {
     FontWeight.w700,
     letterSpacing: 0.5,
   );
+
+  // Navigation / Screen headers
+  static final screenTitle = _jakarta(16, AppColors.onSurface, FontWeight.w700);
+
+  // link text (same size as bodyRegular)
+  static final bodyLink = _inter(14, AppColors.primary, FontWeight.w600);
+
+  // Small error messages
+  static final errorSmall = _inter(13, AppColors.error, FontWeight.w500);
+
+  // Small muted captions
+  static final captionMuted = _inter(
+    13,
+    AppColors.onSurfaceVariant,
+    FontWeight.w400,
+  );
+
+  // Small primary-coloured captions (active links, resend)
+  static final captionPrimary = _inter(13, AppColors.primary, FontWeight.w600);
+
+  // Small disabled / countdown captions
+  static final captionDisabled = _inter(
+    13,
+    AppColors.mutedText,
+    FontWeight.w600,
+  );
+
+  // OTP digit display inside a box
+  static final otpDigit = _jakarta(22, AppColors.onSurface, FontWeight.w700);
 }

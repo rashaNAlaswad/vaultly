@@ -56,4 +56,19 @@ class AppColors {
 
   /// onSurfaceVariant 50%
   static const Color onSurfaceVariantHalf = Color(0x80D5C1D2);
+
+  /// primary 5%
+  static const Color primaryGlow5 = Color(0x0DF9ABFF);
+
+  /// primaryContainer 5%
+  static const Color primaryContainerGlow5 = Color(0x0D9C27B0);
+
+  /// primaryContainer 20%
+  static const Color primaryContainerGlow20 = Color(0x339C27B0);
+
+  /// primary 30%
+  static const Color primaryGlow30 = Color(0x4DF9ABFF);
+
+  /// Muted grey for disabled/countdown text
+  static const Color mutedText = Color(0xFF777777);
 }
