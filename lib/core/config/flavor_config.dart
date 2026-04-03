@@ -1,15 +1,15 @@
 enum Flavor { development, production }
 
 class FlavorConfig {
+  static const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+  static const supabasePublishableKey = String.fromEnvironment(
+    'SUPABASE_PUBLISHABLE_KEY',
+  );
+
   final Flavor flavor;
   final String name;
-  final String baseUrl;
 
-  FlavorConfig._({
-    required this.flavor,
-    required this.name,
-    required this.baseUrl,
-  });
+  FlavorConfig._({required this.flavor, required this.name});
 
   static FlavorConfig? _instance;
   static FlavorConfig get instance => _instance!;
@@ -17,20 +17,7 @@ class FlavorConfig {
   static bool get isDev => _instance?.isDevelopment ?? false;
 
   static void setup({required Flavor flavor}) {
-    _instance = FlavorConfig._(
-      flavor: flavor,
-      name: flavor.name,
-      baseUrl: _getBaseUrl(flavor),
-    );
-  }
-
-  static String _getBaseUrl(Flavor flavor) {
-    switch (flavor) {
-      case Flavor.development:
-        return 'https://dev-api.yourapp.com';
-      case Flavor.production:
-        return 'https://api.yourapp.com';
-    }
+    _instance = FlavorConfig._(flavor: flavor, name: flavor.name);
   }
 
   bool get isDevelopment => flavor == Flavor.development;
