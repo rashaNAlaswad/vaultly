@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
-import '../../features/auth/email/screens/email_entry_screen.dart';
-import '../../features/auth/otp/screens/otp_verification_screen.dart';
 
+import '../../features/auth/presentation/email/screens/email_entry_screen.dart';
+import '../../features/auth/presentation/otp/screens/otp_verification_screen.dart';
+import '../../features/home/screens/home_screen.dart';
 import '../screens/not_found_screen.dart';
 import 'app_routes.dart';
 
@@ -20,6 +21,10 @@ class AppRouter {
         builder: (context, state) => OtpVerificationScreen(
           email: state.extra as String,
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.home,
+        builder: (context, state) => const HomeScreen(),
       ),
     ],
     errorBuilder: (context, state) =>
