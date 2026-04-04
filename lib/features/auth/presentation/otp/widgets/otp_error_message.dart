@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
-import '../../../../core/themes/text_styles.dart';
+import '../../../../../core/helpers/responsive_helper.dart';
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/themes/text_styles.dart';
 
 /// Animated error message shown below the OTP input row on a wrong code.
 class OtpErrorMessage extends StatelessWidget {

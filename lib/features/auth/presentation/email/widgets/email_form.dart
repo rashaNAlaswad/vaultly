@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../../../../core/helpers/app_regexp.dart';
-import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
-import '../../../../core/widgets/app_text_field.dart';
-import '../../../../core/widgets/gradient_button.dart';
+
+import '../../../../../core/helpers/app_regexp.dart';
+import '../../../../../core/helpers/responsive_helper.dart';
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/widgets/app_text_field.dart';
+import '../../../../../core/widgets/gradient_button.dart';
 
 class EmailForm extends StatefulWidget {
-  const EmailForm({super.key, required this.onSubmit});
+  const EmailForm({
+    super.key,
+    required this.onSubmit,
+    this.isLoading = false,
+  });
 
   final ValueChanged<String> onSubmit;
+  final bool isLoading;
 
   @override
   State<EmailForm> createState() => _EmailFormState();
@@ -61,6 +67,7 @@ class _EmailFormState extends State<EmailForm> {
             label: 'Send Verification Code',
             icon: Icons.arrow_forward,
             onTap: _submit,
+            isLoading: widget.isLoading,
           ),
         ],
       ),

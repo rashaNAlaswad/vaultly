@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
-import '../../../../core/themes/text_styles.dart';
+import '../../../../../core/helpers/responsive_helper.dart';
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/themes/text_styles.dart';
 
 class GoBackWidget extends StatelessWidget {
   const GoBackWidget({super.key});

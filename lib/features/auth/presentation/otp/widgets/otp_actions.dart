@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../core/themes/text_styles.dart';
+import '../../../../../core/themes/text_styles.dart';
 
 /// resend link shown at the bottom of the OTP screen.
 class ResendLink extends StatelessWidget {

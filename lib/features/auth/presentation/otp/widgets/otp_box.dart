@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
-import '../../../../core/themes/text_styles.dart';
+import '../../../../../core/helpers/responsive_helper.dart';
+import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/themes/text_styles.dart';
 
 /// A single digit input box used in an OTP entry row.
 class OtpBox extends StatefulWidget {

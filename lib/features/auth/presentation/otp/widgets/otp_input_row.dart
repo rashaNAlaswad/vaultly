@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../core/helpers/responsive_helper.dart';
+import '../../../../../core/helpers/responsive_helper.dart';
 import 'otp_box.dart';
 
 /// A row of [OtpBox] widgets that together form the 6-digit OTP input.
