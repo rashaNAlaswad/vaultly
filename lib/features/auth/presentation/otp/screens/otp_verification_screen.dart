@@ -12,7 +12,7 @@ import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/gradient_button.dart';
 import '../../../providers/auth_providers.dart';
 import '../../widgets/ambient_blob.dart';
-import '../widgets/go_back_widget.dart';
+import '../../../../../core/widgets/app_screen_header.dart';
 import '../widgets/instruction_header.dart';
 import '../widgets/otp_actions.dart';
 import '../widgets/otp_error_message.dart';
@@ -156,7 +156,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
           SafeArea(
             child: Column(
               children: [
-                const GoBackWidget(),
+                const AppScreenHeader(title: 'Verify Email'),
                 Expanded(
                   child: SingleChildScrollView(
                     padding: context.responsive.edgeInsetsSymmetric(
