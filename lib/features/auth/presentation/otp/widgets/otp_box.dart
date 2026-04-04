@@ -7,7 +7,7 @@ import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 
 /// A single digit input box used in an OTP entry row.
-class OtpBox extends StatefulWidget {
+class OtpBox extends StatelessWidget {
   const OtpBox({
     super.key,
     required this.controller,
@@ -22,91 +22,77 @@ class OtpBox extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
   @override
-  State<OtpBox> createState() => _OtpBoxState();
-}
-
-class _OtpBoxState extends State<OtpBox> {
-  @override
-  void initState() {
-    super.initState();
-    widget.focusNode.addListener(_onFocusChange);
-  }
-
-  @override
-  void dispose() {
-    widget.focusNode.removeListener(_onFocusChange);
-    super.dispose();
-  }
-
-  void _onFocusChange() => setState(() {});
-
-  @override
   Widget build(BuildContext context) {
-    final isFocused = widget.focusNode.hasFocus;
-    final isFilled = widget.controller.text.isNotEmpty;
+    return ListenableBuilder(
+      listenable: focusNode,
+      builder: (context, _) {
+        final isFocused = focusNode.hasFocus;
+        final isFilled = controller.text.isNotEmpty;
 
-    final Color boxColor;
-    final Border? border;
-    final List<BoxShadow>? shadows;
+        final Color boxColor;
+        final Border? border;
+        final List<BoxShadow>? shadows;
 
-    if (widget.hasError) {
-      boxColor = AppColors.surfaceContainerHigh;
-      border = Border.all(color: AppColors.error);
-      shadows = const [BoxShadow(color: AppColors.errorGlow20, blurRadius: 10)];
-    } else if (isFocused) {
-      boxColor = AppColors.surfaceContainerHighest;
-      border = Border.all(color: AppColors.primary, width: 2);
-      shadows = const [
-        BoxShadow(color: AppColors.primaryGlow30, blurRadius: 15),
-      ];
-    } else if (isFilled) {
-      boxColor = AppColors.surfaceContainerHigh;
-      border = null;
-      shadows = null;
-    } else {
-      boxColor = AppColors.surfaceContainerLow;
-      border = null;
-      shadows = null;
-    }
+        if (hasError) {
+          boxColor = AppColors.surfaceContainerHigh;
+          border = Border.all(color: AppColors.error);
+          shadows = const [BoxShadow(color: AppColors.errorGlow20, blurRadius: 10)];
+        } else if (isFocused) {
+          boxColor = AppColors.surfaceContainerHighest;
+          border = Border.all(color: AppColors.primary, width: 2);
+          shadows = const [
+            BoxShadow(color: AppColors.primaryGlow30, blurRadius: 15),
+          ];
+        } else if (isFilled) {
+          boxColor = AppColors.surfaceContainerHigh;
+          border = null;
+          shadows = null;
+        } else {
+          boxColor = AppColors.surfaceContainerLow;
+          border = null;
+          shadows = null;
+        }
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 150),
-      height: 56.h,
-      decoration: BoxDecoration(
-        color: boxColor,
-        borderRadius: BorderRadius.circular(12.r),
-        border: border,
-        boxShadow: shadows,
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Hidden field captures keyboard input
-          Opacity(
-            opacity: 0,
-            child: TextField(
-              controller: widget.controller,
-              focusNode: widget.focusNode,
-              keyboardType: TextInputType.number,
-              textAlign: TextAlign.center,
-              maxLength: 1,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              onChanged: widget.onChanged,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                counterText: '',
-                isCollapsed: true,
-              ),
-            ),
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          height: 56.h,
+          decoration: BoxDecoration(
+            color: boxColor,
+            borderRadius: BorderRadius.circular(12.r),
+            border: border,
+            boxShadow: shadows,
           ),
-          if (isFilled)
-            Text(widget.controller.text, style: TextStyles.otpDigit)
-          else if (isFocused)
-            const BlinkingCursor()
-          else
-            const SizedBox.shrink(),
-        ],
-      ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              // Hidden field captures keyboard input
+              Opacity(
+                opacity: 0,
+                child: TextField(
+                  controller: controller,
+                  focusNode: focusNode,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  maxLength: 1,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  onChanged: onChanged,
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    counterText: '',
+                    isCollapsed: true,
+                  ),
+                ),
+              ),
+              if (isFilled)
+                Text(controller.text, style: TextStyles.otpDigit)
+              else if (isFocused)
+                const RepaintBoundary(child: BlinkingCursor())
+              else
+                const SizedBox.shrink(),
+            ],
+          ),
+        );
+      },
     );
   }
 }
