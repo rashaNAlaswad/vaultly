@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../helpers/responsive_helper.dart';
 import 'app_colors.dart';
+import 'text_styles.dart';
 
 class AppTheme {
   AppTheme._();
@@ -54,6 +55,13 @@ class AppTheme {
         borderSide: const BorderSide(color: AppColors.error),
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+    ),
+
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.primary,
+        textStyle: TextStyles.buttonLabel,
+      ),
     ),
   );
 

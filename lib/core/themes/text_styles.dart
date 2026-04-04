@@ -52,9 +52,9 @@ class TextStyles {
     letterSpacing: 2,
   );
 
-  static final inputText = _inter(17, AppColors.onSurface, FontWeight.w400);
+  static final inputText = _inter(15, AppColors.onSurface, FontWeight.w400);
 
-  static final inputHint = _inter(17, AppColors.hintText, FontWeight.w400);
+  static final inputHint = _inter(15, AppColors.hintText, FontWeight.w400);
 
   //Buttons
   static final buttonLabel = _jakarta(15, AppColors.onPrimary, FontWeight.w700);
@@ -75,7 +75,7 @@ class TextStyles {
   // Small error messages
   static final errorSmall = _inter(13, AppColors.error, FontWeight.w500);
 
-  // Small muted captions
+  // Small muted captions / add new tag text
   static final captionMuted = _inter(
     13,
     AppColors.onSurfaceVariant,
