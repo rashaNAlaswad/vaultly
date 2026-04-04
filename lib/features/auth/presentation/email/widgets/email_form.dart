@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../../../../core/helpers/app_regexp.dart';
+import '../../../../../core/extensions/string_extensions.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/app_text_field.dart';
@@ -56,7 +56,7 @@ class _EmailFormState extends State<EmailForm> {
               if (value == null || value.trim().isEmpty) {
                 return 'Please enter your email';
               }
-              if (!AppRegExp.isEmailValid(value.trim())) {
+              if (!value.trim().isValidEmail) {
                 return 'Please enter a valid email';
               }
               return null;
