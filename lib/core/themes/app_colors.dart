@@ -71,4 +71,14 @@ class AppColors {
 
   /// Muted grey for disabled/countdown text
   static const Color mutedText = Color(0xFF777777);
+
+  // Semantic — password strength
+  static const Color warning = Color(0xFFF59E0B);
+  static const Color success = Color(0xFF10B981);
+
+  /// warning 60%
+  static const Color warningGlow60 = Color(0x99F59E0B);
+
+  /// success 60%
+  static const Color successGlow60 = Color(0x9910B981);
 }
