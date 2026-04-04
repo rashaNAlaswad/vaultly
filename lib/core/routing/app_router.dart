@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/email/screens/email_entry_screen.dart';
 import '../../features/auth/presentation/otp/screens/otp_verification_screen.dart';
 import '../../features/home/screens/home_screen.dart';
+import '../../features/add_password/presentation/screens/add_password_screen.dart';
 import '../screens/not_found_screen.dart';
 import 'app_routes.dart';
 
@@ -10,7 +11,7 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.emailEntry,
+    initialLocation: AppRoutes.addPassword,
     routes: [
       GoRoute(
         path: AppRoutes.emailEntry,
@@ -18,13 +19,16 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoutes.otpVerification,
-        builder: (context, state) => OtpVerificationScreen(
-          email: state.extra as String,
-        ),
+        builder: (context, state) =>
+            OtpVerificationScreen(email: state.extra as String),
       ),
       GoRoute(
         path: AppRoutes.home,
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.addPassword,
+        builder: (context, state) => const AddPasswordScreen(),
       ),
     ],
     errorBuilder: (context, state) =>
