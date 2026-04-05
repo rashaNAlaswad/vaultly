@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/constants/vault_categories.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
-
-const _kTags = ['Social', 'Work', 'Finance'];
+import '../../../../../core/widgets/category_chip.dart';
 
 class CategoryTagRow extends StatelessWidget {
   const CategoryTagRow({
@@ -22,35 +22,12 @@ class CategoryTagRow extends StatelessWidget {
       spacing: 8.w,
       runSpacing: 8.h,
       children: [
-        ..._kTags.map(
-          (tag) => Semantics(
-            label: 'Tag: $tag',
-            selected: selected == tag,
-            button: true,
-            child: GestureDetector(
-              onTap: () => onChanged(tag),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding: context.responsive.edgeInsetsSymmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  color: selected == tag
-                      ? AppColors.primaryContainer
-                      : AppColors.surfaceContainerHigh,
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Text(
-                  tag,
-                  style: TextStyles.captionMuted.copyWith(
-                    color: selected == tag
-                        ? AppColors.onPrimaryContainer
-                        : AppColors.onSurfaceVariant,
-                  ),
-                ),
-              ),
-            ),
+        ...kVaultCategories.map(
+          (tag) => CategoryChip(
+            label: tag,
+            isSelected: selected == tag,
+            onTap: () => onChanged(tag),
+            semanticPrefix: 'Tag',
           ),
         ),
         Semantics(
