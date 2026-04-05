@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/email/screens/email_entry_screen.dart';
 import '../../features/auth/presentation/otp/screens/otp_verification_screen.dart';
-import '../../features/home/screens/home_screen.dart';
+import '../../features/home/presentation/screens/home_screen.dart';
 import '../../features/add_password/presentation/screens/add_password_screen.dart';
 import '../screens/not_found_screen.dart';
 import 'app_routes.dart';
@@ -11,7 +11,7 @@ class AppRouter {
   AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.addPassword,
+    initialLocation: AppRoutes.home,
     routes: [
       GoRoute(
         path: AppRoutes.emailEntry,
