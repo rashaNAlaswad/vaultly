@@ -84,7 +84,7 @@ class OtpBox extends StatelessWidget {
                 ),
               ),
               if (isFilled)
-                Text(controller.text, style: TextStyles.otpDigit)
+                Text(controller.text, style: TextStyles.largeText)
               else if (isFocused)
                 const RepaintBoundary(child: BlinkingCursor())
               else

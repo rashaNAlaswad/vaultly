@@ -92,6 +92,6 @@ class TextStyles {
     FontWeight.w600,
   );
 
-  // OTP digit display inside a box
-  static final otpDigit = _jakarta(22, AppColors.onSurface, FontWeight.w700);
+  // OTP digit display inside a box / vault empty state title
+  static final largeText = _jakarta(22, AppColors.onSurface, FontWeight.w700);
 }
