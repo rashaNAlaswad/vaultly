@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../data/repositories/supabase_auth_repository.dart';
 import '../domain/repositories/auth_repository.dart';
+import 'auth_session_provider.dart';
 
 part 'auth_providers.g.dart';
 
@@ -34,11 +35,12 @@ class VerifyOtpNotifier extends _$VerifyOtpNotifier {
     required String token,
   }) async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
-      () => ref.read(authRepositoryProvider).verifyOtp(
+    state = await AsyncValue.guard(() async {
+      final userId = await ref.read(authRepositoryProvider).verifyOtp(
             email: email,
             token: token,
-          ),
-    );
+          );
+      await ref.read(authSessionProvider.notifier).saveUserId(userId);
+    });
   }
 }

@@ -13,14 +13,15 @@ class SupabaseAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<void> verifyOtp({
+  Future<String> verifyOtp({
     required String email,
     required String token,
   }) async {
-    await _client.auth.verifyOTP(
+    final response = await _client.auth.verifyOTP(
       email: email,
       token: token,
       type: OtpType.email,
     );
+    return response.user?.id ?? '';
   }
 }
