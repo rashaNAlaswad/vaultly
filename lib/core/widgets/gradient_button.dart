@@ -30,79 +30,101 @@ class GradientButton extends StatefulWidget {
 }
 
 class _GradientButtonState extends State<GradientButton> {
-  bool _pressed = false;
+  final _pressed = ValueNotifier<bool>(false);
+
+  bool get _interactive => widget.enabled && !widget.isLoading;
+
+  @override
+  void dispose() {
+    _pressed.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final decoration = BoxDecoration(
+      gradient: LinearGradient(
+        colors: widget.enabled
+            ? [AppColors.primary, AppColors.primaryContainer]
+            : [
+                AppColors.surfaceContainerHigh,
+                AppColors.surfaceContainerHighest,
+              ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      borderRadius: BorderRadius.circular(12.r),
+      boxShadow: widget.enabled
+          ? const [
+              BoxShadow(
+                color: AppColors.primaryContainerGlow40,
+                blurRadius: 25,
+                offset: Offset(0, 8),
+              ),
+            ]
+          : null,
+    );
+
     return Semantics(
       label: widget.label,
       button: true,
       enabled: widget.enabled,
-      child: widget.isLoading
-          ? SizedBox(child: Center(child: CircularProgressIndicator()))
-          : GestureDetector(
-              onTapDown: widget.enabled && !widget.isLoading
-                  ? (_) => setState(() => _pressed = true)
-                  : null,
-              onTapUp: widget.enabled && !widget.isLoading
-                  ? (_) {
-                      setState(() => _pressed = false);
-                      widget.onTap();
-                    }
-                  : null,
-              onTapCancel: () => setState(() => _pressed = false),
-              child: AnimatedScale(
-                scale: _pressed ? 0.97 : 1.0,
-                duration: const Duration(milliseconds: 100),
-                child: Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 20.h),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: widget.enabled
-                          ? [AppColors.primary, AppColors.primaryContainer]
-                          : [
-                              AppColors.surfaceContainerHigh,
-                              AppColors.surfaceContainerHighest,
-                            ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: BorderRadius.circular(12.r),
-                    boxShadow: widget.enabled
-                        ? const [
-                            BoxShadow(
-                              color: AppColors.primaryContainerGlow40,
-                              blurRadius: 25,
-                              offset: Offset(0, 8),
+      child: GestureDetector(
+        onTapDown: _interactive ? (_) => _pressed.value = true : null,
+        onTapUp: _interactive
+            ? (_) {
+                _pressed.value = false;
+                widget.onTap();
+              }
+            : null,
+        onTapCancel: _interactive ? () => _pressed.value = false : null,
+        child: RepaintBoundary(
+          child: ValueListenableBuilder<bool>(
+            valueListenable: _pressed,
+            builder: (_, pressed, child) => AnimatedScale(
+              scale: pressed ? 0.97 : 1.0,
+              duration: const Duration(milliseconds: 100),
+              child: child,
+            ),
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              decoration: decoration,
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                child: widget.isLoading
+                    ? const SizedBox(
+                        key: ValueKey('loading'),
+                        height: 24,
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    : Row(
+                        key: const ValueKey('label'),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.label,
+                            style: widget.enabled
+                                ? TextStyles.buttonLabel
+                                : TextStyles.buttonLabelDisabled,
+                          ),
+                          if (widget.icon != null) ...[
+                            12.horizontalSpace,
+                            Icon(
+                              widget.icon,
+                              color: widget.enabled
+                                  ? AppColors.onPrimary
+                                  : AppColors.subtleText,
+                              size: 20,
                             ),
-                          ]
-                        : null,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.label,
-                        style: widget.enabled
-                            ? TextStyles.buttonLabel
-                            : TextStyles.buttonLabelDisabled,
+                          ],
+                        ],
                       ),
-                      if (widget.icon != null) ...[
-                        12.horizontalSpace,
-                        Icon(
-                          widget.icon,
-                          color: widget.enabled
-                              ? AppColors.onPrimary
-                              : AppColors.subtleText,
-                          size: 20,
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
               ),
             ),
+          ),
+        ),
+      ),
     );
   }
 }
