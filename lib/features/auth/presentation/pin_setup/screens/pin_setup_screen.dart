@@ -1,20 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/extensions/animations.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
+import '../../../../../core/routing/app_routes.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../widgets/ambient_blob.dart';
 import '../pin_setup_provider.dart';
+import '../strategies/pin_strategy.dart';
 import '../widgets/pin_dot_row.dart';
 import '../widgets/pin_hero_section.dart';
 import '../widgets/pin_keypad.dart';
 
-class PinSetupScreen extends StatelessWidget {
-  const PinSetupScreen({super.key});
+class PinScreen extends ConsumerWidget {
+  const PinScreen({super.key, required this.strategy});
+
+  final PinStrategy strategy;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(
+      pinProvider(strategy).select((s) => s.result),
+      (_, result) {
+        if (result == null) return;
+        result.whenOrNull(
+          data: (_) => context.go(AppRoutes.home),
+          error: (error, _) {
+            ref.read(pinProvider(strategy).notifier).resetDigits();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(error.toString())),
+            );
+          },
+        );
+      },
+    );
+
     return Scaffold(
       body: Stack(
         children: [
@@ -32,11 +53,11 @@ class PinSetupScreen extends StatelessWidget {
               child: Column(
                 children: [
                   48.verticalSpace,
-                  const _AnimatedHeroSection(),
+                  _HeroSection(strategy: strategy),
                   40.verticalSpace,
-                  const _AnimatedDotRow(),
+                  _DotRow(strategy: strategy),
                   48.verticalSpace,
-                  const _AnimatedKeypad(),
+                  _Keypad(strategy: strategy),
                   200.verticalSpace,
                 ],
               ),
@@ -48,34 +69,40 @@ class PinSetupScreen extends StatelessWidget {
   }
 }
 
-/// Rendered once — animation runs on first build only.
-class _AnimatedHeroSection extends StatelessWidget {
-  const _AnimatedHeroSection();
+class _HeroSection extends StatelessWidget {
+  const _HeroSection({required this.strategy});
+
+  final PinStrategy strategy;
 
   @override
   Widget build(BuildContext context) {
-    return const PinHeroSection().fadeInSlide(delay: 0);
+    return PinHeroSection(
+      title: strategy.title,
+      subtitle: strategy.subtitle,
+    ).fadeInSlide(delay: 0);
   }
 }
 
-/// Only rebuilds when filledCount changes via the provider.
-class _AnimatedDotRow extends ConsumerWidget {
-  const _AnimatedDotRow();
+class _DotRow extends ConsumerWidget {
+  const _DotRow({required this.strategy});
+
+  final PinStrategy strategy;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final filledCount = ref.watch(pinSetupProvider).length;
-    return PinDotRow(filledCount: filledCount).fadeInSlide(delay: 100);
+    final length = ref.watch(pinProvider(strategy)).length;
+    return PinDotRow(filledCount: length).fadeInSlide(delay: 100);
   }
 }
 
-/// Rendered once — stable method references, never needs to rebuild.
-class _AnimatedKeypad extends ConsumerWidget {
-  const _AnimatedKeypad();
+class _Keypad extends ConsumerWidget {
+  const _Keypad({required this.strategy});
+
+  final PinStrategy strategy;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(pinSetupProvider.notifier);
+    final notifier = ref.read(pinProvider(strategy).notifier);
     return PinKeypad(
       onDigit: notifier.addDigit,
       onBackspace: notifier.removeDigit,
