@@ -5,7 +5,14 @@ import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/text_styles.dart';
 
 class PinHeroSection extends StatelessWidget {
-  const PinHeroSection({super.key});
+  const PinHeroSection({
+    super.key,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +44,10 @@ class PinHeroSection extends StatelessWidget {
           ),
         ),
         20.verticalSpace,
-        Text('Create your PIN', style: TextStyles.largeText),
+        Text(title, style: TextStyles.largeText),
         12.verticalSpace,
         Text(
-          'Your PIN encrypts your vault. We never store it.',
+          subtitle,
           textAlign: TextAlign.center,
           style: TextStyles.heroSubtitle,
         ),
