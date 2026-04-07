@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/routing/app_routes.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/gradient_button.dart';
 import '../../../providers/auth_providers.dart';
@@ -133,9 +131,6 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(error.toString())));
-        },
-        data: (_) {
-          context.go(AppRoutes.home);
         },
       );
     });
