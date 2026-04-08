@@ -28,9 +28,9 @@ class RouterNotifier extends ChangeNotifier {
           return isEmailOrOtp ? null : AppRoutes.emailEntry;
         }
 
-        // Has user + PIN but not yet unlocked this session → PIN entry.
+        // Has user + PIN but not yet unlocked this session → PIN unlock.
         if (data.hasPin && !data.isUnlocked) {
-          return currentPath == AppRoutes.pinEntry ? null : AppRoutes.pinEntry;
+          return currentPath == AppRoutes.pinUnlock ? null : AppRoutes.pinUnlock;
         }
 
         // Unlocked user on email/OTP → send home.

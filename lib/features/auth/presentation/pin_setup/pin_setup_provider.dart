@@ -49,9 +49,11 @@ class PinNotifier extends _$PinNotifier {
     if (result is AsyncData) {
       final session = ref.read(authSessionProvider.notifier);
       switch (strategy.action) {
-        case PinAction.setup:
+        case PinAction.create:
+          break; // Navigation to confirm screen is handled by the UI layer.
+        case PinAction.confirm:
           session.markPinSaved();
-        case PinAction.entry:
+        case PinAction.unlock:
           session.unlock();
       }
     }
