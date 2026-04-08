@@ -11,6 +11,7 @@ import '../../../../../core/widgets/gradient_button.dart';
 import '../../../providers/auth_providers.dart';
 import '../../widgets/ambient_blob.dart';
 import '../../../../../core/widgets/app_screen_header.dart';
+import '../../../../../core/widgets/app_snack_bar.dart';
 import '../widgets/instruction_header.dart';
 import '../widgets/otp_actions.dart';
 import '../widgets/otp_error_message.dart';
@@ -128,9 +129,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
       next.whenOrNull(
         error: (error, _) {
           setState(() => _hasError = true);
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(error.toString())));
+          AppSnackBar.error(context, error.toString());
         },
       );
     });

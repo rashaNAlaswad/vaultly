@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/widgets/app_snack_bar.dart';
 import '../../../../core/routing/app_routes.dart';
 
 class VaultFab extends StatelessWidget {
@@ -15,15 +16,7 @@ class VaultFab extends StatelessWidget {
       context.push(AppRoutes.addPassword);
       return;
     }
-    final messenger = ScaffoldMessenger.maybeOf(context);
-    if (messenger == null) return;
-    messenger.clearSnackBars();
-    messenger.showSnackBar(
-      const SnackBar(
-        content: Text('Create a PIN to add passwords to your vault'),
-        duration: Duration(seconds: 4),
-      ),
-    );
+    AppSnackBar.info(context, 'Create a PIN to add passwords to your vault');
   }
 
   @override

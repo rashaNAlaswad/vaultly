@@ -6,6 +6,7 @@ import '../../../../../core/extensions/animations.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/routing/app_routes.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/widgets/app_snack_bar.dart';
 import '../../widgets/ambient_blob.dart';
 import '../pin_setup_provider.dart';
 import '../strategies/pin_strategy.dart';
@@ -35,9 +36,7 @@ class PinScreen extends ConsumerWidget {
           },
           error: (error, _) {
             ref.read(pinProvider(strategy).notifier).resetDigits();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(error.toString())),
-            );
+            AppSnackBar.error(context, error.toString());
           },
         );
       },

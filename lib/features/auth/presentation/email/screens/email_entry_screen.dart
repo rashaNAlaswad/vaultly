@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/routing/app_routes.dart';
 import '../../../../../core/themes/app_colors.dart';
+import '../../../../../core/widgets/app_snack_bar.dart';
 import '../../../providers/auth_providers.dart';
 import '../../widgets/ambient_blob.dart';
 import '../widgets/email_form.dart';
@@ -17,9 +18,7 @@ class EmailEntryScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue<void>>(sendOtpProvider, (_, state) {
       state.whenOrNull(
-        error: (error, _) => ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(error.toString()))),
+        error: (error, _) => AppSnackBar.error(context, error.toString()),
       );
     });
 
