@@ -25,7 +25,14 @@ class PinScreen extends ConsumerWidget {
       (_, result) {
         if (result == null) return;
         result.whenOrNull(
-          data: (_) => context.go(AppRoutes.home),
+          data: (_) {
+            if (strategy.action == PinAction.create) {
+              final pin = ref.read(pinProvider(strategy)).digits.join();
+              context.push(AppRoutes.pinConfirm, extra: pin);
+            } else {
+              context.go(AppRoutes.home);
+            }
+          },
           error: (error, _) {
             ref.read(pinProvider(strategy).notifier).resetDigits();
             ScaffoldMessenger.of(context).showSnackBar(
