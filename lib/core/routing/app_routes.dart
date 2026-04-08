@@ -5,6 +5,7 @@ class AppRoutes {
   static const String emailEntry = '/';
   static const String otpVerification = '/otp-verification';
   static const String addPassword = '/add-password';
-  static const String pinSetup = '/pin-setup';
-  static const String pinEntry = '/pin-entry';
+  static const String pinCreate = '/pin-create';
+  static const String pinConfirm = '/pin-confirm';
+  static const String pinUnlock = '/pin-unlock';
 }

@@ -5,8 +5,9 @@ import '../../features/add_password/presentation/screens/add_password_screen.dar
 import '../../features/auth/presentation/email/screens/email_entry_screen.dart';
 import '../../features/auth/presentation/otp/screens/otp_verification_screen.dart';
 import '../../features/auth/presentation/pin_setup/screens/pin_setup_screen.dart';
-import '../../features/auth/presentation/pin_setup/strategies/pin_entry_strategy.dart';
-import '../../features/auth/presentation/pin_setup/strategies/pin_setup_strategy.dart';
+import '../../features/auth/presentation/pin_setup/strategies/pin_confirm_strategy.dart';
+import '../../features/auth/presentation/pin_setup/strategies/pin_create_strategy.dart';
+import '../../features/auth/presentation/pin_setup/strategies/pin_unlock_strategy.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
 import '../screens/not_found_screen.dart';
 import 'app_routes.dart';
@@ -32,14 +33,19 @@ GoRouter appRouter(Ref ref) {
             OtpVerificationScreen(email: state.extra as String),
       ),
       GoRoute(
-        path: AppRoutes.pinSetup,
+        path: AppRoutes.pinCreate,
         builder: (context, state) =>
-            const PinScreen(strategy: PinSetupStrategy()),
+            const PinScreen(strategy: PinCreateStrategy()),
       ),
       GoRoute(
-        path: AppRoutes.pinEntry,
+        path: AppRoutes.pinConfirm,
         builder: (context, state) =>
-            const PinScreen(strategy: PinEntryStrategy()),
+            PinScreen(strategy: PinConfirmStrategy(state.extra! as String)),
+      ),
+      GoRoute(
+        path: AppRoutes.pinUnlock,
+        builder: (context, state) =>
+            const PinScreen(strategy: PinUnlockStrategy()),
       ),
       GoRoute(
         path: AppRoutes.home,
