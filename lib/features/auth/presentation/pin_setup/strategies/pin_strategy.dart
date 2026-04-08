@@ -19,6 +19,8 @@ class PinState {
   }
 }
 
+enum PinAction { setup, entry }
+
 /// Encapsulates what happens when the user finishes entering a PIN.
 ///
 /// Implement [PinSetupStrategy] to save a new PIN.
@@ -28,5 +30,6 @@ abstract interface class PinStrategy {
 
   String get title;
   String get subtitle;
+  PinAction get action;
   Future<void> execute(String pin);
 }

@@ -13,6 +13,9 @@ class PinSetupStrategy implements PinStrategy {
   String get subtitle => 'Your PIN encrypts your vault. We never store it.';
 
   @override
+  PinAction get action => PinAction.setup;
+
+  @override
   Future<void> execute(String pin) async {
     await SharedPrefHelper.setSecuredString(SecureStorageKeys.pin, pin);
   }

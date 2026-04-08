@@ -13,6 +13,9 @@ class PinEntryStrategy implements PinStrategy {
   String get subtitle => 'Unlock your vault to continue.';
 
   @override
+  PinAction get action => PinAction.entry;
+
+  @override
   Future<void> execute(String pin) async {
     final stored = await SharedPrefHelper.getSecuredString(SecureStorageKeys.pin);
     if (pin != stored) throw Exception('Incorrect PIN. Try again.');
