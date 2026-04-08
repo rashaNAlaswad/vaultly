@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../core/routing/app_routes.dart';
 
 class SecureVaultBanner extends StatelessWidget {
-  const SecureVaultBanner({super.key, required this.onCreatePin});
-
-  final VoidCallback onCreatePin;
+  const SecureVaultBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,9 @@ class SecureVaultBanner extends StatelessWidget {
                     label: 'Create PIN',
                     button: true,
                     child: GestureDetector(
-                      onTap: onCreatePin,
+                      onTap: () {
+                        context.push(AppRoutes.pinCreate);
+                      },
                       child: Container(
                         padding: context.responsive.edgeInsetsSymmetric(
                           horizontal: 14,
