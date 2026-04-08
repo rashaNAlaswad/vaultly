@@ -3,8 +3,8 @@ import '../../../../../core/helpers/shared_pref_helper.dart';
 import 'pin_strategy.dart';
 
 /// Verifies the entered PIN against the one stored in secure storage.
-class PinEntryStrategy implements PinStrategy {
-  const PinEntryStrategy();
+class PinUnlockStrategy implements PinStrategy {
+  const PinUnlockStrategy();
 
   @override
   String get title => 'Enter your PIN';
@@ -13,7 +13,7 @@ class PinEntryStrategy implements PinStrategy {
   String get subtitle => 'Unlock your vault to continue.';
 
   @override
-  PinAction get action => PinAction.entry;
+  PinAction get action => PinAction.unlock;
 
   @override
   Future<void> execute(String pin) async {

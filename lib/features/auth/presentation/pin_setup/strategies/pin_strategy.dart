@@ -19,12 +19,8 @@ class PinState {
   }
 }
 
-enum PinAction { setup, entry }
+enum PinAction { create, confirm, unlock }
 
-/// Encapsulates what happens when the user finishes entering a PIN.
-///
-/// Implement [PinSetupStrategy] to save a new PIN.
-/// Implement [PinEntryStrategy] to verify an existing PIN.
 abstract interface class PinStrategy {
   const PinStrategy();
 
