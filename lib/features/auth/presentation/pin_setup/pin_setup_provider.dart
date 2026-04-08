@@ -16,29 +16,44 @@ class PinNotifier extends _$PinNotifier {
     if (state.result is AsyncLoading) return;
 
     if (state.digits.length >= kPinLength) return;
+
     final next = [...state.digits, digit];
     state = state.copyWith(digits: next);
+
     if (next.length == kPinLength) _execute();
   }
 
   void removeDigit() {
+    if (state.result is AsyncLoading) return;
+
     if (state.digits.isEmpty) return;
+
     state = state.copyWith(
       digits: state.digits.sublist(0, state.digits.length - 1),
     );
   }
 
   void resetDigits() {
+    if (state.result is AsyncLoading) return;
+
     state = const PinState();
   }
 
   Future<void> _execute() async {
     final pin = state.digits.join();
+    
     state = state.copyWith(result: const AsyncLoading());
+
     final result = await AsyncValue.guard<void>(() => strategy.execute(pin));
+
     if (result is AsyncData) {
-      // Refresh session so the router has the latest hasPin state.
-      ref.invalidate(authSessionProvider);
+      final session = ref.read(authSessionProvider.notifier);
+      switch (strategy.action) {
+        case PinAction.setup:
+          session.markPinSaved();
+        case PinAction.entry:
+          session.unlock();
+      }
     }
     state = state.copyWith(result: result);
   }

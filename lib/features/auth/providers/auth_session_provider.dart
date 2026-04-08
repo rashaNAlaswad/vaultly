@@ -31,6 +31,10 @@ class AuthSession extends _$AuthSession {
 
   Future<void> savePin(String pin) async {
     await SharedPrefHelper.setSecuredString(SecureStorageKeys.pin, pin);
+    markPinSaved();
+  }
+
+  void markPinSaved() {
     state = AsyncData((
       userId: state.asData?.value.userId,
       hasPin: true,
