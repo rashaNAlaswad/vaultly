@@ -5,7 +5,7 @@ import '../../../core/helpers/shared_pref_helper.dart';
 
 part 'auth_session_provider.g.dart';
 
-typedef AuthSessionData = ({String? userId, bool hasPin});
+typedef AuthSessionData = ({String? userId, bool hasPin, bool isUnlocked});
 
 @Riverpod(keepAlive: true)
 class AuthSession extends _$AuthSession {
@@ -16,6 +16,7 @@ class AuthSession extends _$AuthSession {
     return (
       userId: userId.isEmpty ? null : userId,
       hasPin: pin.isNotEmpty,
+      isUnlocked: false, // always false on cold start
     );
   }
 
@@ -24,6 +25,7 @@ class AuthSession extends _$AuthSession {
     state = AsyncData((
       userId: userId,
       hasPin: state.asData?.value.hasPin ?? false,
+      isUnlocked: true, // OTP verified — session is active
     ));
   }
 
@@ -32,11 +34,20 @@ class AuthSession extends _$AuthSession {
     state = AsyncData((
       userId: state.asData?.value.userId,
       hasPin: true,
+      isUnlocked: state.asData?.value.isUnlocked ?? true,
+    ));
+  }
+
+  void unlock() {
+    state = AsyncData((
+      userId: state.asData?.value.userId,
+      hasPin: state.asData?.value.hasPin ?? false,
+      isUnlocked: true,
     ));
   }
 
   Future<void> clearSession() async {
     await SharedPrefHelper.clearAllSecuredData();
-    state = const AsyncData((userId: null, hasPin: false));
+    state = const AsyncData((userId: null, hasPin: false, isUnlocked: false));
   }
 }
