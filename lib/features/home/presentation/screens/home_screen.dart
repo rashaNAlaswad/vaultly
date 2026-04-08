@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/routing/app_routes.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 import '../../../../core/widgets/app_screen_header.dart';
+import '../../../auth/providers/auth_session_provider.dart';
 import '../widgets/home_category_filter_row.dart';
 import '../widgets/secure_vault_banner.dart';
 import '../widgets/vault_empty_state.dart';
 import '../widgets/vault_fab.dart';
 import '../widgets/vault_search_bar.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final _searchController = TextEditingController();
   String _selectedCategory = 'All';
 
@@ -32,6 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final hasPin = ref.watch(
+      authSessionProvider.select((s) => s.asData?.value.hasPin ?? false),
+    );
+
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -68,10 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       VaultSearchBar(
                         controller: _searchController,
                       ).fadeInSlide(delay: 50),
-                      20.verticalSpace,
-                      SecureVaultBanner(
-                        onCreatePin: () {},
-                      ).fadeInSlide(delay: 150),
+                      if (!hasPin) ...[
+                        20.verticalSpace,
+                        SecureVaultBanner(
+                        ).fadeInSlide(delay: 150),
+                      ],
                       20.verticalSpace,
                       HomeCategoryFilterRow(
                         selected: _selectedCategory,
@@ -86,15 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-
-            // FAB pinned to bottom-right
             Positioned(
               right: 20.w,
               bottom: 28.h,
               child: VaultFab(
-                onTap: () {
-                  context.push(AppRoutes.addPassword);
-                },
+                enabled: hasPin,
               ).bounce(delay: 500),
             ),
           ],
