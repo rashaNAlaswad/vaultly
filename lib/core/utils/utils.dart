@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../config/flavor_config.dart';
 import '../helpers/responsive_helper.dart';
@@ -13,6 +14,12 @@ class Utils {
     if (!_enableLogs) return;
     debugPrint(message);
   }
+
+  // Cached UUID generator instance for efficient UUID generation
+  static final _uuid = Uuid();
+  static String generateUuid() => _uuid.v4();
+
+
 
   static void unfocus(BuildContext context) => FocusScope.of(context).unfocus();
 
