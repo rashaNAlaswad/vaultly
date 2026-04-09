@@ -6,7 +6,7 @@ part 'password_entry.g.dart';
 @freezed
 abstract class PasswordEntry with _$PasswordEntry {
   const factory PasswordEntry({
-    required String id,
+    @JsonKey(name: 'id', includeIfNull: false) String? id,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'site_name') required String siteName,
     required String username,

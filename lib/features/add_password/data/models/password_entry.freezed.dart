@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PasswordEntry {
 
- String get id;@JsonKey(name: 'user_id') String get userId;@JsonKey(name: 'site_name') String get siteName; String get username; String get password; List<String> get tags; String get notes;@JsonKey(name: 'created_at') DateTime get createdAt;
+@JsonKey(name: 'id', includeIfNull: false) String? get id;@JsonKey(name: 'user_id') String get userId;@JsonKey(name: 'site_name') String get siteName; String get username; String get password; List<String> get tags; String get notes;@JsonKey(name: 'created_at') DateTime get createdAt;
 /// Create a copy of PasswordEntry
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $PasswordEntryCopyWith<$Res>  {
   factory $PasswordEntryCopyWith(PasswordEntry value, $Res Function(PasswordEntry) _then) = _$PasswordEntryCopyWithImpl;
 @useResult
 $Res call({
- String id,@JsonKey(name: 'user_id') String userId,@JsonKey(name: 'site_name') String siteName, String username, String password, List<String> tags, String notes,@JsonKey(name: 'created_at') DateTime createdAt
+@JsonKey(name: 'id', includeIfNull: false) String? id,@JsonKey(name: 'user_id') String userId,@JsonKey(name: 'site_name') String siteName, String username, String password, List<String> tags, String notes,@JsonKey(name: 'created_at') DateTime createdAt
 });
 
 
@@ -65,10 +65,10 @@ class _$PasswordEntryCopyWithImpl<$Res>
 
 /// Create a copy of PasswordEntry
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? userId = null,Object? siteName = null,Object? username = null,Object? password = null,Object? tags = null,Object? notes = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? userId = null,Object? siteName = null,Object? username = null,Object? password = null,Object? tags = null,Object? notes = null,Object? createdAt = null,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,siteName: null == siteName ? _self.siteName : siteName // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
@@ -160,7 +160,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'site_name')  String siteName,  String username,  String password,  List<String> tags,  String notes, @JsonKey(name: 'created_at')  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'id', includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'site_name')  String siteName,  String username,  String password,  List<String> tags,  String notes, @JsonKey(name: 'created_at')  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PasswordEntry() when $default != null:
 return $default(_that.id,_that.userId,_that.siteName,_that.username,_that.password,_that.tags,_that.notes,_that.createdAt);case _:
@@ -181,7 +181,7 @@ return $default(_that.id,_that.userId,_that.siteName,_that.username,_that.passwo
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'site_name')  String siteName,  String username,  String password,  List<String> tags,  String notes, @JsonKey(name: 'created_at')  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'id', includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'site_name')  String siteName,  String username,  String password,  List<String> tags,  String notes, @JsonKey(name: 'created_at')  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _PasswordEntry():
 return $default(_that.id,_that.userId,_that.siteName,_that.username,_that.password,_that.tags,_that.notes,_that.createdAt);case _:
@@ -201,7 +201,7 @@ return $default(_that.id,_that.userId,_that.siteName,_that.username,_that.passwo
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'site_name')  String siteName,  String username,  String password,  List<String> tags,  String notes, @JsonKey(name: 'created_at')  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'id', includeIfNull: false)  String? id, @JsonKey(name: 'user_id')  String userId, @JsonKey(name: 'site_name')  String siteName,  String username,  String password,  List<String> tags,  String notes, @JsonKey(name: 'created_at')  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _PasswordEntry() when $default != null:
 return $default(_that.id,_that.userId,_that.siteName,_that.username,_that.password,_that.tags,_that.notes,_that.createdAt);case _:
@@ -216,10 +216,10 @@ return $default(_that.id,_that.userId,_that.siteName,_that.username,_that.passwo
 @JsonSerializable()
 
 class _PasswordEntry implements PasswordEntry {
-  const _PasswordEntry({required this.id, @JsonKey(name: 'user_id') required this.userId, @JsonKey(name: 'site_name') required this.siteName, required this.username, required this.password, final  List<String> tags = const [], this.notes = '', @JsonKey(name: 'created_at') required this.createdAt}): _tags = tags;
+  const _PasswordEntry({@JsonKey(name: 'id', includeIfNull: false) this.id, @JsonKey(name: 'user_id') required this.userId, @JsonKey(name: 'site_name') required this.siteName, required this.username, required this.password, final  List<String> tags = const [], this.notes = '', @JsonKey(name: 'created_at') required this.createdAt}): _tags = tags;
   factory _PasswordEntry.fromJson(Map<String, dynamic> json) => _$PasswordEntryFromJson(json);
 
-@override final  String id;
+@override@JsonKey(name: 'id', includeIfNull: false) final  String? id;
 @override@JsonKey(name: 'user_id') final  String userId;
 @override@JsonKey(name: 'site_name') final  String siteName;
 @override final  String username;
@@ -267,7 +267,7 @@ abstract mixin class _$PasswordEntryCopyWith<$Res> implements $PasswordEntryCopy
   factory _$PasswordEntryCopyWith(_PasswordEntry value, $Res Function(_PasswordEntry) _then) = __$PasswordEntryCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(name: 'user_id') String userId,@JsonKey(name: 'site_name') String siteName, String username, String password, List<String> tags, String notes,@JsonKey(name: 'created_at') DateTime createdAt
+@JsonKey(name: 'id', includeIfNull: false) String? id,@JsonKey(name: 'user_id') String userId,@JsonKey(name: 'site_name') String siteName, String username, String password, List<String> tags, String notes,@JsonKey(name: 'created_at') DateTime createdAt
 });
 
 
@@ -284,10 +284,10 @@ class __$PasswordEntryCopyWithImpl<$Res>
 
 /// Create a copy of PasswordEntry
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? userId = null,Object? siteName = null,Object? username = null,Object? password = null,Object? tags = null,Object? notes = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? userId = null,Object? siteName = null,Object? username = null,Object? password = null,Object? tags = null,Object? notes = null,Object? createdAt = null,}) {
   return _then(_PasswordEntry(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,siteName: null == siteName ? _self.siteName : siteName // ignore: cast_nullable_to_non_nullable
 as String,username: null == username ? _self.username : username // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
