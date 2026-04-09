@@ -86,19 +86,16 @@ class _GradientButtonState extends State<GradientButton> {
               duration: const Duration(milliseconds: 100),
               child: child,
             ),
-            child: Container(
+            child:widget.isLoading
+                  ? Center(child: CircularProgressIndicator()) 
+                  : Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(vertical: 20.h),
               decoration: decoration,
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                child: widget.isLoading
-                    ? const SizedBox(
-                        key: ValueKey('loading'),
-                        height: 24,
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                    : Row(
+              child: 
+                  AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: Row(
                         key: const ValueKey('label'),
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -120,7 +117,7 @@ class _GradientButtonState extends State<GradientButton> {
                           ],
                         ],
                       ),
-              ),
+                    ),
             ),
           ),
         ),
