@@ -1,26 +1,28 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import '../widgets/category_section.dart';
 
 import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/themes/app_colors.dart';
-import '../../../../core/themes/text_styles.dart';
 import '../../../../core/widgets/app_screen_header.dart';
+import '../../../../core/widgets/app_snack_bar.dart';
 import '../../../../core/widgets/app_text_field.dart';
+import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/gradient_button.dart';
-import '../widgets/category_tag_row.dart';
+import '../providers/passwords_provider.dart';
 import '../widgets/password_strength_row.dart';
 import '../widgets/vault_identity_avatar.dart';
 
-class AddPasswordScreen extends StatefulWidget {
+class AddPasswordScreen extends ConsumerStatefulWidget {
   const AddPasswordScreen({super.key});
 
   @override
-  State<AddPasswordScreen> createState() => _AddPasswordScreenState();
+  ConsumerState<AddPasswordScreen> createState() => _AddPasswordScreenState();
 }
 
-class _AddPasswordScreenState extends State<AddPasswordScreen> {
+class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _siteController = TextEditingController();
@@ -28,18 +30,9 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
   final _passwordController = TextEditingController();
   final _notesController = TextEditingController();
 
-  bool _obscurePassword = true;
-  String _selectedTag = 'Social';
-  String _passwordValue = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _passwordController.addListener(
-      () => setState(() => _passwordValue = _passwordController.text),
-    );
-    _siteController.addListener(() => setState(() {}));
-  }
+  final _obscurePasswordNotifier = ValueNotifier<bool>(true);
+  final _selectedTagsNotifier = ValueNotifier<List<String>>([]);
+  final _isSavingNotifier = ValueNotifier<bool>(false);
 
   @override
   void dispose() {
@@ -47,80 +40,41 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
     _usernameController.dispose();
     _passwordController.dispose();
     _notesController.dispose();
+    _obscurePasswordNotifier.dispose();
+    _selectedTagsNotifier.dispose();
+    _isSavingNotifier.dispose();
     super.dispose();
   }
 
-  String get _avatarLetter {
-    final text = _siteController.text.trim();
-    if (text.isEmpty) return 'N';
-    return text[0].toUpperCase();
-  }
-
   void _generatePassword() {
-    const lower = 'abcdefghijklmnopqrstuvwxyz';
-    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const numbers = '0123456789';
-    const symbols = '!@#\$%^&*';
-    const allChars = '$lower$upper$numbers$symbols';
-    final rng = Random.secure();
-    _passwordController.text = List.generate(
-      16,
-      (_) => allChars[rng.nextInt(allChars.length)],
-    ).join();
+    _passwordController.text = Utils.generatePassword();
   }
 
-  void _onSave() {
+  Future<void> _onSave() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-  }
+    if (_selectedTagsNotifier.value.isEmpty) {
+      AppSnackBar.error(context, 'Please select a tag.');
+      return;
+    }
 
-  Widget _passwordField() {
-    return Column(
-      children: [
-        AppTextField(
-          controller: _passwordController,
-          hint: '••••••••••••',
-          label: 'Password',
-          obscureText: _obscurePassword,
-          textInputAction: TextInputAction.done,
-          suffixIcon: Semantics(
-            label: _obscurePassword ? 'Show password' : 'Hide password',
-            button: true,
-            child: GestureDetector(
-              onTap: () =>
-                  setState(() => _obscurePassword = !_obscurePassword),
-              child: Icon(
-                _obscurePassword
-                    ? Icons.visibility_outlined
-                    : Icons.visibility_off_outlined,
-                color: AppColors.onSurfaceVariant,
-                size: 20,
-              ),
-            ),
-          ),
-        ),
-        8.verticalSpace,
-        PasswordStrengthRow(
-          password: _passwordValue,
-          onRegenerate: _generatePassword,
-        ),
-      ],
-    );
-  }
-
-  Widget _categorySection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: context.responsive.edgeInsets(left: 4, bottom: 8),
-          child: Text('Category Tags', style: TextStyles.captionMuted),
-        ),
-        CategoryTagRow(
-          selected: _selectedTag,
-          onChanged: (t) => setState(() => _selectedTag = t),
-        ),
-      ],
-    );
+    _isSavingNotifier.value = true;
+    try {
+      await ref.read(passwordsProvider.notifier).addPassword(
+        siteName: _siteController.text.trim(),
+        username: _usernameController.text.trim(),
+        password: _passwordController.text,
+        tags: _selectedTagsNotifier.value,
+        notes: _notesController.text.trim(),
+      );
+      if (mounted) {
+        AppSnackBar.success(context, 'Password saved!');
+        context.pop();
+      }
+    } catch (_) {
+      if (mounted) AppSnackBar.error(context, 'Failed to save. Please try again.');
+    } finally {
+      if (mounted) _isSavingNotifier.value = false;
+    }
   }
 
   @override
@@ -134,31 +88,58 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
               trailing: Semantics(
                 label: 'Save password',
                 button: true,
-                child: TextButton(onPressed: _onSave, child: const Text('Save')),
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: _isSavingNotifier,
+                  builder: (context, isSaving, _) => TextButton(
+                    onPressed: isSaving ? null : _onSave,
+                    child: isSaving
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Text('Save'),
+                  ),
+                ),
               ),
             ),
             Expanded(
               child: Form(
                 key: _formKey,
                 child: ListView(
-                  padding: context.responsive.edgeInsetsSymmetric(horizontal: 24),
+                  padding: context.responsive.edgeInsetsSymmetric(
+                    horizontal: 24,
+                  ),
                   children: [
                     32.verticalSpace,
-                    VaultIdentityAvatar(letter: _avatarLetter).fadeInScale(delay: 0),
+                    ValueListenableBuilder<TextEditingValue>(
+                      valueListenable: _siteController,
+                      builder: (context, value, _) {
+                        final text = value.text.trim();
+                        final letter =
+                            text.isEmpty ? 'V' : text[0].toUpperCase();
+                        return VaultIdentityAvatar(letter: letter)
+                            .fadeInScale(delay: 0);
+                      },
+                    ),
                     32.verticalSpace,
                     AppTextField(
                       controller: _siteController,
                       hint: 'e.g. Replit',
                       label: 'Site/App Name',
                       textInputAction: TextInputAction.next,
+                      validator: (v) =>
+                          (v == null || v.trim().isEmpty) ? 'Required' : null,
                     ).fadeInSlide(delay: 60),
                     20.verticalSpace,
                     AppTextField(
                       controller: _usernameController,
                       hint: 'user@example.com',
-                      label: 'Username',
+                      label: 'Username or Email',
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
+                      validator: (v) =>
+                          (v == null || v.trim().isEmpty) ? 'Required' : null,
                       suffixIcon: const Icon(
                         Icons.person_outline_rounded,
                         color: AppColors.onSurfaceVariant,
@@ -166,14 +147,30 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
                       ),
                     ).fadeInSlide(delay: 100),
                     20.verticalSpace,
-                    _passwordField().fadeInSlide(delay: 140),
+                    ValueListenableBuilder<bool>(
+                      valueListenable: _obscurePasswordNotifier,
+                      builder: (context, obscure, _) => _PasswordField(
+                        controller: _passwordController,
+                        obscureText: obscure,
+                        onToggleObscure: () =>
+                            _obscurePasswordNotifier.value = !obscure,
+                        onRegenerate: _generatePassword,
+                      ).fadeInSlide(delay: 140),
+                    ),
                     20.verticalSpace,
                     GradientButton(
                       label: 'Generate Secure Key',
                       onTap: _generatePassword,
                     ).fadeInSlide(delay: 180),
                     24.verticalSpace,
-                    _categorySection(context).fadeInSlide(delay: 220),
+                    ValueListenableBuilder<List<String>>(
+                      valueListenable: _selectedTagsNotifier,
+                      builder: (context, selected, _) => CategorySection(
+                        selected: selected,
+                        onChanged: (tags) =>
+                            _selectedTagsNotifier.value = tags,
+                      ).fadeInSlide(delay: 220),
+                    ),
                     20.verticalSpace,
                     AppTextField(
                       controller: _notesController,
@@ -190,6 +187,58 @@ class _AddPasswordScreenState extends State<AddPasswordScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PasswordField extends StatelessWidget {
+  const _PasswordField({
+    required this.controller,
+    required this.obscureText,
+    required this.onToggleObscure,
+    required this.onRegenerate,
+  });
+
+  final TextEditingController controller;
+  final bool obscureText;
+  final VoidCallback onToggleObscure;
+  final VoidCallback onRegenerate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppTextField(
+          controller: controller,
+          hint: '••••••••••••',
+          label: 'Password',
+          obscureText: obscureText,
+          textInputAction: TextInputAction.done,
+          validator: (v) => (v == null || v.isEmpty) ? 'Required' : null,
+          suffixIcon: Semantics(
+            label: obscureText ? 'Show password' : 'Hide password',
+            button: true,
+            child: GestureDetector(
+              onTap: onToggleObscure,
+              child: Icon(
+                obscureText
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: AppColors.onSurfaceVariant,
+                size: 20,
+              ),
+            ),
+          ),
+        ),
+        8.verticalSpace,
+        ValueListenableBuilder<TextEditingValue>(
+          valueListenable: controller,
+          builder: (_, value, _) => PasswordStrengthRow(
+            password: value.text,
+            onRegenerate: onRegenerate,
+          ),
+        ),
+      ],
     );
   }
 }
