@@ -1,20 +1,52 @@
 import 'package:flutter/material.dart';
+import '../../../../core/helpers/responsive_helper.dart';
+import '../../../../core/themes/app_colors.dart';
+import '../../../../core/themes/text_styles.dart';
 
-import '../../../../../core/constants/vault_categories.dart';
-import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
-import '../../../../../core/themes/text_styles.dart';
-import '../../../../../core/widgets/category_chip.dart';
+import '../../../../core/constants/vault_categories.dart';
+import '../../../../core/widgets/category_chip.dart';
 
-class CategoryTagRow extends StatelessWidget {
-  const CategoryTagRow({
+class CategorySection extends StatelessWidget {
+  const CategorySection({
     super.key,
     required this.selected,
     required this.onChanged,
   });
 
-  final String selected;
-  final ValueChanged<String> onChanged;
+  final List<String> selected;
+  final ValueChanged<List<String>> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: context.responsive.edgeInsets(left: 4, bottom: 8),
+          child: Text('Category Tags', style: TextStyles.captionMuted),
+        ),
+
+        _CategoryTagRow(selected: selected, onChanged: onChanged),
+      ],
+    );
+  }
+}
+
+class _CategoryTagRow extends StatelessWidget {
+  const _CategoryTagRow({required this.selected, required this.onChanged});
+
+  final List<String> selected;
+  final ValueChanged<List<String>> onChanged;
+
+  void _toggle(String tag) {
+    final updated = List<String>.from(selected);
+    if (updated.contains(tag)) {
+      updated.remove(tag);
+    } else {
+      updated.add(tag);
+    }
+    onChanged(updated);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +57,8 @@ class CategoryTagRow extends StatelessWidget {
         ...kVaultCategories.map(
           (tag) => CategoryChip(
             label: tag,
-            isSelected: selected == tag,
-            onTap: () => onChanged(tag),
+            isSelected: selected.contains(tag),
+            onTap: () => _toggle(tag),
             semanticPrefix: 'Tag',
           ),
         ),
