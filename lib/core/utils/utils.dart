@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -19,7 +21,16 @@ class Utils {
   static final _uuid = Uuid();
   static String generateUuid() => _uuid.v4();
 
-
+  /// Generates a random password with a mix of characters, numbers, and symbols.
+  static String generatePassword({int length = 16}) {
+    const lower = 'abcdefghijklmnopqrstuvwxyz';
+    const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const numbers = '0123456789';
+    const symbols = '!@#\$%^&*';
+    const chars = '$lower$upper$numbers$symbols';
+    final rng = Random.secure();
+    return List.generate(length, (_) => chars[rng.nextInt(chars.length)]).join();
+  }
 
   static void unfocus(BuildContext context) => FocusScope.of(context).unfocus();
 
