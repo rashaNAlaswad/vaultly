@@ -34,7 +34,7 @@ class Utils {
 
   static void unfocus(BuildContext context) => FocusScope.of(context).unfocus();
 
-  Future<dynamic> showDefaultBottomSheet(
+  static Future<dynamic> showDefaultBottomSheet(
     BuildContext context,
     Widget widget,
     bool? isDismissible,
@@ -72,7 +72,7 @@ class Utils {
     },
   );
 
-  Future<dynamic> showDefaultDialog(
+  static Future<dynamic> showDefaultDialog(
     BuildContext context,
     Widget widget,
     Widget actions,
@@ -90,7 +90,7 @@ class Utils {
           ),
           clipBehavior: Clip.antiAliasWithSaveLayer,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(6.r)),
+            borderRadius: BorderRadius.all(Radius.circular(12.r)),
           ),
           content: widget,
           actions: [actions],
