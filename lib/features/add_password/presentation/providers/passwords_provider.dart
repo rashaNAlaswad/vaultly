@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/utils/utils.dart';
+import '../../../auth/providers/auth_session_provider.dart';
 import '../../data/models/password_entry.dart';
 import '../../data/repositories/supabase_password_repository.dart';
 import '../../domain/repositories/password_repository.dart';
@@ -20,10 +21,29 @@ class PasswordsNotifier extends _$PasswordsNotifier {
     return ref.read(passwordRepositoryProvider).fetchAll();
   }
 
-  Future<void> addPassword(PasswordEntry entry) async {
-    final withId = entry.copyWith(id: Utils.generateUuid());
-    await ref.read(passwordRepositoryProvider).save(withId);
-    state = AsyncData([withId, ...?state.value]);
+  Future<void> addPassword({
+    required String siteName,
+    required String username,
+    required String password,
+    required List<String> tags,
+    String notes = '',
+  }) async {
+    final userId = ref.read(authSessionProvider).asData?.value.userId;
+    if (userId == null) throw Exception('No active session');
+
+    final entry = PasswordEntry(
+      id: Utils.generateUuid(),
+      userId: userId,
+      siteName: siteName,
+      username: username,
+      password: password,
+      tags: tags,
+      notes: notes,
+      createdAt: DateTime.now(),
+    );
+
+    await ref.read(passwordRepositoryProvider).save(entry);
+    state = AsyncData([entry, ...?state.value]);
   }
 
   Future<void> deletePassword(String id) async {
