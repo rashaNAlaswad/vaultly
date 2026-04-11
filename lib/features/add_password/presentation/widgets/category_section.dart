@@ -3,18 +3,21 @@ import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 
-import '../../../../core/constants/vault_categories.dart';
 import '../../../../core/widgets/category_chip.dart';
 
 class CategorySection extends StatelessWidget {
   const CategorySection({
     super.key,
+    required this.tags,
     required this.selected,
     required this.onChanged,
+    required this.onAddTag,
   });
 
+  final List<String> tags;
   final List<String> selected;
   final ValueChanged<List<String>> onChanged;
+  final VoidCallback onAddTag;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +29,29 @@ class CategorySection extends StatelessWidget {
           child: Text('Category Tags', style: TextStyles.captionMuted),
         ),
 
-        _CategoryTagRow(selected: selected, onChanged: onChanged),
+        _CategoryTagRow(
+          tags: tags,
+          selected: selected,
+          onChanged: onChanged,
+          onAddTag: onAddTag,
+        ),
       ],
     );
   }
 }
 
 class _CategoryTagRow extends StatelessWidget {
-  const _CategoryTagRow({required this.selected, required this.onChanged});
+  const _CategoryTagRow({
+    required this.tags,
+    required this.selected,
+    required this.onChanged,
+    required this.onAddTag,
+  });
 
+  final List<String> tags;
   final List<String> selected;
   final ValueChanged<List<String>> onChanged;
+  final VoidCallback onAddTag;
 
   void _toggle(String tag) {
     final updated = List<String>.from(selected);
@@ -54,7 +69,7 @@ class _CategoryTagRow extends StatelessWidget {
       spacing: 8.w,
       runSpacing: 8.h,
       children: [
-        ...kVaultCategories.map(
+        ...tags.map(
           (tag) => CategoryChip(
             label: tag,
             isSelected: selected.contains(tag),
@@ -66,7 +81,7 @@ class _CategoryTagRow extends StatelessWidget {
           label: 'Add new tag',
           button: true,
           child: GestureDetector(
-            onTap: () {},
+            onTap: onAddTag,
             child: Container(
               padding: context.responsive.edgeInsetsSymmetric(
                 horizontal: 12,
