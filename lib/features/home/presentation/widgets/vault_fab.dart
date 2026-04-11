@@ -21,7 +21,7 @@ class VaultFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reduceMotion = MediaQuery.of(context).disableAnimations;
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
 
     return Semantics(
       label: 'Add password',

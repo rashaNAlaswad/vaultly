@@ -48,10 +48,6 @@ class Utils {
         topRight: Radius.circular(16.r),
       ),
     ),
-    transitionAnimationController: AnimationController(
-      vsync: Navigator.of(context),
-      duration: const Duration(milliseconds: 500),
-    ),
     builder: (context) {
       return Padding(
         padding: EdgeInsets.only(
@@ -88,7 +84,7 @@ class Utils {
             vertical: 14.h,
             horizontal: 20.w,
           ),
-          clipBehavior: Clip.antiAliasWithSaveLayer,
+          clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.r)),
           ),

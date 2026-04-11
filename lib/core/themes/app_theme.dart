@@ -7,7 +7,7 @@ import 'text_styles.dart';
 class AppTheme {
   AppTheme._();
 
-  static ThemeData get dark => ThemeData(
+  static final ThemeData dark = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
