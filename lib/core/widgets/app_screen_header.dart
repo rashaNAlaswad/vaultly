@@ -39,10 +39,12 @@ class AppScreenHeader extends StatelessWidget {
   /// Whether to show the leading back button. Defaults to `true`.
   final bool showBackButton;
 
+  static final _padding = EdgeInsets.symmetric(horizontal: 8.w);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: context.responsive.edgeInsetsSymmetric(horizontal: 8),
+      padding: _padding,
       child: Row(
         children: [
           showBackButton
