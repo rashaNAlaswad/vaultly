@@ -11,7 +11,9 @@ import '../../../../core/widgets/app_snack_bar.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/gradient_button.dart';
+import '../widgets/add_tag_dialog.dart';
 import '../providers/passwords_provider.dart';
+import '../providers/user_tags_provider.dart';
 import '../widgets/password_strength_row.dart';
 import '../widgets/vault_identity_avatar.dart';
 
@@ -31,7 +33,7 @@ class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
   final _notesController = TextEditingController();
 
   final _obscurePasswordNotifier = ValueNotifier<bool>(true);
-  final _selectedTagsNotifier = ValueNotifier<List<String>>([]);
+  final _selectedTagNotifier = ValueNotifier<String?>(null);
   final _isSavingNotifier = ValueNotifier<bool>(false);
 
   @override
@@ -41,7 +43,7 @@ class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
     _passwordController.dispose();
     _notesController.dispose();
     _obscurePasswordNotifier.dispose();
-    _selectedTagsNotifier.dispose();
+    _selectedTagNotifier.dispose();
     _isSavingNotifier.dispose();
     super.dispose();
   }
@@ -50,9 +52,17 @@ class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
     _passwordController.text = Utils.generatePassword();
   }
 
+  Future<void> _showAddTagDialog() async {
+    final tag = await AddTagDialog.show(context);
+    if (tag == null) return;
+    final added = await ref.read(userTagsProvider.notifier).addTag(tag);
+    if (added) _selectedTagNotifier.value = tag;
+  }
+
   Future<void> _onSave() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    if (_selectedTagsNotifier.value.isEmpty) {
+    final selectedTag = _selectedTagNotifier.value;
+    if (selectedTag == null) {
       AppSnackBar.error(context, 'Please select a tag.');
       return;
     }
@@ -63,7 +73,7 @@ class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
         siteName: _siteController.text.trim(),
         username: _usernameController.text.trim(),
         password: _passwordController.text,
-        tags: _selectedTagsNotifier.value,
+        tags: [selectedTag],
         notes: _notesController.text.trim(),
       );
       if (mounted) {
@@ -163,13 +173,18 @@ class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
                       onTap: _generatePassword,
                     ).fadeInSlide(delay: 180),
                     24.verticalSpace,
-                    ValueListenableBuilder<List<String>>(
-                      valueListenable: _selectedTagsNotifier,
-                      builder: (context, selected, _) => CategorySection(
-                        selected: selected,
-                        onChanged: (tags) =>
-                            _selectedTagsNotifier.value = tags,
-                      ).fadeInSlide(delay: 220),
+                    ValueListenableBuilder<String?>(
+                      valueListenable: _selectedTagNotifier,
+                      builder: (context, selected, _) {
+                        final tags =
+                            ref.watch(userTagsProvider).asData?.value ?? [];
+                        return CategorySection(
+                          tags: tags,
+                          selected: selected,
+                          onChanged: (t) => _selectedTagNotifier.value = t,
+                          onAddTag: _showAddTagDialog,
+                        ).fadeInSlide(delay: 220);
+                      },
                     ),
                     20.verticalSpace,
                     AppTextField(
