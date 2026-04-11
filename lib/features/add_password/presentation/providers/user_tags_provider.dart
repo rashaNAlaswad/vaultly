@@ -28,10 +28,12 @@ class UserTagsNotifier extends _$UserTagsNotifier {
     return merged;
   }
 
-  Future<void> addTag(String tag) async {
+  Future<bool> addTag(String tag) async {
     final current = state.asData?.value ?? [];
+    if (current.any((t) => t.toLowerCase() == tag.toLowerCase())) return false;
     final updated = [...current, tag];
     await ref.read(userTagsRepositoryProvider).saveTags(updated);
     state = AsyncData(updated);
+    return true;
   }
 }
