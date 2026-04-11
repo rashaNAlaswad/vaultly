@@ -5,6 +5,7 @@ import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/widgets/app_snack_bar.dart';
 import '../../../add_password/presentation/providers/passwords_provider.dart';
+import '../../../add_password/presentation/providers/user_tags_provider.dart';
 import '../../../auth/providers/auth_session_provider.dart';
 import '../widgets/app_screen_header_widget.dart';
 import '../widgets/home_category_filter_row.dart';
@@ -46,6 +47,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       authSessionProvider.select((s) => s.asData?.value.hasPin ?? false),
     );
     final passwordsAsync = ref.watch(passwordsProvider);
+    final filterCategories = <String>[
+      'All',
+      ...ref.watch(userTagsProvider).asData?.value ?? <String>[],
+    ];
 
     return Scaffold(
       body: SafeArea(
@@ -74,6 +79,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         valueListenable: _categoryNotifier,
                         builder: (context, selected, _) =>
                             HomeCategoryFilterRow(
+                              categories: filterCategories,
                               selected: selected,
                               onChanged: (c) => _categoryNotifier.value = c,
                             ),
