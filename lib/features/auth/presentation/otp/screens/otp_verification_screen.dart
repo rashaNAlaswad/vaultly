@@ -38,14 +38,15 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
   final _focusNodes = List.generate(_otpLength, (_) => FocusNode());
 
   final _resendSeconds = ValueNotifier<int>(58);
+  final _hasError = ValueNotifier<bool>(false);
   String _currentOtp = '';
   Timer? _resendTimer;
-  bool _hasError = false;
 
   @override
   void dispose() {
     _resendTimer?.cancel();
     _resendSeconds.dispose();
+    _hasError.dispose();
     for (final c in _controllers) {
       c.dispose();
     }
@@ -99,7 +100,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
       _focusNodes[index + 1].requestFocus();
     }
     _currentOtp = _controllers.map((c) => c.text).join();
-    setState(() => _hasError = false);
+    _hasError.value = false;
   }
 
   bool get _isComplete => _currentOtp.length == _otpLength;
@@ -118,7 +119,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
     }
     _currentOtp = '';
     _focusNodes.first.requestFocus();
-    setState(() => _hasError = false);
+    _hasError.value = false;
     _startResendTimer();
     await ref.read(sendOtpProvider.notifier).sendOtp(widget.email);
   }
@@ -128,7 +129,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
     ref.listen<AsyncValue<void>>(verifyOtpProvider, (previous, next) {
       next.whenOrNull(
         error: (error, _) {
-          setState(() => _hasError = true);
+          _hasError.value = true;
           AppSnackBar.error(context, error.toString());
         },
       );
@@ -162,14 +163,21 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
                         16.verticalSpace,
                         InstructionHeader(email: widget.email),
                         48.verticalSpace,
-                        OtpInputRow(
-                          controllers: _controllers,
-                          focusNodes: _focusNodes,
-                          hasError: _hasError,
-                          onChanged: _onDigitChanged,
+                        ValueListenableBuilder<bool>(
+                          valueListenable: _hasError,
+                          builder: (context, hasError, _) => Column(
+                            children: [
+                              OtpInputRow(
+                                controllers: _controllers,
+                                focusNodes: _focusNodes,
+                                hasError: hasError,
+                                onChanged: _onDigitChanged,
+                              ),
+                              20.verticalSpace,
+                              if (hasError) const OtpErrorMessage(),
+                            ],
+                          ),
                         ),
-                        20.verticalSpace,
-                        if (_hasError) const OtpErrorMessage(),
                         48.verticalSpace,
                         GradientButton(
                           label: 'Verify Identity',
