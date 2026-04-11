@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class VaultEmptyState extends StatelessWidget {
   const VaultEmptyState({super.key});
@@ -48,10 +49,13 @@ class VaultEmptyState extends StatelessWidget {
           ),
         ),
         28.verticalSpace,
-        Text('Your vault is empty', style: TextStyles.largeText),
+        Text(
+          AppLocalizations.of(context).vaultEmpty,
+          style: TextStyles.largeText,
+        ),
         12.verticalSpace,
         Text(
-          'Tap + to add your first password\nand keep your life organized.',
+          AppLocalizations.of(context).vaultEmptySubtitle,
           textAlign: TextAlign.center,
           style: TextStyles.heroSubtitle,
         ),

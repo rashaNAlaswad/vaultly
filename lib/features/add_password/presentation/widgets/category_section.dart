@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
-
 import '../../../../core/widgets/category_chip.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class CategorySection extends StatelessWidget {
   const CategorySection({
@@ -21,12 +21,13 @@ class CategorySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: context.responsive.edgeInsets(left: 4, bottom: 8),
-          child: Text('Category Tags', style: TextStyles.captionMuted),
+          padding: context.responsive.edgeInsets(start: 4, bottom: 8),
+          child: Text(l10n.categoryTags, style: TextStyles.captionMuted),
         ),
 
         _CategoryTagRow(
@@ -90,7 +91,10 @@ class _CategoryTagRow extends StatelessWidget {
                     size: 16.sp,
                   ),
                   4.horizontalSpace,
-                  Text('Add Tag', style: TextStyles.captionMuted),
+                  Text(
+                    AppLocalizations.of(context).addTagButton,
+                    style: TextStyles.captionMuted,
+                  ),
                 ],
               ),
             ),

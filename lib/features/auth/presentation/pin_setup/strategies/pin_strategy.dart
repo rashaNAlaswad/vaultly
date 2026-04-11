@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../l10n/app_localizations.dart';
+
 /// The state held by [PinNotifier].
 class PinState {
   const PinState({this.digits = const [], this.result});
@@ -24,8 +26,8 @@ enum PinAction { create, confirm, unlock }
 abstract interface class PinStrategy {
   const PinStrategy();
 
-  String get title;
-  String get subtitle;
+  String title(AppLocalizations l10n);
+  String subtitle(AppLocalizations l10n);
   PinAction get action;
   Future<void> execute(String pin);
 }

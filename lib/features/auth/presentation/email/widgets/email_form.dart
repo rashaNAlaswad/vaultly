@@ -6,6 +6,7 @@ import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/gradient_button.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class EmailForm extends StatefulWidget {
   const EmailForm({
@@ -39,6 +40,7 @@ class _EmailFormState extends State<EmailForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -46,25 +48,25 @@ class _EmailFormState extends State<EmailForm> {
         children: [
           AppTextField(
             controller: _controller,
-            label: 'Secure Email Address',
-            hint: 'name@example.com',
+            label: l10n.emailLabel,
+            hint: l10n.emailHint,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.done,
             onFieldSubmitted: (_) => _submit(),
             suffixIcon: const EmailSuffixIcon(),
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
-                return 'Please enter your email';
+                return l10n.emailRequired;
               }
               if (!value.trim().isValidEmail) {
-                return 'Please enter a valid email';
+                return l10n.emailInvalid;
               }
               return null;
             },
           ),
           24.verticalSpace,
           GradientButton(
-            label: 'Send Verification Code',
+            label: l10n.sendCode,
             icon: Icons.arrow_forward,
             onTap: _submit,
             isLoading: widget.isLoading,

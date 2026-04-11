@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
+import '../../../../../core/models/password_strength.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
-import '../../../../../core/models/password_strength.dart';
 import '../../../../../core/utils/utils.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../add_password/data/models/password_entry.dart';
 
 class PasswordCard extends StatelessWidget {
@@ -41,16 +42,17 @@ class PasswordCard extends StatelessWidget {
       entry.siteName.isNotEmpty ? entry.siteName[0].toUpperCase() : '?';
 
   Future<void> _confirmDelete(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
     final confirmed = await Utils.showDefaultDialog(
       context,
       Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Delete password?', style: TextStyles.screenTitle),
+          Text(l10n.deletePasswordTitle, style: TextStyles.screenTitle),
           8.verticalSpace,
           Text(
-            'Remove "${entry.siteName}" from your vault?',
+            l10n.deletePasswordConfirmMessage(entry.siteName),
             style: TextStyles.captionMuted,
           ),
         ],
@@ -60,11 +62,11 @@ class PasswordCard extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Delete', style: _deleteTextStyle),
+            child: Text(l10n.delete, style: _deleteTextStyle),
           ),
         ],
       ),
@@ -154,6 +156,7 @@ class _StrengthIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final activeColor = strength.color;
     final activeDots = strength.filledDots;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -164,7 +167,7 @@ class _StrengthIndicator extends StatelessWidget {
           children: List.generate(3, (i) {
             final active = i < activeDots;
             return Padding(
-              padding: context.responsive.edgeInsets(left: i == 0 ? 0 : 4),
+              padding: context.responsive.edgeInsets(start: i == 0 ? 0 : 4),
               child: Container(
                 width: 6.w,
                 height: 6.h,
@@ -180,7 +183,7 @@ class _StrengthIndicator extends StatelessWidget {
         ),
         4.verticalSpace,
         Text(
-          strength.label,
+          strength.label(l10n),
           style: TextStyles.captionPrimary.copyWith(
             fontSize: 10.sp,
             color: activeColor,

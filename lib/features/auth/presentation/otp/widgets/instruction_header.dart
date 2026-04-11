@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class InstructionHeader extends StatelessWidget {
   const InstructionHeader({super.key, required this.email});
@@ -12,6 +13,7 @@ class InstructionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         Container(
@@ -39,7 +41,7 @@ class InstructionHeader extends StatelessWidget {
             .scale(begin: const Offset(0.8, 0.8)),
         24.verticalSpace,
         Text(
-          'Security Check',
+          l10n.securityCheck,
           style: TextStyles.heroTitle,
         ).animate().fadeIn(delay: 100.ms, duration: 600.ms).slideY(begin: 0.1),
         12.verticalSpace,
@@ -48,9 +50,9 @@ class InstructionHeader extends StatelessWidget {
           text: TextSpan(
             style: TextStyles.heroSubtitle,
             children: [
-              const TextSpan(text: 'We sent a 6-digit code to '),
+              TextSpan(text: l10n.otpSentPrefix),
               TextSpan(text: email, style: TextStyles.bodyLink),
-              const TextSpan(text: '. Please enter it below to continue.'),
+              TextSpan(text: l10n.otpSentSuffix),
             ],
           ),
         ).animate().fadeIn(delay: 200.ms, duration: 600.ms).slideY(begin: 0.1),

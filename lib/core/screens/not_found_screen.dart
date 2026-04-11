@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../extensions/animations.dart';
 import '../helpers/responsive_helper.dart';
 import '../routing/app_routes.dart';
+import '../../l10n/app_localizations.dart';
 
 class NotFoundScreen extends StatelessWidget {
   final String routeName;
@@ -13,6 +14,7 @@ class NotFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -27,7 +29,7 @@ class NotFoundScreen extends StatelessWidget {
             ).fadeInScale(),
             20.verticalSpace,
             Text(
-              'Page Not Found',
+              l10n.pageNotFound,
               style: theme.textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -49,7 +51,7 @@ class NotFoundScreen extends StatelessWidget {
               onPressed: () {
                 context.pushReplacement(AppRoutes.home);
               },
-              child: Text('Go to Home', style: TextStyle(fontSize: 16.sp)),
+              child: Text(l10n.goToHome, style: TextStyle(fontSize: 16.sp)),
             ).fadeInSlide(delay: 400),
           ],
         ),

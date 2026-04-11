@@ -3,12 +3,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         Container(
@@ -33,12 +35,12 @@ class HeroSection extends StatelessWidget {
             .scale(begin: const Offset(0.8, 0.8)),
         24.verticalSpace,
         Text(
-          'Vaultly',
+          l10n.appName,
           style: TextStyles.heroTitle,
         ).animate().fadeIn(delay: 100.ms, duration: 600.ms).slideY(begin: 0.1),
         12.verticalSpace,
         Text(
-          'Vaultly uses a Master PIN instead of a password for total privacy.',
+          l10n.appTagline,
           textAlign: TextAlign.center,
           style: TextStyles.heroSubtitle,
         ).animate().fadeIn(delay: 200.ms, duration: 600.ms).slideY(begin: 0.1),

@@ -64,7 +64,7 @@ class AppTextField extends StatelessWidget {
       children: [
         if (label != null) ...[
           Padding(
-            padding: context.responsive.edgeInsets(left: 16, bottom: 8),
+            padding: context.responsive.edgeInsets(start: 16, bottom: 8),
             child: Text(label!.toUpperCase(), style: TextStyles.fieldLabel),
           ),
         ],
@@ -90,13 +90,13 @@ class AppTextField extends StatelessWidget {
               hintStyle: TextStyles.inputHint,
               suffixIcon: suffixIcon != null
                   ? Padding(
-                      padding: context.responsive.edgeInsets(right: 8),
+                      padding: context.responsive.edgeInsets(end: 8),
                       child: suffixIcon,
                     )
                   : null,
               prefixIcon: prefixIcon != null
                   ? Padding(
-                      padding: context.responsive.edgeInsets(left: 16),
+                      padding: context.responsive.edgeInsets(start: 16),
                       child: prefixIcon,
                     )
                   : null,

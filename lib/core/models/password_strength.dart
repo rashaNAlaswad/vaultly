@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart' show Color;
 
 import '../themes/app_colors.dart';
+import '../../l10n/app_localizations.dart';
 
 enum PasswordStrength { weak, moderate, secure }
 
 extension PasswordStrengthX on PasswordStrength {
-  String get label => switch (this) {
-    PasswordStrength.weak => 'WEAK',
-    PasswordStrength.moderate => 'MODERATE',
-    PasswordStrength.secure => 'SECURE',
+  String label(AppLocalizations l10n) => switch (this) {
+    PasswordStrength.weak => l10n.strengthWeak,
+    PasswordStrength.moderate => l10n.strengthModerate,
+    PasswordStrength.secure => l10n.strengthSecure,
   };
 
   Color get color => switch (this) {

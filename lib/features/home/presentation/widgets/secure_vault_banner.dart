@@ -5,6 +5,7 @@ import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../core/routing/app_routes.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class SecureVaultBanner extends StatelessWidget {
   const SecureVaultBanner({super.key});
@@ -53,6 +54,7 @@ class SecureVaultBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       decoration: _outerDecoration,
       child: ClipRRect(
@@ -84,10 +86,10 @@ class SecureVaultBanner extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Secure your vault', style: TextStyles.screenTitle),
+                        Text(l10n.secureVaultTitle, style: TextStyles.screenTitle),
                         4.verticalSpace,
                         Text(
-                          'Create a PIN to encrypt your passwords',
+                          l10n.secureVaultSubtitle,
                           style: TextStyles.captionMuted,
                         ),
                       ],
@@ -103,7 +105,7 @@ class SecureVaultBanner extends StatelessWidget {
                         padding: _buttonPadding,
                         decoration: _buttonDecoration,
                         child: Text(
-                          'Create\nPIN',
+                          l10n.createPin,
                           textAlign: TextAlign.center,
                           style: _buttonTextStyle,
                         ),

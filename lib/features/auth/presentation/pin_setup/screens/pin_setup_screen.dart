@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../l10n/app_localizations.dart';
+
 import '../../../../../core/extensions/animations.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/routing/app_routes.dart';
@@ -82,9 +84,10 @@ class _HeroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return PinHeroSection(
-      title: strategy.title,
-      subtitle: strategy.subtitle,
+      title: strategy.title(l10n),
+      subtitle: strategy.subtitle(l10n),
     ).fadeInSlide(delay: 0);
   }
 }

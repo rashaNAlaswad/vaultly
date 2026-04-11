@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/widgets/category_chip.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class HomeCategoryFilterRow extends StatelessWidget {
   const HomeCategoryFilterRow({
@@ -17,6 +18,7 @@ class HomeCategoryFilterRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Wrap(
@@ -24,7 +26,7 @@ class HomeCategoryFilterRow extends StatelessWidget {
         children: categories
             .map(
               (category) => CategoryChip(
-                label: category,
+                label: category == 'All' ? l10n.all : category,
                 isSelected: selected == category,
                 onTap: () => onChanged(category),
                 semanticPrefix: 'Filter',

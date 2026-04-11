@@ -5,6 +5,7 @@ import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/app_snack_bar.dart';
 import '../../../../core/routing/app_routes.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class VaultFab extends StatelessWidget {
   const VaultFab({super.key, this.enabled = true});
@@ -16,7 +17,7 @@ class VaultFab extends StatelessWidget {
       context.push(AppRoutes.addPassword);
       return;
     }
-    AppSnackBar.info(context, 'Create a PIN to add passwords to your vault');
+    AppSnackBar.info(context, AppLocalizations.of(context).createPinToAdd);
   }
 
   @override

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
+
 import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/themes/app_colors.dart';
@@ -73,8 +75,9 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
   Future<void> _onSave() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     final selectedTag = _selectedTagNotifier.value;
+    final l10n = AppLocalizations.of(context);
     if (selectedTag == null) {
-      AppSnackBar.error(context, 'Please select a tag.');
+      AppSnackBar.error(context, l10n.selectTagError);
       return;
     }
 
@@ -100,11 +103,11 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
         );
       }
       if (mounted) {
-        AppSnackBar.success(context, 'Password saved!');
+        AppSnackBar.success(context, l10n.passwordSaved);
         context.pop();
       }
     } catch (_) {
-      if (mounted) AppSnackBar.error(context, 'Failed to save. Please try again.');
+      if (mounted) AppSnackBar.error(context, l10n.failedToSave);
     } finally {
       if (mounted) _isSavingNotifier.value = false;
     }
@@ -112,14 +115,15 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             AppScreenHeader(
-              title: _isEditing ? 'Edit Password' : 'New Password',
+              title: _isEditing ? l10n.editPassword : l10n.newPassword,
               trailing: Semantics(
-                label: 'Save password',
+                label: l10n.savePassword,
                 button: true,
                 child: ValueListenableBuilder<bool>(
                   valueListenable: _isSavingNotifier,
@@ -131,7 +135,7 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
                             height: 16,
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
-                        : const Text('Save'),
+                        : Text(l10n.save),
                   ),
                 ),
               ),
@@ -157,21 +161,21 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
                     32.verticalSpace,
                     AppTextField(
                       controller: _siteController,
-                      hint: 'e.g. Replit',
-                      label: 'Site/App Name',
+                      hint: l10n.siteNameHint,
+                      label: l10n.siteNameLabel,
                       textInputAction: TextInputAction.next,
                       validator: (v) =>
-                          (v == null || v.trim().isEmpty) ? 'Required' : null,
+                          (v == null || v.trim().isEmpty) ? l10n.required : null,
                     ).fadeInSlide(delay: 60),
                     20.verticalSpace,
                     AppTextField(
                       controller: _usernameController,
-                      hint: 'user@example.com',
-                      label: 'Username or Email',
+                      hint: l10n.usernameHint,
+                      label: l10n.usernameLabel,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
                       validator: (v) =>
-                          (v == null || v.trim().isEmpty) ? 'Required' : null,
+                          (v == null || v.trim().isEmpty) ? l10n.required : null,
                       suffixIcon: const Icon(
                         Icons.person_outline_rounded,
                         color: AppColors.onSurfaceVariant,
@@ -191,7 +195,7 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
                     ),
                     20.verticalSpace,
                     GradientButton(
-                      label: 'Generate Secure Key',
+                      label: l10n.generateSecureKey,
                       onTap: _generatePassword,
                     ).fadeInSlide(delay: 180),
                     24.verticalSpace,
@@ -211,8 +215,8 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
                     20.verticalSpace,
                     AppTextField(
                       controller: _notesController,
-                      hint: 'Secret questions, ...etc.',
-                      label: 'Optional Notes',
+                      hint: l10n.notesHint,
+                      label: l10n.notesLabel,
                       maxLines: 3,
                       textInputAction: TextInputAction.done,
                     ).fadeInSlide(delay: 260),
@@ -243,17 +247,18 @@ class _PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         AppTextField(
           controller: controller,
-          hint: '••••••••••••',
-          label: 'Password',
+          hint: l10n.passwordHint,
+          label: l10n.passwordLabel,
           obscureText: obscureText,
           textInputAction: TextInputAction.done,
-          validator: (v) => (v == null || v.isEmpty) ? 'Required' : null,
+          validator: (v) => (v == null || v.isEmpty) ? l10n.required : null,
           suffixIcon: Semantics(
-            label: obscureText ? 'Show password' : 'Hide password',
+            label: obscureText ? l10n.showPassword : l10n.hidePassword,
             button: true,
             child: GestureDetector(
               onTap: onToggleObscure,

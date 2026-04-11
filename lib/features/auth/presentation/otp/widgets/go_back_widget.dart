@@ -4,12 +4,14 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class GoBackWidget extends StatelessWidget {
   const GoBackWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: context.responsive.edgeInsetsSymmetric(horizontal: 24),
       child: Row(
@@ -27,7 +29,7 @@ class GoBackWidget extends StatelessWidget {
             ),
           ),
           16.horizontalSpace,
-          Text('Verify Email', style: TextStyles.screenTitle),
+          Text(l10n.verifyEmail, style: TextStyles.screenTitle),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 /// Animated error message shown below the OTP input row on a wrong code.
 class OtpErrorMessage extends StatelessWidget {
@@ -11,12 +12,13 @@ class OtpErrorMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.error_outline, color: AppColors.error, size: 16.sp),
         6.horizontalSpace,
-        Text('Incorrect code, try again', style: TextStyles.errorSmall),
+        Text(l10n.incorrectCode, style: TextStyles.errorSmall),
       ],
     )
         .animate()

@@ -4,6 +4,7 @@ import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/models/password_strength.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 /// 3-dot animated strength bar with label and regenerate button.
 class PasswordStrengthRow extends StatelessWidget {
@@ -21,8 +22,9 @@ class PasswordStrengthRow extends StatelessWidget {
     final strength = evaluateStrength(password);
     if (strength == null) return const SizedBox.shrink();
 
+    final l10n = AppLocalizations.of(context);
     return Semantics(
-      label: 'Password strength: ${strength.label}',
+      label: 'Password strength: ${strength.label(l10n)}',
       child: Padding(
         padding: context.responsive.edgeInsetsSymmetric(horizontal: 4),
         child: Column(
@@ -33,7 +35,7 @@ class PasswordStrengthRow extends StatelessWidget {
                 return Expanded(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
-                    margin: EdgeInsets.only(right: i < 2 ? 4.w : 0),
+                    margin: EdgeInsetsDirectional.only(end: i < 2 ? 4.w : 0),
                     height: 5.h,
                     decoration: BoxDecoration(
                       color: isActive
@@ -58,7 +60,7 @@ class PasswordStrengthRow extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  strength.label,
+                  strength.label(l10n),
                   style: TextStyles.fieldLabel.copyWith(color: strength.color),
                 ),
                 Semantics(
@@ -75,7 +77,7 @@ class PasswordStrengthRow extends StatelessWidget {
                           size: 14.sp,
                         ),
                         4.horizontalSpace,
-                        Text('Regenerate', style: TextStyles.captionPrimary),
+                        Text(l10n.regenerate, style: TextStyles.captionPrimary),
                       ],
                     ),
                   ),

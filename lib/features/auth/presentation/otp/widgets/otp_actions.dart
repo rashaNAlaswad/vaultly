@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 /// resend link shown at the bottom of the OTP screen.
 class ResendLink extends StatelessWidget {
@@ -16,20 +17,21 @@ class ResendLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Didn't receive it? ", style: TextStyles.captionMuted),
+        Text('${l10n.didntReceiveIt} ', style: TextStyles.captionMuted),
         Semantics(
           button: true,
           enabled: resendSeconds == 0,
           label: resendSeconds > 0
-              ? 'Resend available in $resendSeconds seconds'
+              ? l10n.resendAvailableIn(resendSeconds)
               : 'Resend code',
           child: GestureDetector(
             onTap: resendSeconds == 0 ? onResend : null,
             child: Text(
-              resendSeconds > 0 ? 'Resend in ${resendSeconds}s' : 'Resend',
+              resendSeconds > 0 ? l10n.resendIn(resendSeconds) : l10n.resend,
               style: resendSeconds > 0
                   ? TextStyles.captionDisabled
                   : TextStyles.captionPrimary,

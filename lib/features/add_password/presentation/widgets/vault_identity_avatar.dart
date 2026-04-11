@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
+import '../../../../../l10n/app_localizations.dart';
 
 class VaultIdentityAvatar extends StatelessWidget {
   const VaultIdentityAvatar({super.key, required this.letter});
@@ -36,7 +37,10 @@ class VaultIdentityAvatar extends StatelessWidget {
             ),
           ),
           12.verticalSpace,
-          Text('VAULT IDENTITY', style: TextStyles.fieldLabel),
+          Text(
+            AppLocalizations.of(context).vaultIdentity,
+            style: TextStyles.fieldLabel,
+          ),
         ],
       ),
     );

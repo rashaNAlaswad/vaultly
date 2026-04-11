@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../l10n/app_localizations.dart';
+
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../add_password/data/models/password_entry.dart';
 import 'password_card.dart';
@@ -48,7 +50,9 @@ class PasswordsSliver extends StatelessWidget {
       error: (e, _) => SliverToBoxAdapter(
         child: Padding(
           padding: context.responsive.edgeInsetsSymmetric(vertical: 48),
-          child: const Center(child: Text('Could not load passwords.')),
+          child: Center(
+            child: Text(AppLocalizations.of(context).couldNotLoadPasswords),
+          ),
         ),
       ),
       data: (entries) => ListenableBuilder(

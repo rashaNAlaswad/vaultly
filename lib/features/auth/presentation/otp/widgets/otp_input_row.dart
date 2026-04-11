@@ -29,7 +29,7 @@ class OtpInputRow extends StatelessWidget {
         children: List.generate(length, (i) {
           return Expanded(
             child: Padding(
-              padding: EdgeInsets.only(right: i < length - 1 ? 8.w : 0),
+              padding: EdgeInsetsDirectional.only(end: i < length - 1 ? 8.w : 0),
               child: OtpBox(
                 controller: controllers[i],
                 focusNode: focusNodes[i],

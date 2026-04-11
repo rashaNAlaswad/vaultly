@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../l10n/app_localizations.dart';
+
 import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/widgets/app_snack_bar.dart';
@@ -36,11 +38,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Future<void> _delete(String id) async {
+    final l10n = AppLocalizations.of(context);
     try {
       await ref.read(passwordsProvider.notifier).deletePassword(id);
-      if (mounted) AppSnackBar.success(context, 'Password deleted.');
+      if (mounted) AppSnackBar.success(context, l10n.passwordDeleted);
     } catch (_) {
-      if (mounted) AppSnackBar.error(context, 'Failed to delete.');
+      if (mounted) AppSnackBar.error(context, l10n.failedToDelete);
     }
   }
 
@@ -104,8 +107,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 SliverToBoxAdapter(child: 100.verticalSpace),
               ],
             ),
-            Positioned(
-              right: 20.w,
+            PositionedDirectional(
+              end: 20.w,
               bottom: 28.h,
               child: VaultFab(enabled: hasPin).bounce(delay: 500),
             ),
