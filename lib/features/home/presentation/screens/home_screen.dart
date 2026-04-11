@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
@@ -7,6 +8,8 @@ import '../../../../core/widgets/app_snack_bar.dart';
 import '../../../add_password/presentation/providers/passwords_provider.dart';
 import '../../../add_password/presentation/providers/user_tags_provider.dart';
 import '../../../auth/providers/auth_session_provider.dart';
+import '../../../../core/routing/app_routes.dart';
+import '../../../add_password/data/models/password_entry.dart';
 import '../widgets/app_screen_header_widget.dart';
 import '../widgets/home_category_filter_row.dart';
 import '../widgets/passwords_sliver.dart';
@@ -93,6 +96,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   searchListenable: _searchController,
                   categoryListenable: _categoryNotifier,
                   onDelete: (id) => _delete(id),
+                  onTap: (PasswordEntry entry) => context.push(
+                    AppRoutes.passwordDetail,
+                    extra: entry,
+                  ),
                 ),
                 SliverToBoxAdapter(child: 100.verticalSpace),
               ],
