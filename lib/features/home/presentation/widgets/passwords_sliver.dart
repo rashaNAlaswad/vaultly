@@ -2,9 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/text_styles.dart';
 import '../../../add_password/data/models/password_entry.dart';
 import 'password_card.dart';
 import 'vault_empty_state.dart';
@@ -41,21 +39,16 @@ class PasswordsSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return passwordsAsync.when(
-      loading: () => const SliverToBoxAdapter(
+      loading: () => SliverToBoxAdapter(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 48),
-          child: Center(child: CircularProgressIndicator()),
+          padding: context.responsive.edgeInsetsSymmetric(vertical: 48),
+          child: const Center(child: CircularProgressIndicator()),
         ),
       ),
       error: (e, _) => SliverToBoxAdapter(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 48),
-          child: Center(
-            child: Text(
-              'Could not load passwords.',
-              style: TextStyles.captionMuted,
-            ),
-          ),
+          padding: context.responsive.edgeInsetsSymmetric(vertical: 48),
+          child: const Center(child: Text('Could not load passwords.')),
         ),
       ),
       data: (entries) => ListenableBuilder(
@@ -78,7 +71,7 @@ class PasswordsSliver extends StatelessWidget {
                     entry: item,
                     onDelete: () => onDelete(item.id),
                     onTap: () => onTap(item),
-                  ).listItemAnimation(index: i),
+                  ),
                 );
               },
             ),
