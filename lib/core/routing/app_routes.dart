@@ -8,4 +8,5 @@ class AppRoutes {
   static const String pinCreate = '/pin-create';
   static const String pinConfirm = '/pin-confirm';
   static const String pinUnlock = '/pin-unlock';
+  static const String passwordDetail = '/password-detail';
 }

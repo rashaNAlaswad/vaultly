@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../features/add_password/presentation/screens/add_password_screen.dart';
+import '../../features/add_password/data/models/password_entry.dart';
+import '../../features/add_password/presentation/screens/password_form_screen.dart';
 import '../../features/auth/presentation/email/screens/email_entry_screen.dart';
 import '../../features/auth/presentation/otp/screens/otp_verification_screen.dart';
 import '../../features/auth/presentation/pin_setup/screens/pin_setup_screen.dart';
@@ -53,7 +54,13 @@ GoRouter appRouter(Ref ref) {
       ),
       GoRoute(
         path: AppRoutes.addPassword,
-        builder: (context, state) => const AddPasswordScreen(),
+        builder: (context, state) => const PasswordFormScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.passwordDetail,
+        builder: (context, state) => PasswordFormScreen(
+          entry: state.extra! as PasswordEntry,
+        ),
       ),
     ],
     errorBuilder: (context, state) =>
