@@ -10,17 +10,17 @@ class PinDotRow extends StatelessWidget {
   final int filledCount;
 
   static const int _pinLength = 6;
+  static final _dotPadding = EdgeInsets.symmetric(horizontal: 10.w);
 
   @override
   Widget build(BuildContext context) {
-    final horizontalPadding = EdgeInsets.symmetric(horizontal: 10.w);
     return Semantics(
       label: '$filledCount of $_pinLength digits entered',
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(_pinLength, (index) {
           return Padding(
-            padding: horizontalPadding,
+            padding: _dotPadding,
             child: RepaintBoundary(
               child: _PinDot(
                 key: ValueKey(index),
@@ -39,6 +39,19 @@ class _PinDot extends StatelessWidget {
 
   final bool filled;
 
+  static final _filledDecoration = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.primary,
+    boxShadow: const [
+      BoxShadow(color: AppColors.primaryGlow30, blurRadius: 12, spreadRadius: 2),
+    ],
+  );
+
+  static const _emptyDecoration = BoxDecoration(
+    shape: BoxShape.circle,
+    color: AppColors.surfaceContainerHighest,
+  );
+
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -46,19 +59,7 @@ class _PinDot extends StatelessWidget {
       curve: Curves.easeOut,
       width: 14.w,
       height: 14.w,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: filled ? AppColors.primary : AppColors.surfaceContainerHighest,
-        boxShadow: filled
-            ? const [
-                BoxShadow(
-                  color: AppColors.primaryGlow30,
-                  blurRadius: 12,
-                  spreadRadius: 2,
-                ),
-              ]
-            : null,
-      ),
+      decoration: filled ? _filledDecoration : _emptyDecoration,
     );
   }
 }
