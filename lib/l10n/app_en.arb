@@ -1,0 +1,105 @@
+{
+  "@@locale": "en",
+
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete": "Delete",
+  "add": "Add",
+  "required": "Required",
+  "all": "All",
+  "regenerate": "Regenerate",
+
+  "appName": "Vaultly",
+  "appTagline": "Vaultly uses a Master PIN instead of a password for total privacy.",
+
+  "emailLabel": "Secure Email Address",
+  "emailHint": "name@example.com",
+  "sendCode": "Send Verification Code",
+  "emailRequired": "Please enter your email",
+  "emailInvalid": "Please enter a valid email",
+
+  "verifyEmail": "Verify Email",
+  "securityCheck": "Security Check",
+  "otpSentPrefix": "We sent a 6-digit code to ",
+  "otpSentSuffix": ". Please enter it below to continue.",
+  "didntReceiveIt": "Didn't receive it?",
+  "resendIn": "Resend in {seconds}s",
+  "@resendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resendAvailableIn": "Resend available in {seconds} seconds",
+  "@resendAvailableIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resend": "Resend",
+  "incorrectCode": "Incorrect code, try again",
+
+  "createPinTitle": "Create your PIN",
+  "createPinSubtitle": "Your PIN encrypts your vault. We never store it.",
+  "confirmPinTitle": "Confirm your PIN",
+  "confirmPinSubtitle": "Enter your PIN again to confirm.",
+  "unlockPinTitle": "Enter your PIN",
+  "unlockPinSubtitle": "Unlock your vault to continue.",
+
+  "hello": "Hello!",
+  "settings": "Settings",
+  "deletePasswordTitle": "Delete password?",
+  "deletePasswordConfirmMessage": "Remove \"{name}\" from your vault?",
+  "@deletePasswordConfirmMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "passwordDeleted": "Password deleted.",
+  "failedToDelete": "Failed to delete.",
+  "couldNotLoadPasswords": "Could not load passwords.",
+  "secureVaultTitle": "Secure your vault",
+  "secureVaultSubtitle": "Create a PIN to encrypt your passwords",
+  "createPin": "Create\nPIN",
+  "vaultEmpty": "Your vault is empty",
+  "vaultEmptySubtitle": "Tap + to add your first password\nand keep your life organized.",
+  "createPinToAdd": "Create a PIN to add passwords to your vault",
+
+  "newPassword": "New Password",
+  "editPassword": "Edit Password",
+  "savePassword": "Save password",
+  "selectTagError": "Please select a tag.",
+  "siteNameHint": "e.g. Replit",
+  "siteNameLabel": "Site/App Name",
+  "usernameHint": "user@example.com",
+  "usernameLabel": "Username or Email",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "passwordHint": "•••••••••••",
+  "passwordLabel": "Password",
+  "generateSecureKey": "Generate Secure Key",
+  "notesHint": "Secret questions, ...etc.",
+  "notesLabel": "Optional Notes",
+  "passwordSaved": "Password saved!",
+  "failedToSave": "Failed to save. Please try again.",
+
+  "addTagTitle": "Add Tag",
+  "tagNameHint": "e.g. Gaming",
+  "tagNameLabel": "Tag Name",
+  "categoryTags": "Category Tags",
+  "addTagButton": "Add Tag",
+
+  "strengthWeak": "WEAK",
+  "strengthModerate": "MODERATE",
+  "strengthSecure": "SECURE",
+
+  "pageNotFound": "Page Not Found",
+  "goToHome": "Go to Home",
+
+  "vaultIdentity": "VAULT IDENTITY"
+}

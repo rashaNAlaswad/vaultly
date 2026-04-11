@@ -1,0 +1,105 @@
+{
+  "@@locale": "ar",
+
+  "cancel": "إلغاء",
+  "save": "حفظ",
+  "delete": "حذف",
+  "add": "إضافة",
+  "required": "مطلوب",
+  "all": "الكل",
+  "regenerate": "إعادة توليد",
+
+  "appName": "Vaultly",
+  "appTagline": "يستخدم Vaultly رقم دخول بدلاً من كلمة المرور لضمان الخصوصية التامة.",
+
+  "emailLabel": "البريد الإلكتروني الآمن",
+  "emailHint": "name@example.com",
+  "sendCode": "إرسال رمز التحقق",
+  "emailRequired": "الرجاء إدخال البريد الإلكتروني",
+  "emailInvalid": "الرجاء إدخال بريد إلكتروني صالح",
+
+  "verifyEmail": "تحقق من البريد",
+  "securityCheck": "التحقق الأمني",
+  "otpSentPrefix": "أرسلنا رمزاً من 6 أرقام إلى ",
+  "otpSentSuffix": ". الرجاء إدخاله أدناه للمتابعة.",
+  "didntReceiveIt": "لم تستلمه؟",
+  "resendIn": "إعادة الإرسال خلال {seconds}ث",
+  "@resendIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resendAvailableIn": "إعادة الإرسال متاحة خلال {seconds} ثانية",
+  "@resendAvailableIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "resend": "إعادة الإرسال",
+  "incorrectCode": "رمز غير صحيح، حاول مجدداً",
+
+  "createPinTitle": "أنشئ رمز الدخول",
+  "createPinSubtitle": "يقوم رمز دخول بتشفير قبو كلماتك. لا نقوم بتخزينه أبداً.",
+  "confirmPinTitle": "أكّد رمز الدخول",
+  "confirmPinSubtitle": "أدخل رمز الدخول مرة أخرى للتأكيد.",
+  "unlockPinTitle": "أدخل رمز الدخول",
+  "unlockPinSubtitle": "افتح الخزنة للمتابعة.",
+
+  "hello": "مرحباً!",
+  "settings": "الإعدادات",
+  "deletePasswordTitle": "حذف كلمة المرور؟",
+  "deletePasswordConfirmMessage": "إزالة \"{name}\" من الخزنة؟",
+  "@deletePasswordConfirmMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "passwordDeleted": "تم حذف كلمة المرور.",
+  "failedToDelete": "فشل الحذف.",
+  "couldNotLoadPasswords": "تعذّر تحميل كلمات المرور.",
+  "secureVaultTitle": "أمّن خزنتك",
+  "secureVaultSubtitle": "أنشئ رمز الدخول لتشفير كلمات مرورك",
+  "createPin": "إنشاء\nرمز الدخول",
+  "vaultEmpty": "الخزنة فارغة",
+  "vaultEmptySubtitle": "اضغط + لإضافة أول كلمة مرور\nونظّم حياتك.",
+  "createPinToAdd": "أنشئ رمز الدخول لإضافة كلمات مرور إلى الخزنة",
+
+  "newPassword": "كلمة مرور جديدة",
+  "editPassword": "تعديل كلمة المرور",
+  "savePassword": "حفظ كلمة المرور",
+  "selectTagError": "الرجاء اختيار وسم.",
+  "siteNameHint": "مثال: Replit",
+  "siteNameLabel": "اسم الموقع / التطبيق",
+  "usernameHint": "user@example.com",
+  "usernameLabel": "اسم المستخدم أو البريد",
+  "showPassword": "إظهار كلمة المرور",
+  "hidePassword": "إخفاء كلمة المرور",
+  "passwordHint": "•••••••••••",
+  "passwordLabel": "كلمة المرور",
+  "generateSecureKey": "توليد مفتاح آمن",
+  "notesHint": "أسئلة سرية، إلخ.",
+  "notesLabel": "ملاحظات اختيارية",
+  "passwordSaved": "تم حفظ كلمة المرور!",
+  "failedToSave": "فشل الحفظ. الرجاء المحاولة مجدداً.",
+
+  "addTagTitle": "إضافة وسم",
+  "tagNameHint": "مثال: الألعاب",
+  "tagNameLabel": "اسم الوسم",
+  "categoryTags": "وسوم الفئة",
+  "addTagButton": "إضافة وسم",
+
+  "strengthWeak": "ضعيف",
+  "strengthModerate": "متوسط",
+  "strengthSecure": "آمن",
+
+  "pageNotFound": "الصفحة غير موجودة",
+  "goToHome": "العودة للرئيسية",
+
+  "vaultIdentity": "هوية الخزنة"
+}
