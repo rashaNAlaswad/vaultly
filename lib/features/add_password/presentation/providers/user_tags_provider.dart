@@ -11,11 +11,11 @@ part 'user_tags_provider.g.dart';
 UserTagsRepository userTagsRepository(Ref ref) =>
     SupabaseUserTagsRepository(Supabase.instance.client);
 
-@riverpod
+@Riverpod(keepAlive: true)
 class UserTagsNotifier extends _$UserTagsNotifier {
   @override
   Future<List<String>> build() async {
-    final repo = ref.read(userTagsRepositoryProvider);
+    final repo = ref.watch(userTagsRepositoryProvider);
     final tags = await repo.fetchTags();
     final missing = kVaultCategories.where((t) => !tags.contains(t)).toList();
     if (missing.isEmpty) return tags;

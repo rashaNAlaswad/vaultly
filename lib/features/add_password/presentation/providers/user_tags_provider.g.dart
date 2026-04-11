@@ -68,7 +68,7 @@ final class UserTagsNotifierProvider
         argument: null,
         retry: null,
         name: r'userTagsProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -81,7 +81,7 @@ final class UserTagsNotifierProvider
   UserTagsNotifier create() => UserTagsNotifier();
 }
 
-String _$userTagsNotifierHash() => r'521ccaa36406c918dbcc5d8dffffff107bec8509';
+String _$userTagsNotifierHash() => r'6560588cf761f603f972889fccb44da8ec23a4ac';
 
 abstract class _$UserTagsNotifier extends $AsyncNotifier<List<String>> {
   FutureOr<List<String>> build();
