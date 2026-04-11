@@ -151,10 +151,9 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
                         final text = value.text.trim();
                         final letter =
                             text.isEmpty ? 'V' : text[0].toUpperCase();
-                        return VaultIdentityAvatar(letter: letter)
-                            .fadeInScale(delay: 0);
+                        return VaultIdentityAvatar(letter: letter);
                       },
-                    ),
+                    ).fadeInScale(delay: 0),
                     32.verticalSpace,
                     AppTextField(
                       controller: _siteController,
