@@ -32,6 +32,11 @@ extension PasswordStrengthX on PasswordStrength {
   };
 }
 
+final _upperRe = RegExp(r'[A-Z]');
+final _lowerRe = RegExp(r'[a-z]');
+final _digitRe = RegExp(r'[0-9]');
+final _symbolRe = RegExp(r'[^A-Za-z0-9]');
+
 /// Evaluates a raw password string and returns its [PasswordStrength].
 /// Returns null when the password is empty.
 PasswordStrength? evaluateStrength(String password) {
@@ -39,10 +44,10 @@ PasswordStrength? evaluateStrength(String password) {
   int score = 0;
   if (password.length >= 8) score++;
   if (password.length >= 12) score++;
-  if (RegExp(r'[A-Z]').hasMatch(password)) score++;
-  if (RegExp(r'[a-z]').hasMatch(password)) score++;
-  if (RegExp(r'[0-9]').hasMatch(password)) score++;
-  if (RegExp(r'[^A-Za-z0-9]').hasMatch(password)) score++;
+  if (_upperRe.hasMatch(password)) score++;
+  if (_lowerRe.hasMatch(password)) score++;
+  if (_digitRe.hasMatch(password)) score++;
+  if (_symbolRe.hasMatch(password)) score++;
 
   if (score <= 3) return PasswordStrength.weak;
   if (score <= 4) return PasswordStrength.moderate;
