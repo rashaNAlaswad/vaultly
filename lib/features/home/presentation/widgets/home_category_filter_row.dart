@@ -19,17 +19,15 @@ class HomeCategoryFilterRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
+      child: Wrap(
+        spacing: 8.w,
         children: categories
             .map(
-              (category) => Padding(
-                padding: EdgeInsets.only(right: 8.w),
-                child: CategoryChip(
-                  label: category,
-                  isSelected: selected == category,
-                  onTap: () => onChanged(category),
-                  semanticPrefix: 'Filter',
-                ),
+              (category) => CategoryChip(
+                label: category,
+                isSelected: selected == category,
+                onTap: () => onChanged(category),
+                semanticPrefix: 'Filter',
               ),
             )
             .toList(),
