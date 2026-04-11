@@ -18,6 +18,27 @@ class CategoryChip extends StatelessWidget {
   final VoidCallback onTap;
   final String semanticPrefix;
 
+  static final _selectedStyle = TextStyles.captionMuted.copyWith(
+    color: AppColors.onPrimaryContainer,
+  );
+  static final _unselectedStyle = TextStyles.captionMuted.copyWith(
+    color: AppColors.onSurfaceVariant,
+  );
+
+  static final _selectedDecoration = BoxDecoration(
+    color: AppColors.primaryContainer,
+    borderRadius: BorderRadius.circular(100),
+  );
+  static final _unselectedDecoration = BoxDecoration(
+    color: AppColors.surfaceContainerHigh,
+    borderRadius: BorderRadius.circular(100),
+  );
+
+  static final _padding = EdgeInsets.symmetric(
+    horizontal: 16.w,
+    vertical: 8.h,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Semantics(
@@ -28,23 +49,11 @@ class CategoryChip extends StatelessWidget {
         onTap: onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: context.responsive.edgeInsetsSymmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
-          decoration: BoxDecoration(
-            color: isSelected
-                ? AppColors.primaryContainer
-                : AppColors.surfaceContainerHigh,
-            borderRadius: BorderRadius.circular(100),
-          ),
+          padding: _padding,
+          decoration: isSelected ? _selectedDecoration : _unselectedDecoration,
           child: Text(
             label,
-            style: TextStyles.captionMuted.copyWith(
-              color: isSelected
-                  ? AppColors.onPrimaryContainer
-                  : AppColors.onSurfaceVariant,
-            ),
+            style: isSelected ? _selectedStyle : _unselectedStyle,
           ),
         ),
       ),

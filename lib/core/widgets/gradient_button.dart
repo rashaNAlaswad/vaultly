@@ -32,6 +32,33 @@ class GradientButton extends StatefulWidget {
 class _GradientButtonState extends State<GradientButton> {
   final _pressed = ValueNotifier<bool>(false);
 
+  static final _enabledDecoration = BoxDecoration(
+    gradient: const LinearGradient(
+      colors: [AppColors.primary, AppColors.primaryContainer],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(12.r),
+    boxShadow: const [
+      BoxShadow(
+        color: AppColors.primaryContainerGlow40,
+        blurRadius: 25,
+        offset: Offset(0, 8),
+      ),
+    ],
+  );
+
+  static final _disabledDecoration = BoxDecoration(
+    gradient: const LinearGradient(
+      colors: [AppColors.surfaceContainerHigh, AppColors.surfaceContainerHighest],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(12.r),
+  );
+
+  static final _contentPadding = EdgeInsets.symmetric(vertical: 20.h);
+
   bool get _interactive => widget.enabled && !widget.isLoading;
 
   @override
@@ -42,29 +69,6 @@ class _GradientButtonState extends State<GradientButton> {
 
   @override
   Widget build(BuildContext context) {
-    final decoration = BoxDecoration(
-      gradient: LinearGradient(
-        colors: widget.enabled
-            ? [AppColors.primary, AppColors.primaryContainer]
-            : [
-                AppColors.surfaceContainerHigh,
-                AppColors.surfaceContainerHighest,
-              ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      borderRadius: BorderRadius.circular(12.r),
-      boxShadow: widget.enabled
-          ? const [
-              BoxShadow(
-                color: AppColors.primaryContainerGlow40,
-                blurRadius: 25,
-                offset: Offset(0, 8),
-              ),
-            ]
-          : null,
-    );
-
     return Semantics(
       label: widget.label,
       button: true,
@@ -86,14 +90,15 @@ class _GradientButtonState extends State<GradientButton> {
               duration: const Duration(milliseconds: 100),
               child: child,
             ),
-            child:widget.isLoading
-                  ? Center(child: CircularProgressIndicator()) 
-                  : Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 20.h),
-              decoration: decoration,
-              child: 
-                  AnimatedSwitcher(
+            child: widget.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Container(
+                    width: double.infinity,
+                    padding: _contentPadding,
+                    decoration: widget.enabled
+                        ? _enabledDecoration
+                        : _disabledDecoration,
+                    child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 200),
                       child: Row(
                         key: const ValueKey('label'),
@@ -118,7 +123,7 @@ class _GradientButtonState extends State<GradientButton> {
                         ],
                       ),
                     ),
-            ),
+                  ),
           ),
         ),
       ),

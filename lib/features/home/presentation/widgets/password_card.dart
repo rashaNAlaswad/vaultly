@@ -19,6 +19,24 @@ class PasswordCard extends StatelessWidget {
   final VoidCallback onDelete;
   final VoidCallback onTap;
 
+  static final _usernameStyle = TextStyles.captionMuted.copyWith(
+    color: AppColors.outline,
+  );
+
+  static final _deleteTextStyle = TextStyles.captionMuted.copyWith(
+    color: AppColors.error,
+  );
+
+  static final _cardDecoration = BoxDecoration(
+    color: AppColors.surfaceContainerLow,
+    borderRadius: BorderRadius.circular(12.r),
+  );
+
+  static final _cardPadding = EdgeInsets.symmetric(
+    horizontal: 16.w,
+    vertical: 16.h,
+  );
+
   String get _avatarLetter =>
       entry.siteName.isNotEmpty ? entry.siteName[0].toUpperCase() : '?';
 
@@ -46,7 +64,7 @@ class PasswordCard extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text('Delete', style: TextStyle(color: AppColors.error)),
+            child: Text('Delete', style: _deleteTextStyle),
           ),
         ],
       ),
@@ -57,6 +75,8 @@ class PasswordCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final strength = evaluateStrength(entry.password) ?? PasswordStrength.weak;
+
     return Semantics(
       label: 'Password entry for ${entry.siteName}',
       button: true,
@@ -64,11 +84,8 @@ class PasswordCard extends StatelessWidget {
         onTap: onTap,
         onLongPress: () => _confirmDelete(context),
         child: Container(
-          padding: context.responsive.edgeInsets(horizontal: 16, vertical: 16),
-          decoration: BoxDecoration(
-            color: AppColors.surfaceContainerLow,
-            borderRadius: BorderRadius.circular(12.r),
-          ),
+          padding: _cardPadding,
+          decoration: _cardDecoration,
           child: Row(
             children: [
               _SiteAvatar(letter: _avatarLetter),
@@ -86,9 +103,7 @@ class PasswordCard extends StatelessWidget {
                     4.verticalSpace,
                     Text(
                       entry.username,
-                      style: TextStyles.captionMuted.copyWith(
-                        color: AppColors.outline,
-                      ),
+                      style: _usernameStyle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -96,7 +111,7 @@ class PasswordCard extends StatelessWidget {
                 ),
               ),
               16.horizontalSpace,
-              _StrengthIndicator(password: entry.password),
+              _StrengthIndicator(strength: strength),
             ],
           ),
         ),
@@ -110,6 +125,10 @@ class _SiteAvatar extends StatelessWidget {
 
   final String letter;
 
+  static final _letterStyle = TextStyles.screenTitle.copyWith(
+    color: AppColors.onPrimary,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -120,23 +139,19 @@ class _SiteAvatar extends StatelessWidget {
         color: AppColors.primary,
       ),
       child: Center(
-        child: Text(
-          letter,
-          style: TextStyles.screenTitle.copyWith(color: AppColors.onPrimary),
-        ),
+        child: Text(letter, style: _letterStyle),
       ),
     );
   }
 }
 
 class _StrengthIndicator extends StatelessWidget {
-  const _StrengthIndicator({required this.password});
+  const _StrengthIndicator({required this.strength});
 
-  final String password;
+  final PasswordStrength strength;
 
   @override
   Widget build(BuildContext context) {
-    final strength = evaluateStrength(password) ?? PasswordStrength.weak;
     final activeColor = strength.color;
     final activeDots = strength.filledDots;
 
