@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   # State management.
   riverpod: ^3.2.1
@@ -53,6 +55,7 @@ dev_dependencies:
   json_serializable: ^6.8.0
 
 flutter:
+  generate: true
   uses-material-design: true
 
   assets:
