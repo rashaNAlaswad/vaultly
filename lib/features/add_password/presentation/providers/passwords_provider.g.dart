@@ -68,7 +68,7 @@ final class PasswordsNotifierProvider
         argument: null,
         retry: null,
         name: r'passwordsProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -81,7 +81,7 @@ final class PasswordsNotifierProvider
   PasswordsNotifier create() => PasswordsNotifier();
 }
 
-String _$passwordsNotifierHash() => r'906c13e88c09c5e8aa8f1e8dac58aea3b698a43b';
+String _$passwordsNotifierHash() => r'490173211e8890c7c1b793280ac76a80140eb835';
 
 abstract class _$PasswordsNotifier extends $AsyncNotifier<List<PasswordEntry>> {
   FutureOr<List<PasswordEntry>> build();

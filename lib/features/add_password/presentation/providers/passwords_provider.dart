@@ -14,11 +14,11 @@ PasswordRepository passwordRepository(Ref ref) {
   return SupabasePasswordRepository(Supabase.instance.client);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class PasswordsNotifier extends _$PasswordsNotifier {
   @override
   Future<List<PasswordEntry>> build() async {
-    return ref.read(passwordRepositoryProvider).fetchAll();
+    return ref.watch(passwordRepositoryProvider).fetchAll();
   }
 
   Future<void> addPassword({
