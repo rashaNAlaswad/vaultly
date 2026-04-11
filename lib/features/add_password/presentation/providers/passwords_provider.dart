@@ -46,6 +46,13 @@ class PasswordsNotifier extends _$PasswordsNotifier {
     state = AsyncData([entry, ...?state.value]);
   }
 
+  Future<void> updatePassword(PasswordEntry updated) async {
+    await ref.read(passwordRepositoryProvider).update(updated);
+    state = AsyncData(
+      state.value?.map((e) => e.id == updated.id ? updated : e).toList() ?? [],
+    );
+  }
+
   Future<void> deletePassword(String id) async {
     final repository = ref.read(passwordRepositoryProvider);
 

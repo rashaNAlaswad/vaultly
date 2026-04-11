@@ -28,6 +28,17 @@ class SupabasePasswordRepository implements PasswordRepository {
   }
 
   @override
+  Future<void> update(PasswordEntry entry) async {
+    await _client.from('passwords').update({
+      'site_name': entry.siteName,
+      'username': entry.username,
+      'password': entry.password,
+      'tags': entry.tags,
+      'notes': entry.notes,
+    }).eq('id', entry.id);
+  }
+
+  @override
   Future<void> delete(String id) async {
     await _client.from('passwords').delete().eq('id', id);
   }
