@@ -70,20 +70,20 @@ class ResponsiveHelper {
   T device<T>({required T mobile, required T tablet}) =>
       isMobile ? mobile : tablet;
 
-  EdgeInsets edgeInsets({
+  EdgeInsetsDirectional edgeInsets({
     num? all,
     num? horizontal,
     num? vertical,
     num? top,
     num? bottom,
-    num? left,
-    num? right,
+    num? start,
+    num? end,
   }) =>
-      EdgeInsets.only(
+      EdgeInsetsDirectional.only(
         top: h(top ?? vertical ?? all ?? 0),
         bottom: h(bottom ?? vertical ?? all ?? 0),
-        left: w(left ?? horizontal ?? all ?? 0),
-        right: w(right ?? horizontal ?? all ?? 0),
+        start: w(start ?? horizontal ?? all ?? 0),
+        end: w(end ?? horizontal ?? all ?? 0),
       );
 
   EdgeInsets edgeInsetsSymmetric({num horizontal = 0, num vertical = 0}) =>
