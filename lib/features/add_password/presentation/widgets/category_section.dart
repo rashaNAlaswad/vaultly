@@ -15,8 +15,8 @@ class CategorySection extends StatelessWidget {
   });
 
   final List<String> tags;
-  final List<String> selected;
-  final ValueChanged<List<String>> onChanged;
+  final String? selected;
+  final ValueChanged<String?> onChanged;
   final VoidCallback onAddTag;
 
   @override
@@ -49,19 +49,9 @@ class _CategoryTagRow extends StatelessWidget {
   });
 
   final List<String> tags;
-  final List<String> selected;
-  final ValueChanged<List<String>> onChanged;
+  final String? selected;
+  final ValueChanged<String?> onChanged;
   final VoidCallback onAddTag;
-
-  void _toggle(String tag) {
-    final updated = List<String>.from(selected);
-    if (updated.contains(tag)) {
-      updated.remove(tag);
-    } else {
-      updated.add(tag);
-    }
-    onChanged(updated);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,8 +62,8 @@ class _CategoryTagRow extends StatelessWidget {
         ...tags.map(
           (tag) => CategoryChip(
             label: tag,
-            isSelected: selected.contains(tag),
-            onTap: () => _toggle(tag),
+            isSelected: selected == tag,
+            onTap: () => onChanged(tag),
             semanticPrefix: 'Tag',
           ),
         ),
