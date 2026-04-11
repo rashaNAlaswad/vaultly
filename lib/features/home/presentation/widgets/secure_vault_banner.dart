@@ -9,39 +9,61 @@ import '../../../../core/routing/app_routes.dart';
 class SecureVaultBanner extends StatelessWidget {
   const SecureVaultBanner({super.key});
 
+  static final _outerDecoration = BoxDecoration(
+    color: AppColors.surfaceContainerLow,
+    borderRadius: BorderRadius.circular(16.r),
+    boxShadow: const [
+      BoxShadow(color: AppColors.primaryContainerGlow20, blurRadius: 30),
+    ],
+  );
+
+  static final _borderRadius = BorderRadius.circular(16.r);
+
+  static const _gradientOverlayDecoration = BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [AppColors.primaryContainerGlow20, Colors.transparent],
+    ),
+  );
+
+  static final _contentPadding = EdgeInsets.symmetric(
+    horizontal: 20.w,
+    vertical: 16.h,
+  );
+
+  static final _buttonDecoration = BoxDecoration(
+    gradient: const LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [AppColors.primary, AppColors.primaryContainer],
+    ),
+    borderRadius: BorderRadius.circular(100.r),
+  );
+
+  static final _buttonPadding = EdgeInsets.symmetric(
+    horizontal: 14.w,
+    vertical: 10.h,
+  );
+
+  static final _buttonTextStyle = TextStyles.captionMuted.copyWith(
+    color: AppColors.onPrimary,
+    fontWeight: FontWeight.w700,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: const [
-          BoxShadow(color: AppColors.primaryContainerGlow20, blurRadius: 30),
-        ],
-      ),
+      decoration: _outerDecoration,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: _borderRadius,
         child: Stack(
           children: [
-            Positioned.fill(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      AppColors.primaryContainerGlow20,
-                      Colors.transparent,
-                    ],
-                  ),
-                ),
-              ),
+            const Positioned.fill(
+              child: DecoratedBox(decoration: _gradientOverlayDecoration),
             ),
             Padding(
-              padding: context.responsive.edgeInsetsSymmetric(
-                horizontal: 20,
-                vertical: 16,
-              ),
+              padding: _contentPadding,
               child: Row(
                 children: [
                   Container(
@@ -62,10 +84,7 @@ class SecureVaultBanner extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Secure your vault',
-                          style: TextStyles.screenTitle,
-                        ),
+                        Text('Secure your vault', style: TextStyles.screenTitle),
                         4.verticalSpace,
                         Text(
                           'Create a PIN to encrypt your passwords',
@@ -75,37 +94,18 @@ class SecureVaultBanner extends StatelessWidget {
                     ),
                   ),
                   12.horizontalSpace,
-                  // Create PIN button
                   Semantics(
                     label: 'Create PIN',
                     button: true,
                     child: GestureDetector(
-                      onTap: () {
-                        context.push(AppRoutes.pinCreate);
-                      },
+                      onTap: () => context.push(AppRoutes.pinCreate),
                       child: Container(
-                        padding: context.responsive.edgeInsetsSymmetric(
-                          horizontal: 14,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              AppColors.primary,
-                              AppColors.primaryContainer,
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(100.r),
-                        ),
+                        padding: _buttonPadding,
+                        decoration: _buttonDecoration,
                         child: Text(
                           'Create\nPIN',
                           textAlign: TextAlign.center,
-                          style: TextStyles.captionMuted.copyWith(
-                            color: AppColors.onPrimary,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: _buttonTextStyle,
                         ),
                       ),
                     ),
