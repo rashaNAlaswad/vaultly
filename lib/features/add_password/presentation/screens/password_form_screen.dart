@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../widgets/category_section.dart';
 
 import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
@@ -11,30 +10,42 @@ import '../../../../core/widgets/app_snack_bar.dart';
 import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../../core/widgets/gradient_button.dart';
-import '../widgets/add_tag_dialog.dart';
+import '../../data/models/password_entry.dart';
 import '../providers/passwords_provider.dart';
 import '../providers/user_tags_provider.dart';
+import '../widgets/add_tag_dialog.dart';
+import '../widgets/category_section.dart';
 import '../widgets/password_strength_row.dart';
 import '../widgets/vault_identity_avatar.dart';
 
-class AddPasswordScreen extends ConsumerStatefulWidget {
-  const AddPasswordScreen({super.key});
+class PasswordFormScreen extends ConsumerStatefulWidget {
+  const PasswordFormScreen({super.key, this.entry});
+
+  /// Null → add mode. Not null → edit mode with pre-filled fields.
+  final PasswordEntry? entry;
 
   @override
-  ConsumerState<AddPasswordScreen> createState() => _AddPasswordScreenState();
+  ConsumerState<PasswordFormScreen> createState() => _PasswordFormScreenState();
 }
 
-class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
+class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final _siteController = TextEditingController();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _notesController = TextEditingController();
+  late final _siteController =
+      TextEditingController(text: widget.entry?.siteName ?? '');
+  late final _usernameController =
+      TextEditingController(text: widget.entry?.username ?? '');
+  late final _passwordController =
+      TextEditingController(text: widget.entry?.password ?? '');
+  late final _notesController =
+      TextEditingController(text: widget.entry?.notes ?? '');
 
   final _obscurePasswordNotifier = ValueNotifier<bool>(true);
-  final _selectedTagNotifier = ValueNotifier<String?>(null);
+  late final _selectedTagNotifier =
+      ValueNotifier<String?>(widget.entry?.tags.firstOrNull);
   final _isSavingNotifier = ValueNotifier<bool>(false);
+
+  bool get _isEditing => widget.entry != null;
 
   @override
   void dispose() {
@@ -69,13 +80,25 @@ class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
 
     _isSavingNotifier.value = true;
     try {
-      await ref.read(passwordsProvider.notifier).addPassword(
-        siteName: _siteController.text.trim(),
-        username: _usernameController.text.trim(),
-        password: _passwordController.text,
-        tags: [selectedTag],
-        notes: _notesController.text.trim(),
-      );
+      if (_isEditing) {
+        await ref.read(passwordsProvider.notifier).updatePassword(
+          widget.entry!.copyWith(
+            siteName: _siteController.text.trim(),
+            username: _usernameController.text.trim(),
+            password: _passwordController.text,
+            tags: [selectedTag],
+            notes: _notesController.text.trim(),
+          ),
+        );
+      } else {
+        await ref.read(passwordsProvider.notifier).addPassword(
+          siteName: _siteController.text.trim(),
+          username: _usernameController.text.trim(),
+          password: _passwordController.text,
+          tags: [selectedTag],
+          notes: _notesController.text.trim(),
+        );
+      }
       if (mounted) {
         AppSnackBar.success(context, 'Password saved!');
         context.pop();
@@ -94,7 +117,7 @@ class _AddPasswordScreenState extends ConsumerState<AddPasswordScreen> {
         child: Column(
           children: [
             AppScreenHeader(
-              title: 'New Password',
+              title: _isEditing ? 'Edit Password' : 'New Password',
               trailing: Semantics(
                 label: 'Save password',
                 button: true,
