@@ -8,10 +8,16 @@ import '../../../../../core/utils/utils.dart';
 import '../../../add_password/data/models/password_entry.dart';
 
 class PasswordCard extends StatelessWidget {
-  const PasswordCard({super.key, required this.entry, required this.onDelete});
+  const PasswordCard({
+    super.key,
+    required this.entry,
+    required this.onDelete,
+    required this.onTap,
+  });
 
   final PasswordEntry entry;
   final VoidCallback onDelete;
+  final VoidCallback onTap;
 
   String get _avatarLetter =>
       entry.siteName.isNotEmpty ? entry.siteName[0].toUpperCase() : '?';
@@ -55,6 +61,7 @@ class PasswordCard extends StatelessWidget {
       label: 'Password entry for ${entry.siteName}',
       button: true,
       child: GestureDetector(
+        onTap: onTap,
         onLongPress: () => _confirmDelete(context),
         child: Container(
           padding: context.responsive.edgeInsets(horizontal: 16, vertical: 16),

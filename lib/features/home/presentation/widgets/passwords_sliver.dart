@@ -16,12 +16,14 @@ class PasswordsSliver extends StatelessWidget {
     required this.searchListenable,
     required this.categoryListenable,
     required this.onDelete,
+    required this.onTap,
   });
 
   final AsyncValue<List<PasswordEntry>> passwordsAsync;
   final ValueListenable<TextEditingValue> searchListenable;
   final ValueListenable<String> categoryListenable;
   final ValueChanged<String> onDelete;
+  final ValueChanged<PasswordEntry> onTap;
 
   List<PasswordEntry> _filter(List<PasswordEntry> entries) {
     final query = searchListenable.value.text.toLowerCase().trim();
@@ -75,6 +77,7 @@ class PasswordsSliver extends StatelessWidget {
                     key: ValueKey(item.id),
                     entry: item,
                     onDelete: () => onDelete(item.id),
+                    onTap: () => onTap(item),
                   ).listItemAnimation(index: i),
                 );
               },
