@@ -87,7 +87,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get createPinSubtitle =>
-      'يقوم رمز دخول بتشفير قبو كلماتك. لا نقوم بتخزينه أبداً.';
+      'يقوم رمز دخول بتشفير خزنة كلماتك. لا نقوم بتخزينه أبداً.';
 
   @override
   String get confirmPinTitle => 'أكّد رمز الدخول';
@@ -100,6 +100,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unlockPinSubtitle => 'افتح الخزنة للمتابعة.';
+
+  @override
+  String get changePinVerifyTitle => 'أدخل رمز الدخول الحالي';
+
+  @override
+  String get changePinVerifySubtitle => 'تحقق من هويتك قبل تغيير رمز الدخول.';
+
+  @override
+  String get changePinNewTitle => 'أدخل رمز الدخول الجديد';
+
+  @override
+  String get changePinNewSubtitle => 'اختر رمز دخول مكوناً من 6 أرقام لخزنتك.';
+
+  @override
+  String get changePinConfirmTitle => 'أكّد رمز الدخول الجديد';
+
+  @override
+  String get changePinConfirmSubtitle =>
+      'أدخل رمز الدخول الجديد مرة أخرى للتأكيد.';
+
+  @override
+  String get pinChanged => 'تم تغيير رمز الدخول بنجاح.';
 
   @override
   String get hello => 'مرحباً!';
