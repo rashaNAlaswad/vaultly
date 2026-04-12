@@ -102,6 +102,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get unlockPinSubtitle => 'Unlock your vault to continue.';
 
   @override
+  String get changePinVerifyTitle => 'Enter current PIN';
+
+  @override
+  String get changePinVerifySubtitle =>
+      'Confirm your identity before changing your PIN.';
+
+  @override
+  String get changePinNewTitle => 'Enter new PIN';
+
+  @override
+  String get changePinNewSubtitle => 'Choose a new 6-digit PIN for your vault.';
+
+  @override
+  String get changePinConfirmTitle => 'Confirm new PIN';
+
+  @override
+  String get changePinConfirmSubtitle => 'Enter your new PIN again to confirm.';
+
+  @override
+  String get pinChanged => 'PIN changed successfully.';
+
+  @override
   String get hello => 'Hello!';
 
   @override

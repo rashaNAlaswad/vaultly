@@ -49,6 +49,14 @@
   "unlockPinTitle": "Enter your PIN",
   "unlockPinSubtitle": "Unlock your vault to continue.",
 
+  "changePinVerifyTitle": "Enter current PIN",
+  "changePinVerifySubtitle": "Confirm your identity before changing your PIN.",
+  "changePinNewTitle": "Enter new PIN",
+  "changePinNewSubtitle": "Choose a new 6-digit PIN for your vault.",
+  "changePinConfirmTitle": "Confirm new PIN",
+  "changePinConfirmSubtitle": "Enter your new PIN again to confirm.",
+  "pinChanged": "PIN changed successfully.",
+
   "hello": "Hello!",
   "settings": "Settings",
   "deletePasswordTitle": "Delete password?",

@@ -272,6 +272,48 @@ abstract class AppLocalizations {
   /// **'Unlock your vault to continue.'**
   String get unlockPinSubtitle;
 
+  /// No description provided for @changePinVerifyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter current PIN'**
+  String get changePinVerifyTitle;
+
+  /// No description provided for @changePinVerifySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your identity before changing your PIN.'**
+  String get changePinVerifySubtitle;
+
+  /// No description provided for @changePinNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter new PIN'**
+  String get changePinNewTitle;
+
+  /// No description provided for @changePinNewSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a new 6-digit PIN for your vault.'**
+  String get changePinNewSubtitle;
+
+  /// No description provided for @changePinConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm new PIN'**
+  String get changePinConfirmTitle;
+
+  /// No description provided for @changePinConfirmSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your new PIN again to confirm.'**
+  String get changePinConfirmSubtitle;
+
+  /// No description provided for @pinChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'PIN changed successfully.'**
+  String get pinChanged;
+
   /// No description provided for @hello.
   ///
   /// In en, this message translates to:

@@ -43,11 +43,19 @@
   "incorrectCode": "رمز غير صحيح، حاول مجدداً",
 
   "createPinTitle": "أنشئ رمز الدخول",
-  "createPinSubtitle": "يقوم رمز دخول بتشفير قبو كلماتك. لا نقوم بتخزينه أبداً.",
+  "createPinSubtitle": "يقوم رمز دخول بتشفير خزنة كلماتك. لا نقوم بتخزينه أبداً.",
   "confirmPinTitle": "أكّد رمز الدخول",
   "confirmPinSubtitle": "أدخل رمز الدخول مرة أخرى للتأكيد.",
   "unlockPinTitle": "أدخل رمز الدخول",
   "unlockPinSubtitle": "افتح الخزنة للمتابعة.",
+
+  "changePinVerifyTitle": "أدخل رمز الدخول الحالي",
+  "changePinVerifySubtitle": "تحقق من هويتك قبل تغيير رمز الدخول.",
+  "changePinNewTitle": "أدخل رمز الدخول الجديد",
+  "changePinNewSubtitle": "اختر رمز دخول مكوناً من 6 أرقام لخزنتك.",
+  "changePinConfirmTitle": "أكّد رمز الدخول الجديد",
+  "changePinConfirmSubtitle": "أدخل رمز الدخول الجديد مرة أخرى للتأكيد.",
+  "pinChanged": "تم تغيير رمز الدخول بنجاح.",
 
   "hello": "مرحباً!",
   "settings": "الإعدادات",
