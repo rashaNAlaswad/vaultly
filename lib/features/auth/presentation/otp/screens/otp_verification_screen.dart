@@ -39,6 +39,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
 
   final _resendSeconds = ValueNotifier<int>(58);
   final _hasError = ValueNotifier<bool>(false);
+  final _otpComplete = ValueNotifier<bool>(false);
   String _currentOtp = '';
   Timer? _resendTimer;
 
@@ -47,6 +48,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
     _resendTimer?.cancel();
     _resendSeconds.dispose();
     _hasError.dispose();
+    _otpComplete.dispose();
     for (final c in _controllers) {
       c.dispose();
     }
@@ -100,13 +102,12 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
       _focusNodes[index + 1].requestFocus();
     }
     _currentOtp = _controllers.map((c) => c.text).join();
+    _otpComplete.value = _currentOtp.length == _otpLength;
     _hasError.value = false;
   }
 
-  bool get _isComplete => _currentOtp.length == _otpLength;
-
   Future<void> _onVerify() async {
-    if (!_isComplete) return;
+    if (!_otpComplete.value) return;
     await ref
         .read(verifyOtpProvider.notifier)
         .verifyOtp(email: widget.email, token: _currentOtp);
@@ -118,6 +119,7 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
       c.clear();
     }
     _currentOtp = '';
+    _otpComplete.value = false;
     _focusNodes.first.requestFocus();
     _hasError.value = false;
     _startResendTimer();
@@ -179,11 +181,14 @@ class _OtpVerificationScreenState extends ConsumerState<OtpVerificationScreen> {
                           ),
                         ),
                         48.verticalSpace,
-                        GradientButton(
-                          label: 'Verify Identity',
-                          onTap: _onVerify,
-                          enabled: _isComplete,
-                          isLoading: state.isLoading,
+                        ValueListenableBuilder<bool>(
+                          valueListenable: _otpComplete,
+                          builder: (context, isComplete, _) => GradientButton(
+                            label: 'Verify Identity',
+                            onTap: _onVerify,
+                            enabled: isComplete,
+                            isLoading: state.isLoading,
+                          ),
                         ).animate().fadeIn(delay: 400.ms, duration: 600.ms),
                         20.verticalSpace,
                         ValueListenableBuilder<int>(

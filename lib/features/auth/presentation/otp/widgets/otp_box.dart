@@ -24,7 +24,7 @@ class OtpBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: focusNode,
+      listenable: Listenable.merge([focusNode, controller]),
       builder: (context, _) {
         final isFocused = focusNode.hasFocus;
         final isFilled = controller.text.isNotEmpty;
