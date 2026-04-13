@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/routing/app_routes.dart';
 
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/providers/locale_provider.dart';
@@ -44,7 +46,9 @@ class AppScreenHeaderWidget extends ConsumerWidget {
               label: l10n.settings,
               button: true,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push(AppRoutes.settings);
+                },
                 icon: Icon(
                   Icons.settings_outlined,
                   color: AppColors.onSurfaceVariant,
