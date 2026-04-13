@@ -29,11 +29,12 @@ class PinScreen extends ConsumerWidget {
         if (result == null) return;
         result.whenOrNull(
           data: (_) {
-            if (strategy.action == PinAction.create) {
-              final pin = ref.read(pinProvider(strategy)).digits.join();
-              context.push(AppRoutes.pinConfirm, extra: pin);
-            } else {
-              context.go(AppRoutes.home);
+            final pin = ref.read(pinProvider(strategy)).digits.join();
+            switch (strategy.action) {
+              case PinAction.create:
+                context.push(AppRoutes.pinConfirm, extra: pin);
+              case PinAction.confirm || PinAction.unlock:
+                context.go(AppRoutes.home);
             }
           },
           error: (error, _) {

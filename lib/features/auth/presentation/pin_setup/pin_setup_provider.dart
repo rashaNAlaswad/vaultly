@@ -50,7 +50,7 @@ class PinNotifier extends _$PinNotifier {
       final session = ref.read(authSessionProvider.notifier);
       switch (strategy.action) {
         case PinAction.create:
-          break; // Navigation to confirm screen is handled by the UI layer.
+          break;
         case PinAction.confirm:
           session.markPinSaved();
         case PinAction.unlock:
