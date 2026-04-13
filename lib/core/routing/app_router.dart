@@ -10,6 +10,8 @@ import '../../features/auth/presentation/pin_setup/strategies/pin_confirm_strate
 import '../../features/auth/presentation/pin_setup/strategies/pin_create_strategy.dart';
 import '../../features/auth/presentation/pin_setup/strategies/pin_unlock_strategy.dart';
 import '../../features/home/presentation/screens/home_screen.dart';
+import '../../features/settings/presentation/screens/change_pin_screen.dart';
+import '../../features/settings/presentation/screens/settings_screen.dart';
 import '../screens/not_found_screen.dart';
 import 'app_routes.dart';
 import 'router_notifier.dart';
@@ -58,9 +60,16 @@ GoRouter appRouter(Ref ref) {
       ),
       GoRoute(
         path: AppRoutes.passwordDetail,
-        builder: (context, state) => PasswordFormScreen(
-          entry: state.extra! as PasswordEntry,
-        ),
+        builder: (context, state) =>
+            PasswordFormScreen(entry: state.extra! as PasswordEntry),
+      ),
+      GoRoute(
+        path: AppRoutes.settings,
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.changePin,
+        builder: (context, state) => const ChangePinScreen(),
       ),
     ],
     errorBuilder: (context, state) =>
