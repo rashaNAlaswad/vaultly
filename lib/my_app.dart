@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'core/providers/app_lifecycle_lock_provider.dart';
 import 'core/providers/locale_provider.dart';
 import 'core/routing/app_router.dart';
 import 'core/themes/app_theme.dart';
@@ -12,6 +13,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(appLifecycleLockProvider);
     final router = ref.watch(appRouterProvider);
     final locale = ref.watch(localeProvider).value ?? const Locale('en');
     return MaterialApp.router(

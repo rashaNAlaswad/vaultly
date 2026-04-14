@@ -50,6 +50,16 @@ class AuthSession extends _$AuthSession {
     ));
   }
 
+  void lock() {
+    final current = state.asData?.value;
+    if (current == null || !current.hasPin || !current.isUnlocked) return;
+    state = AsyncData((
+      userId: current.userId,
+      hasPin: current.hasPin,
+      isUnlocked: false,
+    ));
+  }
+
   Future<void> clearSession() async {
     await SharedPrefHelper.clearAllSecuredData();
     state = const AsyncData((userId: null, hasPin: false, isUnlocked: false));
