@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../../core/extensions/animations.dart';
 import '../../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/text_styles.dart';
+import '../pin_setup_provider.dart';
+import '../strategies/pin_strategy.dart';
 
 /// Numeric keypad for PIN entry (1–9, 0, and backspace).
 class PinKeypad extends StatelessWidget {
@@ -38,6 +42,22 @@ class PinKeypad extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+/// Riverpod-connected keypad wired to [PinNotifier] digit callbacks.
+class PinConnectedKeypad extends ConsumerWidget {
+  const PinConnectedKeypad({super.key, required this.strategy});
+
+  final PinStrategy strategy;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(pinProvider(strategy).notifier);
+    return PinKeypad(
+      onDigit: notifier.addDigit,
+      onBackspace: notifier.removeDigit,
+    ).fadeInSlide(delay: 200);
   }
 }
 
