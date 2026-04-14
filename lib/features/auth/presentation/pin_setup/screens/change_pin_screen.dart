@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/extensions/animations.dart';
-import '../../../../core/routing/app_routes.dart';
-import '../../../../core/widgets/app_snack_bar.dart';
-import '../../../../l10n/app_localizations.dart';
-import '../../../auth/presentation/pin_setup/pin_setup_provider.dart';
-import '../../../auth/presentation/pin_setup/strategies/pin_confirm_strategy.dart';
-import '../../../auth/presentation/pin_setup/strategies/pin_create_strategy.dart';
-import '../../../auth/presentation/pin_setup/strategies/pin_strategy.dart';
-import '../../../auth/presentation/pin_setup/strategies/pin_unlock_strategy.dart';
-import '../../../auth/presentation/pin_setup/widgets/pin_dot_row.dart';
-import '../../../auth/presentation/pin_setup/widgets/pin_hero_section.dart';
-import '../../../auth/presentation/pin_setup/widgets/pin_keypad.dart';
-import '../../../auth/presentation/pin_setup/widgets/pin_scaffold.dart';
+import '../../../../../core/extensions/animations.dart';
+import '../../../../../core/routing/app_routes.dart';
+import '../../../../../core/widgets/app_snack_bar.dart';
+import '../../../../../l10n/app_localizations.dart';
+import '../pin_setup_provider.dart';
+import '../strategies/pin_confirm_strategy.dart';
+import '../strategies/pin_create_strategy.dart';
+import '../strategies/pin_strategy.dart';
+import '../strategies/pin_unlock_strategy.dart';
+import '../widgets/pin_dot_row.dart';
+import '../widgets/pin_hero_section.dart';
+import '../widgets/pin_keypad.dart';
+import '../widgets/pin_scaffold.dart';
 
 enum _Step { verify, enterNew, confirm }
 
