@@ -42,8 +42,10 @@ GoRouter appRouter(Ref ref) {
       ),
       GoRoute(
         path: AppRoutes.pinConfirm,
+        redirect: (context, state) =>
+            state.extra is String ? null : AppRoutes.home,
         builder: (context, state) =>
-            PinScreen(strategy: PinConfirmStrategy(state.extra! as String)),
+            PinScreen(strategy: PinConfirmStrategy(state.extra as String)),
       ),
       GoRoute(
         path: AppRoutes.pinUnlock,
@@ -60,8 +62,10 @@ GoRouter appRouter(Ref ref) {
       ),
       GoRoute(
         path: AppRoutes.passwordDetail,
+        redirect: (context, state) =>
+            state.extra is PasswordEntry ? null : AppRoutes.home,
         builder: (context, state) =>
-            PasswordFormScreen(entry: state.extra! as PasswordEntry),
+            PasswordFormScreen(entry: state.extra as PasswordEntry),
       ),
       GoRoute(
         path: AppRoutes.settings,
