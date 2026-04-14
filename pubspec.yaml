@@ -42,9 +42,6 @@ dependencies:
   # Animations & Effects
   flutter_animate: ^4.5.2
 
-  # Error tracking
-  sentry_flutter: ^9.15.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
