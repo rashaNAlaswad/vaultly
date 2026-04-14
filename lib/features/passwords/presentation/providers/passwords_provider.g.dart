@@ -81,7 +81,7 @@ final class PasswordsNotifierProvider
   PasswordsNotifier create() => PasswordsNotifier();
 }
 
-String _$passwordsNotifierHash() => r'490173211e8890c7c1b793280ac76a80140eb835';
+String _$passwordsNotifierHash() => r'62d5f8033f4dc56d63e4a21287556af583ccaa9f';
 
 abstract class _$PasswordsNotifier extends $AsyncNotifier<List<PasswordEntry>> {
   FutureOr<List<PasswordEntry>> build();
