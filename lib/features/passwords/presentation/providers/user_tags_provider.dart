@@ -1,15 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/constants/vault_categories.dart';
-import '../../data/repositories/supabase_user_tags_repository.dart';
-import '../../domain/repositories/user_tags_repository.dart';
+import '../../data/repository_providers.dart';
 
 part 'user_tags_provider.g.dart';
-
-@riverpod
-UserTagsRepository userTagsRepository(Ref ref) =>
-    SupabaseUserTagsRepository(Supabase.instance.client);
 
 @Riverpod(keepAlive: true)
 class UserTagsNotifier extends _$UserTagsNotifier {

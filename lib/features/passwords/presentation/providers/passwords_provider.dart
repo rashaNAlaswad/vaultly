@@ -1,18 +1,11 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../core/utils/utils.dart';
 import '../../../auth/presentation/providers/auth_session_provider.dart';
 import '../../data/models/password_entry.dart';
-import '../../data/repositories/supabase_password_repository.dart';
-import '../../domain/repositories/password_repository.dart';
+import '../../data/repository_providers.dart';
 
 part 'passwords_provider.g.dart';
-
-@riverpod
-PasswordRepository passwordRepository(Ref ref) {
-  return SupabasePasswordRepository(Supabase.instance.client);
-}
 
 @Riverpod(keepAlive: true)
 class PasswordsNotifier extends _$PasswordsNotifier {
