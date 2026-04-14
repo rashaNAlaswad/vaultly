@@ -2,31 +2,32 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/constants/secure_storage_keys.dart';
 import '../../../core/helpers/shared_pref_helper.dart';
+import '../data/models/auth_session_data.dart';
 
 part 'auth_session_provider.g.dart';
-
-typedef AuthSessionData = ({String? userId, bool hasPin, bool isUnlocked});
 
 @Riverpod(keepAlive: true)
 class AuthSession extends _$AuthSession {
   @override
   Future<AuthSessionData> build() async {
-    final userId = await SharedPrefHelper.getSecuredString(SecureStorageKeys.userId);
-    final pin = await SharedPrefHelper.getSecuredString(SecureStorageKeys.pin);
-    return (
+    final userId =
+        await SharedPrefHelper.getSecuredString(SecureStorageKeys.userId);
+    final pin =
+        await SharedPrefHelper.getSecuredString(SecureStorageKeys.pin);
+    return AuthSessionData(
       userId: userId.isEmpty ? null : userId,
       hasPin: pin.isNotEmpty,
-      isUnlocked: false, // always false on cold start
     );
   }
 
   Future<void> saveUserId(String userId) async {
     await SharedPrefHelper.setSecuredString(SecureStorageKeys.userId, userId);
-    state = AsyncData((
-      userId: userId,
-      hasPin: state.asData?.value.hasPin ?? false,
-      isUnlocked: true, // OTP verified — session is active
-    ));
+    state = AsyncData(
+      (state.asData?.value ?? const AuthSessionData()).copyWith(
+        userId: userId,
+        isUnlocked: true,
+      ),
+    );
   }
 
   Future<void> savePin(String pin) async {
@@ -35,33 +36,27 @@ class AuthSession extends _$AuthSession {
   }
 
   void markPinSaved() {
-    state = AsyncData((
-      userId: state.asData?.value.userId,
-      hasPin: true,
-      isUnlocked: state.asData?.value.isUnlocked ?? true,
-    ));
+    state = AsyncData(
+      (state.asData?.value ?? const AuthSessionData()).copyWith(hasPin: true),
+    );
   }
 
   void unlock() {
-    state = AsyncData((
-      userId: state.asData?.value.userId,
-      hasPin: state.asData?.value.hasPin ?? false,
-      isUnlocked: true,
-    ));
+    state = AsyncData(
+      (state.asData?.value ?? const AuthSessionData()).copyWith(
+        isUnlocked: true,
+      ),
+    );
   }
 
   void lock() {
     final current = state.asData?.value;
     if (current == null || !current.hasPin || !current.isUnlocked) return;
-    state = AsyncData((
-      userId: current.userId,
-      hasPin: current.hasPin,
-      isUnlocked: false,
-    ));
+    state = AsyncData(current.copyWith(isUnlocked: false));
   }
 
   Future<void> clearSession() async {
     await SharedPrefHelper.clearAllSecuredData();
-    state = const AsyncData((userId: null, hasPin: false, isUnlocked: false));
+    state = const AsyncData(AuthSessionData());
   }
 }
