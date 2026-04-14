@@ -5,4 +5,5 @@ abstract class PasswordRepository {
   Future<void> save(PasswordEntry entry);
   Future<void> update(PasswordEntry entry);
   Future<void> delete(String id);
+  Future<void> deleteAll();
 }

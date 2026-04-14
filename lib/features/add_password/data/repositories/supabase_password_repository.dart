@@ -42,4 +42,11 @@ class SupabasePasswordRepository implements PasswordRepository {
   Future<void> delete(String id) async {
     await _client.from('passwords').delete().eq('id', id);
   }
+
+  @override
+  Future<void> deleteAll() async {
+    final userId = _client.auth.currentUser?.id;
+    if (userId == null) return;
+    await _client.from('passwords').delete().eq('user_id', userId);
+  }
 }

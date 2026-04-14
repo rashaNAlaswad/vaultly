@@ -61,4 +61,9 @@ class PasswordsNotifier extends _$PasswordsNotifier {
       state.value?.where((e) => e.id != id).toList() ?? [],
     );
   }
+
+  Future<void> deleteAllPasswords() async {
+    await ref.read(passwordRepositoryProvider).deleteAll();
+    state = const AsyncData([]);
+  }
 }
