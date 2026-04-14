@@ -37,11 +37,11 @@ class Utils {
 
   static void unfocus(BuildContext context) => FocusScope.of(context).unfocus();
 
-  static Future<dynamic> showDefaultBottomSheet(
+  static Future<T?> showDefaultBottomSheet<T>(
     BuildContext context,
     Widget widget,
     bool? isDismissible,
-  ) => showModalBottomSheet(
+  ) => showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
     isDismissible: isDismissible ?? true,
@@ -71,13 +71,13 @@ class Utils {
     },
   );
 
-  static Future<dynamic> showDefaultDialog(
+  static Future<T?> showDefaultDialog<T>(
     BuildContext context,
     Widget widget,
     Widget actions,
     bool? isDismissible,
   ) {
-    return showDialog(
+    return showDialog<T>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
