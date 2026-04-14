@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../l10n/app_localizations.dart';
 
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../add_password/data/models/password_entry.dart';
+import '../../../passwords/data/models/password_entry.dart';
 import 'password_card.dart';
 import 'vault_empty_state.dart';
 

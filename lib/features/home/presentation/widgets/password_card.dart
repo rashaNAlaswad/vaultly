@@ -6,7 +6,7 @@ import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../l10n/app_localizations.dart';
-import '../../../add_password/data/models/password_entry.dart';
+import '../../../passwords/data/models/password_entry.dart';
 
 class PasswordCard extends StatelessWidget {
   const PasswordCard({

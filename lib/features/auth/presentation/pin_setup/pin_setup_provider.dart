@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../features/auth/providers/auth_session_provider.dart';
+import '../providers/auth_session_provider.dart';
 import 'strategies/pin_strategy.dart';
 
 part 'pin_setup_provider.g.dart';

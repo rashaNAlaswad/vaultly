@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/gradient_button.dart';
-import '../../../providers/auth_providers.dart';
+import '../../providers/auth_providers.dart';
 import '../../widgets/ambient_blob.dart';
 import '../../../../../core/widgets/app_screen_header.dart';
 import '../../../../../core/widgets/app_snack_bar.dart';
