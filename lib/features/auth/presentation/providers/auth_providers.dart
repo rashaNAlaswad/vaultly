@@ -1,16 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../data/repositories/supabase_auth_repository.dart';
-import '../../domain/repositories/auth_repository.dart';
+import '../../data/repository_providers.dart';
 import 'auth_session_provider.dart';
 
 part 'auth_providers.g.dart';
-
-@riverpod
-AuthRepository authRepository(Ref ref) {
-  return SupabaseAuthRepository(Supabase.instance.client);
-}
 
 @riverpod
 class SendOtpNotifier extends _$SendOtpNotifier {
