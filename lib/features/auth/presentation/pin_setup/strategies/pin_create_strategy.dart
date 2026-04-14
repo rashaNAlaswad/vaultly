@@ -1,4 +1,4 @@
-import '../../../../../features/auth/validators/pin_validator.dart';
+import '../../../domain/validators/pin_validator.dart';
 import '../../../../../l10n/app_localizations.dart';
 import 'pin_strategy.dart';
 
