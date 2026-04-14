@@ -29,7 +29,10 @@ class Utils {
     const symbols = '!@#\$%^&*';
     const chars = '$lower$upper$numbers$symbols';
     final rng = Random.secure();
-    return List.generate(length, (_) => chars[rng.nextInt(chars.length)]).join();
+    return List.generate(
+      length,
+      (_) => chars[rng.nextInt(chars.length)],
+    ).join();
   }
 
   static void unfocus(BuildContext context) => FocusScope.of(context).unfocus();
@@ -79,7 +82,7 @@ class Utils {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          insetPadding: EdgeInsets.symmetric(horizontal: 16.w),
+          insetPadding: EdgeInsets.symmetric(horizontal: 24.w),
           contentPadding: EdgeInsets.symmetric(
             vertical: 14.h,
             horizontal: 20.w,
