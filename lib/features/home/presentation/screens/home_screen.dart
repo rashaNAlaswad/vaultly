@@ -81,14 +81,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ).fadeInSlide(delay: 150),
                       ],
                       20.verticalSpace,
-                      ValueListenableBuilder<String>(
-                        valueListenable: _categoryNotifier,
-                        builder: (context, selected, _) =>
-                            HomeCategoryFilterRow(
-                              categories: filterCategories,
-                              selected: selected,
-                              onChanged: (c) => _categoryNotifier.value = c,
-                            ),
+                      RepaintBoundary(
+                        child: ValueListenableBuilder<String>(
+                          valueListenable: _categoryNotifier,
+                          builder: (context, selected, _) =>
+                              HomeCategoryFilterRow(
+                                categories: filterCategories,
+                                selected: selected,
+                                onChanged: (c) => _categoryNotifier.value = c,
+                              ),
+                        ),
                       ).fadeInSlide(delay: 250),
                       20.verticalSpace,
                     ]),
@@ -110,7 +112,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             PositionedDirectional(
               end: 20.w,
               bottom: 28.h,
-              child: VaultFab(enabled: hasPin).bounce(delay: 500),
+              child: RepaintBoundary(
+                child: VaultFab(enabled: hasPin).bounce(delay: 500),
+              ),
             ),
           ],
         ),
