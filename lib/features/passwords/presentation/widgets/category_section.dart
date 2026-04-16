@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 import '../../../../core/widgets/category_chip.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -22,12 +21,18 @@ class CategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: context.responsive.edgeInsets(start: 4, bottom: 8),
-          child: Text(l10n.categoryTags, style: TextStyles.captionMuted),
+          child: Text(
+            l10n.categoryTags,
+            style: TextStyles.captionMuted.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
+          ),
         ),
 
         _CategoryTagRow(
@@ -56,6 +61,7 @@ class _CategoryTagRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Wrap(
       spacing: 8.w,
       runSpacing: 8.h,
@@ -80,20 +86,25 @@ class _CategoryTagRow extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                border: Border.all(color: AppColors.outlineVariant, width: 1),
+                border: Border.all(
+                  color: colorScheme.outlineVariant,
+                  width: 1,
+                ),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.add_rounded,
-                    color: AppColors.onSurfaceVariant,
+                    color: colorScheme.onSurfaceVariant,
                     size: 16.sp,
                   ),
                   4.horizontalSpace,
                   Text(
                     AppLocalizations.of(context).addTagButton,
-                    style: TextStyles.captionMuted,
+                    style: TextStyles.captionMuted.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),

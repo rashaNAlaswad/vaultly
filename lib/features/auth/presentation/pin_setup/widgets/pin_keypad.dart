@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../../core/extensions/animations.dart';
 import '../../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/text_styles.dart';
 import '../pin_setup_provider.dart';
 import '../strategies/pin_strategy.dart';
@@ -160,6 +159,7 @@ class _BackspaceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return _PressableButton(
       onTap: onTap,
       semanticsLabel: 'Delete last digit',
@@ -169,7 +169,7 @@ class _BackspaceButton extends StatelessWidget {
         child: Center(
           child: Icon(
             Icons.backspace_outlined,
-            color: AppColors.onSurfaceVariant,
+            color: colorScheme.onSurfaceVariant,
             size: 24.w,
           ),
         ),

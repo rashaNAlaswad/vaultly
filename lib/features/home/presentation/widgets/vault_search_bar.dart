@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/app_text_field.dart';
 
 class VaultSearchBar extends StatelessWidget {
@@ -15,6 +14,7 @@ class VaultSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Semantics(
       label: 'Search your vault',
       textField: true,
@@ -22,9 +22,9 @@ class VaultSearchBar extends StatelessWidget {
         controller: controller,
         hint: 'Search your vault',
         onChanged: onChanged,
-        prefixIcon: const Icon(
+        prefixIcon: Icon(
           Icons.search_rounded,
-          color: AppColors.onSurfaceVariant,
+          color: colorScheme.onSurfaceVariant,
           size: 20,
         ),
         textInputAction: TextInputAction.search,

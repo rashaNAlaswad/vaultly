@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -13,12 +12,16 @@ class OtpErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.error_outline, color: AppColors.error, size: 16.sp),
+        Icon(Icons.error_outline, color: colorScheme.error, size: 16.sp),
         6.horizontalSpace,
-        Text(l10n.incorrectCode, style: TextStyles.errorSmall),
+        Text(
+          l10n.incorrectCode,
+          style: TextStyles.errorSmall.copyWith(color: colorScheme.error),
+        ),
       ],
     )
         .animate()

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 
 /// A single digit input box used in an OTP entry row.
@@ -23,6 +22,8 @@ class OtpBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return ListenableBuilder(
       listenable: Listenable.merge([focusNode, controller]),
       builder: (context, _) {
@@ -34,21 +35,29 @@ class OtpBox extends StatelessWidget {
         final List<BoxShadow>? shadows;
 
         if (hasError) {
-          boxColor = AppColors.surfaceContainerHigh;
-          border = Border.all(color: AppColors.error);
-          shadows = const [BoxShadow(color: AppColors.errorGlow20, blurRadius: 10)];
+          boxColor = colorScheme.surfaceContainerHigh;
+          border = Border.all(color: colorScheme.error);
+          shadows = [
+            BoxShadow(
+              color: colorScheme.error.withValues(alpha: 0.2),
+              blurRadius: 10,
+            ),
+          ];
         } else if (isFocused) {
-          boxColor = AppColors.surfaceContainerHighest;
-          border = Border.all(color: AppColors.primary, width: 2);
-          shadows = const [
-            BoxShadow(color: AppColors.primaryGlow30, blurRadius: 15),
+          boxColor = colorScheme.surfaceContainerHighest;
+          border = Border.all(color: colorScheme.primary, width: 2);
+          shadows = [
+            BoxShadow(
+              color: colorScheme.primary.withValues(alpha: 0.3),
+              blurRadius: 15,
+            ),
           ];
         } else if (isFilled) {
-          boxColor = AppColors.surfaceContainerHigh;
+          boxColor = colorScheme.surfaceContainerHigh;
           border = null;
           shadows = null;
         } else {
-          boxColor = AppColors.surfaceContainerLow;
+          boxColor = colorScheme.surfaceContainerLow;
           border = null;
           shadows = null;
         }
@@ -103,11 +112,12 @@ class BlinkingCursor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
           width: 2,
           height: 28.h,
           decoration: BoxDecoration(
-            color: AppColors.primary,
+            color: colorScheme.primary,
             borderRadius: BorderRadius.circular(1.r),
           ),
         )

@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/extensions/string_extensions.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/app_text_field.dart';
 import '../../../../../core/widgets/gradient_button.dart';
 import '../../../../../l10n/app_localizations.dart';
@@ -82,9 +81,10 @@ class EmailSuffixIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(
+    final colorScheme = Theme.of(context).colorScheme;
+    return Icon(
       Icons.alternate_email,
-      color: AppColors.onSurfaceVariantHalf,
+      color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
       size: 20,
     );
   }

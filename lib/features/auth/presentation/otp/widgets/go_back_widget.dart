@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -12,6 +11,7 @@ class GoBackWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: context.responsive.edgeInsetsSymmetric(horizontal: 24),
       child: Row(
@@ -23,7 +23,7 @@ class GoBackWidget extends StatelessWidget {
               onTap: () => context.pop(),
               child: Icon(
                 Icons.arrow_back,
-                color: AppColors.primary,
+                color: colorScheme.primary,
                 size: 22.sp,
               ),
             ),

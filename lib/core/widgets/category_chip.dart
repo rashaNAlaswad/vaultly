@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/responsive_helper.dart';
-import '../themes/app_colors.dart';
 import '../themes/text_styles.dart';
 
 class CategoryChip extends StatelessWidget {
@@ -18,22 +17,6 @@ class CategoryChip extends StatelessWidget {
   final VoidCallback onTap;
   final String semanticPrefix;
 
-  static final _selectedStyle = TextStyles.captionMuted.copyWith(
-    color: AppColors.onPrimaryContainer,
-  );
-  static final _unselectedStyle = TextStyles.captionMuted.copyWith(
-    color: AppColors.onSurfaceVariant,
-  );
-
-  static final _selectedDecoration = BoxDecoration(
-    color: AppColors.primaryContainer,
-    borderRadius: BorderRadius.circular(100),
-  );
-  static final _unselectedDecoration = BoxDecoration(
-    color: AppColors.surfaceContainerHigh,
-    borderRadius: BorderRadius.circular(100),
-  );
-
   static final _padding = EdgeInsets.symmetric(
     horizontal: 16.w,
     vertical: 8.h,
@@ -41,6 +24,21 @@ class CategoryChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final style = TextStyles.captionMuted.copyWith(
+      color: isSelected
+          ? colorScheme.onPrimaryContainer
+          : colorScheme.onSurfaceVariant,
+    );
+
+    final decoration = BoxDecoration(
+      color: isSelected
+          ? colorScheme.primaryContainer
+          : colorScheme.surfaceContainerHigh,
+      borderRadius: BorderRadius.circular(100),
+    );
+
     return Semantics(
       label: '$semanticPrefix: $label',
       selected: isSelected,
@@ -50,10 +48,10 @@ class CategoryChip extends StatelessWidget {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: _padding,
-          decoration: isSelected ? _selectedDecoration : _unselectedDecoration,
+          decoration: decoration,
           child: Text(
             label,
-            style: isSelected ? _selectedStyle : _unselectedStyle,
+            style: style,
           ),
         ),
       ),

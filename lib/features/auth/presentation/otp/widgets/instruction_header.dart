@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -14,24 +13,25 @@ class InstructionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         Container(
               width: 80.w,
               height: 80.h,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: AppColors.primaryContainerGlow20,
+                color: colorScheme.primaryContainer.withValues(alpha: 0.2),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primaryContainerGlow20,
+                    color: colorScheme.primaryContainer.withValues(alpha: 0.2),
                     blurRadius: 30,
                   ),
                 ],
               ),
               child: Icon(
                 Icons.shield,
-                color: AppColors.primary,
+                color: colorScheme.primary,
                 size: 36.sp,
                 semanticLabel: 'Security verification shield',
               ),
@@ -48,10 +48,17 @@ class InstructionHeader extends StatelessWidget {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-            style: TextStyles.heroSubtitle,
+            style: TextStyles.heroSubtitle.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
             children: [
               TextSpan(text: l10n.otpSentPrefix),
-              TextSpan(text: email, style: TextStyles.bodyLink),
+              TextSpan(
+                text: email,
+                style: TextStyles.bodyLink.copyWith(
+                  color: colorScheme.primary,
+                ),
+              ),
               TextSpan(text: l10n.otpSentSuffix),
             ],
           ),

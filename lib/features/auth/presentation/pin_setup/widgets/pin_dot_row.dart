@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../../core/extensions/animations.dart';
 import '../../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../../core/themes/app_colors.dart';
 import '../pin_setup_provider.dart';
 import '../strategies/pin_strategy.dart';
 
@@ -56,27 +55,30 @@ class _PinDot extends StatelessWidget {
 
   final bool filled;
 
-  static final _filledDecoration = BoxDecoration(
-    shape: BoxShape.circle,
-    color: AppColors.primary,
-    boxShadow: const [
-      BoxShadow(color: AppColors.primaryGlow30, blurRadius: 12, spreadRadius: 2),
-    ],
-  );
-
-  static const _emptyDecoration = BoxDecoration(
-    shape: BoxShape.circle,
-    color: AppColors.surfaceContainerHighest,
-  );
-
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeOut,
       width: 14.w,
       height: 14.w,
-      decoration: filled ? _filledDecoration : _emptyDecoration,
+      decoration: filled
+          ? BoxDecoration(
+              shape: BoxShape.circle,
+              color: colorScheme.primary,
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.primary.withValues(alpha: 0.3),
+                  blurRadius: 12,
+                  spreadRadius: 2,
+                ),
+              ],
+            )
+          : BoxDecoration(
+              shape: BoxShape.circle,
+              color: colorScheme.surfaceContainerHighest,
+            ),
     );
   }
 }

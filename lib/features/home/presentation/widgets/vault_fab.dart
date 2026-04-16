@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/widgets/app_snack_bar.dart';
 import '../../../../core/routing/app_routes.dart';
 import '../../../../../l10n/app_localizations.dart';
@@ -23,6 +22,7 @@ class VaultFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reduceMotion = MediaQuery.disableAnimationsOf(context);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Semantics(
       label: 'Add password',
@@ -43,26 +43,30 @@ class VaultFab extends StatelessWidget {
               height: 60.w,
               decoration: BoxDecoration(
                 gradient: enabled
-                    ? const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [AppColors.primary, AppColors.primaryContainer],
-                      )
-                    : const LinearGradient(
+                    ? LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          AppColors.primaryGlow8,
-                          AppColors.surfaceContainerHigh,
+                          colorScheme.primary,
+                          colorScheme.primaryContainer,
+                        ],
+                      )
+                    : LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          colorScheme.primary.withValues(alpha: 0.08),
+                          colorScheme.surfaceContainerHigh,
                         ],
                       ),
                 shape: BoxShape.circle,
                 boxShadow: enabled
-                    ? const [
+                    ? [
                         BoxShadow(
-                          color: AppColors.primaryContainerGlow40,
+                          color: colorScheme.primaryContainer
+                              .withValues(alpha: 0.4),
                           blurRadius: 25,
-                          offset: Offset(0, 8),
+                          offset: const Offset(0, 8),
                         ),
                       ]
                     : null,
@@ -79,8 +83,8 @@ class VaultFab extends StatelessWidget {
                   enabled ? Icons.add_rounded : Icons.lock_rounded,
                   key: ValueKey(enabled),
                   color: enabled
-                      ? AppColors.onPrimary
-                      : AppColors.onSurfaceVariant,
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurfaceVariant,
                   size: 28.sp,
                 ),
               ),

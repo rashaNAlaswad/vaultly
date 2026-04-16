@@ -18,10 +18,16 @@ class ResendLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('${l10n.didntReceiveIt} ', style: TextStyles.captionMuted),
+        Text(
+          '${l10n.didntReceiveIt} ',
+          style: TextStyles.captionMuted.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
+        ),
         Semantics(
           button: true,
           enabled: resendSeconds == 0,
@@ -33,8 +39,14 @@ class ResendLink extends StatelessWidget {
             child: Text(
               resendSeconds > 0 ? l10n.resendIn(resendSeconds) : l10n.resend,
               style: resendSeconds > 0
-                  ? TextStyles.captionDisabled
-                  : TextStyles.captionPrimary,
+                  ? TextStyles.captionDisabled.copyWith(
+                      color: colorScheme.onSurfaceVariant.withValues(
+                        alpha: 0.5,
+                      ),
+                    )
+                  : TextStyles.captionPrimary.copyWith(
+                      color: colorScheme.primary,
+                    ),
             ),
           ),
         ),

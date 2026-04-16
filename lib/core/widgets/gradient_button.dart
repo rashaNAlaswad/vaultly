@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../helpers/responsive_helper.dart';
-import '../themes/app_colors.dart';
 import '../themes/text_styles.dart';
 
 /// A reusable gradient button used across the app.
@@ -32,31 +31,6 @@ class GradientButton extends StatefulWidget {
 class _GradientButtonState extends State<GradientButton> {
   final _pressed = ValueNotifier<bool>(false);
 
-  static final _enabledDecoration = BoxDecoration(
-    gradient: const LinearGradient(
-      colors: [AppColors.primary, AppColors.primaryContainer],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    ),
-    borderRadius: BorderRadius.circular(12.r),
-    boxShadow: const [
-      BoxShadow(
-        color: AppColors.primaryContainerGlow40,
-        blurRadius: 25,
-        offset: Offset(0, 8),
-      ),
-    ],
-  );
-
-  static final _disabledDecoration = BoxDecoration(
-    gradient: const LinearGradient(
-      colors: [AppColors.surfaceContainerHigh, AppColors.surfaceContainerHighest],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    ),
-    borderRadius: BorderRadius.circular(12.r),
-  );
-
   static final _contentPadding = EdgeInsets.symmetric(vertical: 20.h);
 
   bool get _interactive => widget.enabled && !widget.isLoading;
@@ -69,6 +43,36 @@ class _GradientButtonState extends State<GradientButton> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final enabledDecoration = BoxDecoration(
+      gradient: LinearGradient(
+        colors: [colorScheme.primary, colorScheme.primaryContainer],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      borderRadius: BorderRadius.circular(12.r),
+      boxShadow: [
+        BoxShadow(
+          color: colorScheme.primaryContainer.withValues(alpha: 0.4),
+          blurRadius: 25,
+          offset: const Offset(0, 8),
+        ),
+      ],
+    );
+
+    final disabledDecoration = BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          colorScheme.surfaceContainerHigh,
+          colorScheme.surfaceContainerHighest,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      borderRadius: BorderRadius.circular(12.r),
+    );
+
     return Semantics(
       label: widget.label,
       button: true,
@@ -96,8 +100,8 @@ class _GradientButtonState extends State<GradientButton> {
                     width: double.infinity,
                     padding: _contentPadding,
                     decoration: widget.enabled
-                        ? _enabledDecoration
-                        : _disabledDecoration,
+                        ? enabledDecoration
+                        : disabledDecoration,
                     child: AnimatedSwitcher(
                       duration: const Duration(milliseconds: 200),
                       child: Row(
@@ -107,16 +111,20 @@ class _GradientButtonState extends State<GradientButton> {
                           Text(
                             widget.label,
                             style: widget.enabled
-                                ? TextStyles.buttonLabel
-                                : TextStyles.buttonLabelDisabled,
+                                ? TextStyles.buttonLabel.copyWith(
+                                    color: colorScheme.onPrimary,
+                                  )
+                                : TextStyles.buttonLabelDisabled.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
                           ),
                           if (widget.icon != null) ...[
                             12.horizontalSpace,
                             Icon(
                               widget.icon,
                               color: widget.enabled
-                                  ? AppColors.onPrimary
-                                  : AppColors.subtleText,
+                                  ? colorScheme.onPrimary
+                                  : colorScheme.onSurfaceVariant,
                               size: 20,
                             ),
                           ],

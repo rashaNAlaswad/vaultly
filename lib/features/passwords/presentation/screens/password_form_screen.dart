@@ -6,7 +6,6 @@ import '../../../../l10n/app_localizations.dart';
 
 import '../../../../core/extensions/animations.dart';
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/widgets/app_screen_header.dart';
 import '../../../../core/widgets/app_snack_bar.dart';
 import '../../../../core/widgets/app_text_field.dart';
@@ -176,9 +175,9 @@ class _PasswordFormScreenState extends ConsumerState<PasswordFormScreen> {
                       textInputAction: TextInputAction.next,
                       validator: (v) =>
                           (v == null || v.trim().isEmpty) ? l10n.required : null,
-                      suffixIcon: const Icon(
+                      suffixIcon: Icon(
                         Icons.person_outline_rounded,
-                        color: AppColors.onSurfaceVariant,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                         size: 20,
                       ),
                     ).fadeInSlide(delay: 100),
@@ -266,7 +265,7 @@ class _PasswordField extends StatelessWidget {
                 obscureText
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
-                color: AppColors.onSurfaceVariant,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 size: 20,
               ),
             ),

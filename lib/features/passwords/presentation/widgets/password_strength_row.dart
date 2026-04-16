@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/models/password_strength.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -23,6 +22,7 @@ class PasswordStrengthRow extends StatelessWidget {
     if (strength == null) return const SizedBox.shrink();
 
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Semantics(
       label: 'Password strength: ${strength.label(l10n)}',
       child: Padding(
@@ -40,7 +40,7 @@ class PasswordStrengthRow extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isActive
                           ? strength.color
-                          : AppColors.surfaceContainerHighest,
+                          : colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(100),
                       boxShadow: isActive
                           ? [
@@ -73,11 +73,16 @@ class PasswordStrengthRow extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.refresh_rounded,
-                          color: AppColors.primary,
+                          color: colorScheme.primary,
                           size: 14.sp,
                         ),
                         4.horizontalSpace,
-                        Text(l10n.regenerate, style: TextStyles.captionPrimary),
+                        Text(
+                          l10n.regenerate,
+                          style: TextStyles.captionPrimary.copyWith(
+                            color: colorScheme.primary,
+                          ),
+                        ),
                       ],
                     ),
                   ),

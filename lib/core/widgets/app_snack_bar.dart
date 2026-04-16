@@ -14,27 +14,33 @@ abstract final class AppSnackBar {
     BuildContext context,
     String message, {
     Duration duration = const Duration(seconds: 4),
-  }) => _show(
-    context,
-    message: message,
-    duration: duration,
-    backgroundColor: AppColors.errorContainer,
-    foregroundColor: AppColors.onErrorContainer,
-    icon: Icons.error_outline_rounded,
-  );
+  }) {
+    final colorScheme = Theme.of(context).colorScheme;
+    _show(
+      context,
+      message: message,
+      duration: duration,
+      backgroundColor: colorScheme.errorContainer,
+      foregroundColor: colorScheme.onErrorContainer,
+      icon: Icons.error_outline_rounded,
+    );
+  }
 
   static void info(
     BuildContext context,
     String message, {
     Duration duration = const Duration(seconds: 4),
-  }) => _show(
-    context,
-    message: message,
-    duration: duration,
-    backgroundColor: AppColors.surfaceContainerHigh,
-    foregroundColor: AppColors.onSurface,
-    icon: Icons.info_outline_rounded,
-  );
+  }) {
+    final colorScheme = Theme.of(context).colorScheme;
+    _show(
+      context,
+      message: message,
+      duration: duration,
+      backgroundColor: colorScheme.surfaceContainerHigh,
+      foregroundColor: colorScheme.onSurface,
+      icon: Icons.info_outline_rounded,
+    );
+  }
 
   static void success(
     BuildContext context,

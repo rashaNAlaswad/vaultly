@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../../core/themes/app_colors.dart';
 import '../../../../../../core/themes/text_styles.dart';
 
 class PinHeroSection extends StatelessWidget {
@@ -16,6 +15,7 @@ class PinHeroSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         Container(
@@ -23,14 +23,14 @@ class PinHeroSection extends StatelessWidget {
           height: 64.w,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [AppColors.primary, AppColors.primaryContainer],
+              colors: [colorScheme.primary, colorScheme.primaryContainer],
             ),
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: AppColors.primaryContainerGlow20,
+                color: colorScheme.primaryContainer.withValues(alpha: 0.2),
                 blurRadius: 30,
                 spreadRadius: 4,
               ),
@@ -38,7 +38,7 @@ class PinHeroSection extends StatelessWidget {
           ),
           child: Icon(
             Icons.shield_rounded,
-            color: AppColors.onPrimary,
+            color: colorScheme.onPrimary,
             size: 30.w,
             semanticLabel: 'Security shield',
           ),
@@ -49,7 +49,9 @@ class PinHeroSection extends StatelessWidget {
         Text(
           subtitle,
           textAlign: TextAlign.center,
-          style: TextStyles.heroSubtitle,
+          style: TextStyles.heroSubtitle.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );

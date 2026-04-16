@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -12,6 +11,7 @@ class VaultIdentityAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Semantics(
       label: 'Vault identity avatar: $letter',
       child: Column(
@@ -21,16 +21,19 @@ class VaultIdentityAvatar extends StatelessWidget {
             height: 96,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: AppColors.primaryContainer,
-              boxShadow: const [
-                BoxShadow(color: AppColors.primaryGlow30, blurRadius: 24),
+              color: colorScheme.primaryContainer,
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.primary.withValues(alpha: 0.3),
+                  blurRadius: 24,
+                ),
               ],
             ),
             child: Center(
               child: Text(
                 letter,
                 style: TextStyles.heroTitle.copyWith(
-                  color: AppColors.onPrimaryContainer,
+                  color: colorScheme.onPrimaryContainer,
                   fontSize: 40.sp,
                 ),
               ),
@@ -39,7 +42,9 @@ class VaultIdentityAvatar extends StatelessWidget {
           12.verticalSpace,
           Text(
             AppLocalizations.of(context).vaultIdentity,
-            style: TextStyles.fieldLabel,
+            style: TextStyles.fieldLabel.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
           ),
         ],
       ),

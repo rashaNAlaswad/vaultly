@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/helpers/responsive_helper.dart';
 import '../../../../../core/models/password_strength.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../core/utils/utils.dart';
 import '../../../../../l10n/app_localizations.dart';
@@ -20,19 +19,6 @@ class PasswordCard extends StatelessWidget {
   final VoidCallback onDelete;
   final VoidCallback onTap;
 
-  static final _usernameStyle = TextStyles.captionMuted.copyWith(
-    color: AppColors.outline,
-  );
-
-  static final _deleteTextStyle = TextStyles.captionMuted.copyWith(
-    color: AppColors.error,
-  );
-
-  static final _cardDecoration = BoxDecoration(
-    color: AppColors.surfaceContainerLow,
-    borderRadius: BorderRadius.circular(12.r),
-  );
-
   static final _cardPadding = EdgeInsets.symmetric(
     horizontal: 16.w,
     vertical: 16.h,
@@ -43,6 +29,7 @@ class PasswordCard extends StatelessWidget {
 
   Future<void> _confirmDelete(BuildContext context) async {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     final confirmed = await Utils.showDefaultDialog(
       context,
       Column(
@@ -66,7 +53,12 @@ class PasswordCard extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: Text(l10n.delete, style: _deleteTextStyle),
+            child: Text(
+              l10n.delete,
+              style: TextStyles.captionMuted.copyWith(
+                color: colorScheme.error,
+              ),
+            ),
           ),
         ],
       ),
@@ -78,6 +70,7 @@ class PasswordCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final strength = evaluateStrength(entry.password) ?? PasswordStrength.weak;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Semantics(
       label: 'Password entry for ${entry.siteName}',
@@ -87,7 +80,10 @@ class PasswordCard extends StatelessWidget {
         onLongPress: () => _confirmDelete(context),
         child: Container(
           padding: _cardPadding,
-          decoration: _cardDecoration,
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerLow,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
           child: Row(
             children: [
               _SiteAvatar(letter: _avatarLetter),
@@ -105,7 +101,9 @@ class PasswordCard extends StatelessWidget {
                     4.verticalSpace,
                     Text(
                       entry.username,
-                      style: _usernameStyle,
+                      style: TextStyles.captionMuted.copyWith(
+                        color: colorScheme.outline,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -127,21 +125,21 @@ class _SiteAvatar extends StatelessWidget {
 
   final String letter;
 
-  static final _letterStyle = TextStyles.screenTitle.copyWith(
-    color: AppColors.onPrimary,
-  );
-
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: 48.w,
       height: 48.h,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: AppColors.primary,
+        color: colorScheme.primary,
       ),
       child: Center(
-        child: Text(letter, style: _letterStyle),
+        child: Text(
+          letter,
+          style: TextStyles.screenTitle.copyWith(color: colorScheme.onPrimary),
+        ),
       ),
     );
   }
@@ -157,6 +155,7 @@ class _StrengthIndicator extends StatelessWidget {
     final activeColor = strength.color;
     final activeDots = strength.filledDots;
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -175,7 +174,7 @@ class _StrengthIndicator extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: active
                       ? activeColor
-                      : AppColors.surfaceContainerHighest,
+                      : colorScheme.surfaceContainerHighest,
                 ),
               ),
             );

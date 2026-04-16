@@ -10,6 +10,7 @@ class VaultEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -31,18 +32,17 @@ class VaultEmptyState extends StatelessWidget {
                   ],
                 ),
               ),
-              // Icon container
               Container(
                 width: 96.w,
                 height: 96.w,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.surfaceContainerLow,
+                  color: colorScheme.surfaceContainerLow,
                 ),
                 child: Icon(
                   Icons.shield_rounded,
                   size: 48.sp,
-                  color: AppColors.onSurfaceVariant.withValues(alpha: 0.35),
+                  color: colorScheme.onSurfaceVariant.withValues(alpha: 0.35),
                 ),
               ),
             ],
@@ -57,7 +57,9 @@ class VaultEmptyState extends StatelessWidget {
         Text(
           AppLocalizations.of(context).vaultEmptySubtitle,
           textAlign: TextAlign.center,
-          style: TextStyles.heroSubtitle,
+          style: TextStyles.heroSubtitle.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );

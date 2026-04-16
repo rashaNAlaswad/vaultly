@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../helpers/responsive_helper.dart';
-import '../themes/app_colors.dart';
 import '../themes/text_styles.dart';
 
 /// App-wide top bar — back button + title + optional trailing action.
@@ -43,6 +42,7 @@ class AppScreenHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: _padding,
       child: Row(
@@ -53,9 +53,9 @@ class AppScreenHeader extends StatelessWidget {
                   button: true,
                   child: IconButton(
                     onPressed: onBack ?? () => context.pop(),
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back_rounded,
-                      color: AppColors.onSurface,
+                      color: colorScheme.onSurface,
                       size: 24,
                     ),
                   ),

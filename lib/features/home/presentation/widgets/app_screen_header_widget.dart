@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/routing/app_routes.dart';
 
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 import '../../../../core/widgets/app_screen_header.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -15,6 +14,7 @@ class AppScreenHeaderWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
 
     return SliverAppBar(
       pinned: true,
@@ -32,7 +32,7 @@ class AppScreenHeaderWidget extends ConsumerWidget {
             },
             icon: Icon(
               Icons.settings_outlined,
-              color: AppColors.onSurfaceVariant,
+              color: colorScheme.onSurfaceVariant,
               size: 22.sp,
             ),
           ),

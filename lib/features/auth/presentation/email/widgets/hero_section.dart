@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../../core/helpers/responsive_helper.dart';
-import '../../../../../core/themes/app_colors.dart';
 import '../../../../../core/themes/text_styles.dart';
 import '../../../../../l10n/app_localizations.dart';
 
@@ -11,6 +10,7 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         Container(
@@ -18,14 +18,17 @@ class HeroSection extends StatelessWidget {
               height: 80.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.r),
-                color: AppColors.glassContainer,
-                boxShadow: const [
-                  BoxShadow(color: AppColors.primaryGlow15, blurRadius: 20),
+                color: colorScheme.surface.withValues(alpha: 0.4),
+                boxShadow: [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.15),
+                    blurRadius: 20,
+                  ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.shield,
-                color: AppColors.primary,
+                color: colorScheme.primary,
                 size: 36,
                 semanticLabel: 'Vaultly security shield',
               ),
@@ -42,7 +45,9 @@ class HeroSection extends StatelessWidget {
         Text(
           l10n.appTagline,
           textAlign: TextAlign.center,
-          style: TextStyles.heroSubtitle,
+          style: TextStyles.heroSubtitle.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
         ).animate().fadeIn(delay: 200.ms, duration: 600.ms).slideY(begin: 0.1),
       ],
     );

@@ -10,36 +10,11 @@ import '../../../../../l10n/app_localizations.dart';
 class SecureVaultBanner extends StatelessWidget {
   const SecureVaultBanner({super.key});
 
-  static final _outerDecoration = BoxDecoration(
-    color: AppColors.surfaceContainerLow,
-    borderRadius: BorderRadius.circular(16.r),
-    boxShadow: const [
-      BoxShadow(color: AppColors.primaryContainerGlow20, blurRadius: 30),
-    ],
-  );
-
   static final _borderRadius = BorderRadius.circular(16.r);
-
-  static const _gradientOverlayDecoration = BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [AppColors.primaryContainerGlow20, Colors.transparent],
-    ),
-  );
 
   static final _contentPadding = EdgeInsets.symmetric(
     horizontal: 20.w,
     vertical: 16.h,
-  );
-
-  static final _buttonDecoration = BoxDecoration(
-    gradient: const LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [AppColors.primary, AppColors.primaryContainer],
-    ),
-    borderRadius: BorderRadius.circular(100.r),
   );
 
   static final _buttonPadding = EdgeInsets.symmetric(
@@ -47,22 +22,36 @@ class SecureVaultBanner extends StatelessWidget {
     vertical: 10.h,
   );
 
-  static final _buttonTextStyle = TextStyles.captionMuted.copyWith(
-    color: AppColors.onPrimary,
-    fontWeight: FontWeight.w700,
-  );
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
-      decoration: _outerDecoration,
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerLow,
+        borderRadius: _borderRadius,
+        boxShadow: const [
+          BoxShadow(color: AppColors.primaryContainerGlow20, blurRadius: 30),
+        ],
+      ),
       child: ClipRRect(
         borderRadius: _borderRadius,
         child: Stack(
           children: [
-            const Positioned.fill(
-              child: DecoratedBox(decoration: _gradientOverlayDecoration),
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      colorScheme.primaryContainer.withValues(alpha: 0.2),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
             ),
             Padding(
               padding: _contentPadding,
@@ -71,13 +60,15 @@ class SecureVaultBanner extends StatelessWidget {
                   Container(
                     width: 48.w,
                     height: 48.w,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.primaryContainerGlow20,
+                      color: colorScheme.primaryContainer.withValues(
+                        alpha: 0.2,
+                      ),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.lock_rounded,
-                      color: AppColors.primary,
+                      color: colorScheme.primary,
                       size: 22,
                     ),
                   ),
@@ -90,7 +81,9 @@ class SecureVaultBanner extends StatelessWidget {
                         4.verticalSpace,
                         Text(
                           l10n.secureVaultSubtitle,
-                          style: TextStyles.captionMuted,
+                          style: TextStyles.captionMuted.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ],
                     ),
@@ -103,11 +96,24 @@ class SecureVaultBanner extends StatelessWidget {
                       onTap: () => context.push(AppRoutes.pinCreate),
                       child: Container(
                         padding: _buttonPadding,
-                        decoration: _buttonDecoration,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              colorScheme.primary,
+                              colorScheme.primaryContainer,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(100.r),
+                        ),
                         child: Text(
                           l10n.createPin,
                           textAlign: TextAlign.center,
-                          style: _buttonTextStyle,
+                          style: TextStyles.captionMuted.copyWith(
+                            color: colorScheme.onPrimary,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
