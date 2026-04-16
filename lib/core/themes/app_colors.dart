@@ -72,6 +72,37 @@ class AppColors {
   /// Muted grey for disabled/countdown text
   static const Color mutedText = Color(0xFF777777);
 
+  // ==================== Light Theme ====================
+
+  // Primary (light)
+  static const Color lightPrimary = Color(0xFF9C27B0);
+  static const Color lightOnPrimary = Color(0xFFFFFFFF);
+  static const Color lightPrimaryContainer = Color(0xFFFFD6FF);
+  static const Color lightOnPrimaryContainer = Color(0xFF370044);
+
+  // Secondary (light)
+  static const Color lightSecondary = Color(0xFF6D5871);
+  static const Color lightOnSecondary = Color(0xFFFFFFFF);
+  static const Color lightSecondaryContainer = Color(0xFFF6DBF9);
+
+  // Surface (light)
+  static const Color lightSurface = Color(0xFFFFF7FF);
+  static const Color lightSurfaceContainerLow = Color(0xFFF5EDF4);
+  static const Color lightSurfaceContainerHigh = Color(0xFFECE3EB);
+  static const Color lightSurfaceContainerHighest = Color(0xFFE3DAE2);
+  static const Color lightOnSurface = Color(0xFF1E1A1E);
+  static const Color lightOnSurfaceVariant = Color(0xFF4D444D);
+
+  // Outline (light)
+  static const Color lightOutline = Color(0xFF7F747E);
+  static const Color lightOutlineVariant = Color(0xFFD0C4CF);
+
+  // Error (light)
+  static const Color lightError = Color(0xFFBA1A1A);
+  static const Color lightErrorContainer = Color(0xFFFFDAD6);
+  static const Color lightOnError = Color(0xFFFFFFFF);
+  static const Color lightOnErrorContainer = Color(0xFF410002);
+
   // Semantic — password strength
   static const Color warning = Color(0xFFF59E0B);
   static const Color success = Color(0xFF10B981);

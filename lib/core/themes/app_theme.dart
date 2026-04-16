@@ -19,6 +19,9 @@ class AppTheme {
       onSecondary: AppColors.onSecondary,
       secondaryContainer: AppColors.secondaryContainer,
       surface: AppColors.surface,
+      surfaceContainerLow: AppColors.surfaceContainerLow,
+      surfaceContainerHigh: AppColors.surfaceContainerHigh,
+      surfaceContainerHighest: AppColors.surfaceContainerHighest,
       onSurface: AppColors.onSurface,
       onSurfaceVariant: AppColors.onSurfaceVariant,
       error: AppColors.error,
@@ -65,6 +68,64 @@ class AppTheme {
     ),
   );
 
-  static ThemeData get light =>
-      ThemeData(useMaterial3: true, scaffoldBackgroundColor: Colors.white);
+  static final ThemeData light = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.lightPrimary,
+      onPrimary: AppColors.lightOnPrimary,
+      primaryContainer: AppColors.lightPrimaryContainer,
+      onPrimaryContainer: AppColors.lightOnPrimaryContainer,
+      secondary: AppColors.lightSecondary,
+      onSecondary: AppColors.lightOnSecondary,
+      secondaryContainer: AppColors.lightSecondaryContainer,
+      surface: AppColors.lightSurface,
+      surfaceContainerLow: AppColors.lightSurfaceContainerLow,
+      surfaceContainerHigh: AppColors.lightSurfaceContainerHigh,
+      surfaceContainerHighest: AppColors.lightSurfaceContainerHighest,
+      onSurface: AppColors.lightOnSurface,
+      onSurfaceVariant: AppColors.lightOnSurfaceVariant,
+      error: AppColors.lightError,
+      onError: AppColors.lightOnError,
+      errorContainer: AppColors.lightErrorContainer,
+      onErrorContainer: AppColors.lightOnErrorContainer,
+      outline: AppColors.lightOutline,
+      outlineVariant: AppColors.lightOutlineVariant,
+    ),
+    scaffoldBackgroundColor: AppColors.lightSurface,
+    textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme),
+
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppColors.lightSurfaceContainerLow,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide.none,
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: const BorderSide(color: AppColors.lightError),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: const BorderSide(color: AppColors.lightError),
+      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
+    ),
+
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.lightPrimary,
+        textStyle: TextStyles.buttonLabel,
+      ),
+    ),
+  );
 }
