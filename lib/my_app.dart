@@ -3,9 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/providers/app_lifecycle_lock_provider.dart';
-import 'core/providers/locale_provider.dart';
 import 'core/routing/app_router.dart';
 import 'core/themes/app_theme.dart';
+import 'features/settings/presentation/providers/settings_provider.dart';
 import 'l10n/app_localizations.dart';
 
 class MyApp extends ConsumerWidget {
@@ -15,10 +15,14 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(appLifecycleLockProvider);
     final router = ref.watch(appRouterProvider);
-    final locale = ref.watch(localeProvider).value ?? const Locale('en');
+    final settings = ref.watch(settingsProvider).value;
+    final themeMode = settings?.themeMode ?? ThemeMode.system;
+    final locale = settings?.locale ?? const Locale('en');
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: themeMode,
       routerConfig: router,
       locale: locale,
       supportedLocales: const [Locale('en'), Locale('ar')],
