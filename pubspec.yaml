@@ -39,6 +39,9 @@ dependencies:
   freezed_annotation: ^3.0.0
   json_annotation: ^4.11.0
 
+  # Biometric authentication
+  local_auth: ^2.3.0
+
   # Animations & Effects
   flutter_animate: ^4.5.2
 
