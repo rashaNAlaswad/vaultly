@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 import '../../../../core/utils/utils.dart';
 import 'settings_icon_avatar.dart';
@@ -25,6 +24,7 @@ class SettingsDangerCard extends StatelessWidget {
   final VoidCallback onConfirmed;
 
   Future<void> _showConfirmation(BuildContext context) async {
+    final colorScheme = Theme.of(context).colorScheme;
     final confirmed = await Utils.showDefaultDialog(
       context,
       Column(
@@ -33,7 +33,7 @@ class SettingsDangerCard extends StatelessWidget {
         children: [
           Text(
             confirmTitle,
-            style: TextStyles.largeText.copyWith(color: AppColors.error),
+            style: TextStyles.largeText.copyWith(color: colorScheme.error),
           ),
           8.verticalSpace,
           Text(confirmMessage, style: TextStyles.captionMuted),
@@ -50,7 +50,9 @@ class SettingsDangerCard extends StatelessWidget {
             onPressed: () => Navigator.of(context).pop(true),
             child: Text(
               'Confirm',
-              style: TextStyles.captionMuted.copyWith(color: AppColors.error),
+              style: TextStyles.captionMuted.copyWith(
+                color: colorScheme.error,
+              ),
             ),
           ),
         ],
@@ -62,11 +64,12 @@ class SettingsDangerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Semantics(
       button: true,
       label: title,
       child: Material(
-        color: AppColors.errorContainer.withValues(alpha: 0.1),
+        color: colorScheme.errorContainer.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(12.r),
         child: InkWell(
           onTap: () => _showConfirmation(context),
@@ -77,10 +80,10 @@ class SettingsDangerCard extends StatelessWidget {
               children: [
                 SettingsIconAvatar(
                   icon: icon,
-                  backgroundColor: AppColors.errorContainer.withValues(
+                  backgroundColor: colorScheme.errorContainer.withValues(
                     alpha: 0.3,
                   ),
-                  iconColor: AppColors.error,
+                  iconColor: colorScheme.error,
                 ),
                 12.horizontalSpace,
                 Expanded(
@@ -91,14 +94,14 @@ class SettingsDangerCard extends StatelessWidget {
                         title,
                         style: TextStyles.screenTitle.copyWith(
                           fontSize: 14.sp,
-                          color: AppColors.error,
+                          color: colorScheme.error,
                         ),
                       ),
                       4.verticalSpace,
                       Text(
                         subtitle,
                         style: TextStyles.captionMuted.copyWith(
-                          color: AppColors.error.withValues(alpha: 0.7),
+                          color: colorScheme.error.withValues(alpha: 0.7),
                         ),
                       ),
                     ],
@@ -106,7 +109,7 @@ class SettingsDangerCard extends StatelessWidget {
                 ),
                 Icon(
                   Icons.warning_rounded,
-                  color: AppColors.error.withValues(alpha: 0.4),
+                  color: colorScheme.error.withValues(alpha: 0.4),
                   size: 20.sp,
                 ),
               ],

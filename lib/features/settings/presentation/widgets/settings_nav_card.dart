@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 import 'settings_icon_avatar.dart';
 
@@ -23,6 +22,7 @@ class SettingsNavCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Semantics(
       button: true,
       enabled: enabled,
@@ -30,7 +30,7 @@ class SettingsNavCard extends StatelessWidget {
       child: Opacity(
         opacity: enabled ? 1.0 : 0.55,
         child: Material(
-          color: AppColors.surfaceContainerLow,
+          color: colorScheme.surfaceContainerLow,
           borderRadius: BorderRadius.circular(12.r),
           child: InkWell(
             onTap: enabled ? onTap : null,
@@ -41,8 +41,8 @@ class SettingsNavCard extends StatelessWidget {
                 children: [
                   SettingsIconAvatar(
                     icon: icon,
-                    backgroundColor: AppColors.surfaceContainerHighest,
-                    iconColor: AppColors.onSurfaceVariant,
+                    backgroundColor: colorScheme.surfaceContainerHighest,
+                    iconColor: colorScheme.onSurfaceVariant,
                   ),
                   12.horizontalSpace,
                   Expanded(
@@ -56,13 +56,18 @@ class SettingsNavCard extends StatelessWidget {
                           ),
                         ),
                         4.verticalSpace,
-                        Text(subtitle, style: TextStyles.captionMuted),
+                        Text(
+                          subtitle,
+                          style: TextStyles.captionMuted.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Icon(
                     Icons.chevron_right_rounded,
-                    color: AppColors.outline.withValues(alpha: 0.4),
+                    color: colorScheme.outline.withValues(alpha: 0.4),
                     size: 20.sp,
                   ),
                 ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 import 'settings_icon_avatar.dart';
 
@@ -25,18 +24,19 @@ class SettingsDropdownCard<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: context.responsive.edgeInsets(all: 20),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow,
+        color: colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
         children: [
           SettingsIconAvatar(
             icon: icon,
-            backgroundColor: AppColors.surfaceContainerHighest,
-            iconColor: AppColors.onSurfaceVariant,
+            backgroundColor: colorScheme.surfaceContainerHighest,
+            iconColor: colorScheme.onSurfaceVariant,
           ),
           12.horizontalSpace,
           Expanded(
@@ -48,7 +48,12 @@ class SettingsDropdownCard<T> extends StatelessWidget {
                   style: TextStyles.screenTitle.copyWith(fontSize: 14.sp),
                 ),
                 4.verticalSpace,
-                Text(subtitle, style: TextStyles.captionMuted),
+                Text(
+                  subtitle,
+                  style: TextStyles.captionMuted.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
               ],
             ),
           ),
@@ -60,11 +65,11 @@ class SettingsDropdownCard<T> extends StatelessWidget {
               items: items,
               onChanged: onChanged,
               underline: const SizedBox.shrink(),
-              dropdownColor: AppColors.surfaceContainerHigh,
+              dropdownColor: colorScheme.surfaceContainerHigh,
               style: TextStyles.screenTitle.copyWith(fontSize: 13.sp),
               icon: Icon(
                 Icons.arrow_drop_down_rounded,
-                color: AppColors.onSurfaceVariant,
+                color: colorScheme.onSurfaceVariant,
                 size: 20.sp,
               ),
             ),

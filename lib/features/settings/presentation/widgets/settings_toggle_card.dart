@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/responsive_helper.dart';
-import '../../../../core/themes/app_colors.dart';
 import '../../../../core/themes/text_styles.dart';
 import 'settings_icon_avatar.dart';
 
@@ -23,18 +22,19 @@ class SettingsToggleCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       padding: context.responsive.edgeInsets(all: 20),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow,
+        color: colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
         children: [
           SettingsIconAvatar(
             icon: icon,
-            backgroundColor: AppColors.surfaceContainerHighest,
-            iconColor: AppColors.onSurfaceVariant,
+            backgroundColor: colorScheme.surfaceContainerHighest,
+            iconColor: colorScheme.onSurfaceVariant,
           ),
           12.horizontalSpace,
           Expanded(
@@ -46,7 +46,12 @@ class SettingsToggleCard extends StatelessWidget {
                   style: TextStyles.screenTitle.copyWith(fontSize: 14.sp),
                 ),
                 4.verticalSpace,
-                Text(subtitle, style: TextStyles.captionMuted),
+                Text(
+                  subtitle,
+                  style: TextStyles.captionMuted.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
               ],
             ),
           ),
@@ -57,7 +62,7 @@ class SettingsToggleCard extends StatelessWidget {
             child: Switch(
               value: value,
               onChanged: onChanged,
-              activeThumbColor: AppColors.primary,
+              activeThumbColor: colorScheme.primary,
             ),
           ),
         ],
