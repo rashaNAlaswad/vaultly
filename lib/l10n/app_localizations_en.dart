@@ -248,4 +248,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vaultIdentity => 'VAULT IDENTITY';
+
+  @override
+  String get biometricTouchToUnlock => 'TOUCH TO UNLOCK';
+
+  @override
+  String get biometricOrUsePin => 'OR USE PIN';
+
+  @override
+  String get biometricPromptReason =>
+      'Use your fingerprint to unlock your vault';
+
+  @override
+  String get biometricUnlockSemanticLabel => 'Unlock with fingerprint';
 }

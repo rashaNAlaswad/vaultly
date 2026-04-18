@@ -559,6 +559,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'VAULT IDENTITY'**
   String get vaultIdentity;
+
+  /// No description provided for @biometricTouchToUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'TOUCH TO UNLOCK'**
+  String get biometricTouchToUnlock;
+
+  /// No description provided for @biometricOrUsePin.
+  ///
+  /// In en, this message translates to:
+  /// **'OR USE PIN'**
+  String get biometricOrUsePin;
+
+  /// No description provided for @biometricPromptReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Use your fingerprint to unlock your vault'**
+  String get biometricPromptReason;
+
+  /// No description provided for @biometricUnlockSemanticLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock with fingerprint'**
+  String get biometricUnlockSemanticLabel;
 }
 
 class _AppLocalizationsDelegate

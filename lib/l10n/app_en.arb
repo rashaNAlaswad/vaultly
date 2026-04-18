@@ -109,5 +109,10 @@
   "pageNotFound": "Page Not Found",
   "goToHome": "Go to Home",
 
-  "vaultIdentity": "VAULT IDENTITY"
+  "vaultIdentity": "VAULT IDENTITY",
+
+  "biometricTouchToUnlock": "TOUCH TO UNLOCK",
+  "biometricOrUsePin": "OR USE PIN",
+  "biometricPromptReason": "Use your fingerprint to unlock your vault",
+  "biometricUnlockSemanticLabel": "Unlock with fingerprint"
 }

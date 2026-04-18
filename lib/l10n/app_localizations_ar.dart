@@ -247,4 +247,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get vaultIdentity => 'هوية الخزنة';
+
+  @override
+  String get biometricTouchToUnlock => 'المس للفتح';
+
+  @override
+  String get biometricOrUsePin => 'أو استخدم الرقم السري';
+
+  @override
+  String get biometricPromptReason => 'استخدم بصمتك لفتح الخزنة';
+
+  @override
+  String get biometricUnlockSemanticLabel => 'فتح ببصمة الإصبع';
 }

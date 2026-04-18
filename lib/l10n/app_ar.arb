@@ -109,5 +109,10 @@
   "pageNotFound": "الصفحة غير موجودة",
   "goToHome": "العودة للرئيسية",
 
-  "vaultIdentity": "هوية الخزنة"
+  "vaultIdentity": "هوية الخزنة",
+
+  "biometricTouchToUnlock": "المس للفتح",
+  "biometricOrUsePin": "أو استخدم الرقم السري",
+  "biometricPromptReason": "استخدم بصمتك لفتح الخزنة",
+  "biometricUnlockSemanticLabel": "فتح ببصمة الإصبع"
 }
