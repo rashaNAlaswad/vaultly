@@ -1,47 +1,48 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../core/constants/shared_pref_keys.dart';
+import '../../../../core/providers/shared_preferences_provider.dart';
+import '../../data/models/settings_state.dart';
+import '../../data/repositories/settings_repository_impl.dart';
+import '../../domain/repositories/settings_repository.dart';
 
 part 'settings_provider.g.dart';
 
-class SettingsState {
-  const SettingsState({
-    this.biometricUnlock = false,
-    this.lockOnBackground = true,
-  });
-
-  final bool biometricUnlock;
-  final bool lockOnBackground;
-
-  SettingsState copyWith({bool? biometricUnlock, bool? lockOnBackground}) =>
-      SettingsState(
-        biometricUnlock: biometricUnlock ?? this.biometricUnlock,
-        lockOnBackground: lockOnBackground ?? this.lockOnBackground,
-      );
+@riverpod
+SettingsRepository settingsRepository(Ref ref) {
+  final prefs = ref.watch(sharedPreferencesProvider);
+  return SettingsRepositoryImpl(prefs);
 }
 
 @Riverpod(keepAlive: true)
 class Settings extends _$Settings {
-  late SharedPreferences _prefs;
-
   @override
-  Future<SettingsState> build() async {
-    _prefs = await SharedPreferences.getInstance();
-    return SettingsState(
-      biometricUnlock: _prefs.getBool(SharedPrefKeys.biometricUnlock) ?? false,
-      lockOnBackground:
-          _prefs.getBool(SharedPrefKeys.lockOnBackground) ?? true,
-    );
+  FutureOr<SettingsState> build() async {
+    final repo = ref.watch(settingsRepositoryProvider);
+    return repo.load();
   }
 
   Future<void> setBiometricUnlock(bool value) async {
-    await _prefs.setBool(SharedPrefKeys.biometricUnlock, value);
+    final repo = ref.read(settingsRepositoryProvider);
+    await repo.setBiometricUnlock(value: value);
     state = AsyncData(state.requireValue.copyWith(biometricUnlock: value));
   }
 
   Future<void> setLockOnBackground(bool value) async {
-    await _prefs.setBool(SharedPrefKeys.lockOnBackground, value);
+    final repo = ref.read(settingsRepositoryProvider);
+    await repo.setLockOnBackground(value: value);
     state = AsyncData(state.requireValue.copyWith(lockOnBackground: value));
+  }
+
+  Future<void> setThemeMode(ThemeMode mode) async {
+    final repo = ref.read(settingsRepositoryProvider);
+    await repo.setThemeMode(value: mode);
+    state = AsyncData(state.requireValue.copyWith(themeMode: mode));
+  }
+
+  Future<void> setLocale(Locale locale) async {
+    final repo = ref.read(settingsRepositoryProvider);
+    await repo.setLocale(value: locale);
+    state = AsyncData(state.requireValue.copyWith(locale: locale));
   }
 }
