@@ -49,3 +49,51 @@ final class AuthRepositoryProvider
 }
 
 String _$authRepositoryHash() => r'f62ab297b398ab67b94a2c6d28cd41ffe7077cc2';
+
+@ProviderFor(biometricRepository)
+final biometricRepositoryProvider = BiometricRepositoryProvider._();
+
+final class BiometricRepositoryProvider
+    extends
+        $FunctionalProvider<
+          BiometricRepository,
+          BiometricRepository,
+          BiometricRepository
+        >
+    with $Provider<BiometricRepository> {
+  BiometricRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'biometricRepositoryProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$biometricRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<BiometricRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  BiometricRepository create(Ref ref) {
+    return biometricRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BiometricRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<BiometricRepository>(value),
+    );
+  }
+}
+
+String _$biometricRepositoryHash() =>
+    r'281c0548639d347ac336885bb30a8830da4d4ea1';
