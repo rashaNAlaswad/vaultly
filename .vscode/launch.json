@@ -10,7 +10,9 @@
                 "--flavor",
                 "Development",
                 "--target",
-                "lib/main_development.dart"
+                "lib/main_development.dart",
+                "--dart-define=SUPABASE_URL= Enter your Supabase URL here",
+                "--dart-define=SUPABASE_PUBLISHABLE_KEY= Enter your Supabase publishable key here"
             ]
         },
         {
@@ -22,7 +24,9 @@
                 "--flavor",
                 "Production",
                 "--target",
-                "lib/main_production.dart"
+                "lib/main_production.dart",
+                "--dart-define=SUPABASE_URL= Enter your Supabase URL here",
+                "--dart-define=SUPABASE_PUBLISHABLE_KEY= Enter your Supabase publishable key here"
             ]
         }
     ],
