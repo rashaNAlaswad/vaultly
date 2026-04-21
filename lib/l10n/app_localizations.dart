@@ -104,6 +104,12 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
   /// No description provided for @save.
   ///
   /// In en, this message translates to:
@@ -569,7 +575,7 @@ abstract class AppLocalizations {
   /// No description provided for @biometricOrUsePin.
   ///
   /// In en, this message translates to:
-  /// **'OR USE PIN'**
+  /// **'OR USE YOUR PIN'**
   String get biometricOrUsePin;
 
   /// No description provided for @biometricPromptReason.
@@ -583,6 +589,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unlock with fingerprint'**
   String get biometricUnlockSemanticLabel;
+
+  /// No description provided for @settingsAuthSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication'**
+  String get settingsAuthSection;
+
+  /// No description provided for @settingsChangeMasterPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Change Master PIN'**
+  String get settingsChangeMasterPin;
+
+  /// No description provided for @settingsChangeMasterPinSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your 6-digit access code'**
+  String get settingsChangeMasterPinSubtitle;
+
+  /// No description provided for @settingsSetupPinFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up a PIN first'**
+  String get settingsSetupPinFirst;
+
+  /// No description provided for @settingsBiometricUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric Unlock'**
+  String get settingsBiometricUnlock;
+
+  /// No description provided for @settingsBiometricUnlockSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Fingerprint'**
+  String get settingsBiometricUnlockSubtitle;
+
+  /// No description provided for @settingsAutoLockSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-lock'**
+  String get settingsAutoLockSection;
+
+  /// No description provided for @settingsLockOnBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock on Background'**
+  String get settingsLockOnBackground;
+
+  /// No description provided for @settingsLockOnBackgroundSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Lock when app is minimized'**
+  String get settingsLockOnBackgroundSubtitle;
+
+  /// No description provided for @settingsAppearanceSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settingsAppearanceSection;
+
+  /// No description provided for @settingsTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get settingsTheme;
+
+  /// No description provided for @settingsThemeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose light, dark, or system default'**
+  String get settingsThemeSubtitle;
+
+  /// No description provided for @settingsThemeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get settingsThemeSystem;
+
+  /// No description provided for @settingsThemeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsThemeLight;
+
+  /// No description provided for @settingsThemeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settingsThemeDark;
+
+  /// No description provided for @settingsLanguageSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settingsLanguageSection;
+
+  /// No description provided for @settingsAppLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'App Language'**
+  String get settingsAppLanguage;
+
+  /// No description provided for @settingsAppLanguageSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred language'**
+  String get settingsAppLanguageSubtitle;
+
+  /// No description provided for @settingsDataSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Data'**
+  String get settingsDataSection;
+
+  /// No description provided for @settingsWipeAllData.
+  ///
+  /// In en, this message translates to:
+  /// **'Wipe All Data'**
+  String get settingsWipeAllData;
+
+  /// No description provided for @settingsWipeAllDataSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Irreversible. Permanent vault deletion.'**
+  String get settingsWipeAllDataSubtitle;
+
+  /// No description provided for @settingsWipeAllDataConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Wipe All Data?'**
+  String get settingsWipeAllDataConfirmTitle;
+
+  /// No description provided for @settingsWipeAllDataConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete all your vault data. This action cannot be undone.'**
+  String get settingsWipeAllDataConfirmMessage;
 }
 
 class _AppLocalizationsDelegate

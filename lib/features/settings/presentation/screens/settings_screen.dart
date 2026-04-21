@@ -30,12 +30,14 @@ class SettingsScreen extends ConsumerWidget {
       authSessionProvider.select((s) => s.asData?.value.hasPin ?? false),
     );
 
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             AppScreenHeader(
-              titleWidget: Text('Settings', style: TextStyles.screenTitle),
+              titleWidget: Text(l10n.settings, style: TextStyles.screenTitle),
               onBack: () =>
                   context.canPop() ? context.pop() : context.go(AppRoutes.home),
             ).fadeInSlide(delay: 0),
@@ -46,64 +48,64 @@ class SettingsScreen extends ConsumerWidget {
                   vertical: 8.0,
                 ),
                 children: [
-                  const SettingsSectionHeader(
-                    title: 'Authentication',
+                  SettingsSectionHeader(
+                    title: l10n.settingsAuthSection,
                     icon: Icons.shield_rounded,
                   ).fadeInSlide(delay: 150),
                   12.verticalSpace,
                   SettingsNavCard(
                     icon: Icons.password_rounded,
-                    title: 'Change Master PIN',
+                    title: l10n.settingsChangeMasterPin,
                     subtitle: hasPin
-                        ? 'Update your 6-digit access code'
-                        : 'Set up a PIN first',
+                        ? l10n.settingsChangeMasterPinSubtitle
+                        : l10n.settingsSetupPinFirst,
                     enabled: hasPin,
                     onTap: () => context.push(AppRoutes.changePin),
                   ).listItemAnimation(index: 0, baseDelay: 200),
                   12.verticalSpace,
                   SettingsToggleCard(
                     icon: Icons.fingerprint_rounded,
-                    title: 'Biometric Unlock',
-                    subtitle: 'Use Face ID or Fingerprint',
+                    title: l10n.settingsBiometricUnlock,
+                    subtitle: l10n.settingsBiometricUnlockSubtitle,
                     value: settings.biometricUnlock,
                     onChanged: notifier.setBiometricUnlock,
                   ).listItemAnimation(index: 1, baseDelay: 200),
                   32.verticalSpace,
-                  const SettingsSectionHeader(
-                    title: 'Auto-lock',
+                  SettingsSectionHeader(
+                    title: l10n.settingsAutoLockSection,
                     icon: Icons.timer_rounded,
                   ).fadeInSlide(delay: 380),
                   12.verticalSpace,
                   SettingsToggleCard(
                     icon: Icons.visibility_off_rounded,
-                    title: 'Lock on Background',
-                    subtitle: 'Lock when app is minimized',
+                    title: l10n.settingsLockOnBackground,
+                    subtitle: l10n.settingsLockOnBackgroundSubtitle,
                     value: settings.lockOnBackground,
                     onChanged: notifier.setLockOnBackground,
                   ).listItemAnimation(index: 1, baseDelay: 430),
                   32.verticalSpace,
-                  const SettingsSectionHeader(
-                    title: 'Appearance',
+                  SettingsSectionHeader(
+                    title: l10n.settingsAppearanceSection,
                     icon: Icons.palette_rounded,
                   ).fadeInSlide(delay: 480),
                   12.verticalSpace,
                   SettingsDropdownCard<ThemeMode>(
                     icon: Icons.brightness_6_rounded,
-                    title: 'Theme',
-                    subtitle: 'Choose light, dark, or system default',
+                    title: l10n.settingsTheme,
+                    subtitle: l10n.settingsThemeSubtitle,
                     value: settings.themeMode,
-                    items: const [
+                    items: [
                       DropdownMenuItem(
                         value: ThemeMode.system,
-                        child: Text('System'),
+                        child: Text(l10n.settingsThemeSystem),
                       ),
                       DropdownMenuItem(
                         value: ThemeMode.light,
-                        child: Text('Light'),
+                        child: Text(l10n.settingsThemeLight),
                       ),
                       DropdownMenuItem(
                         value: ThemeMode.dark,
-                        child: Text('Dark'),
+                        child: Text(l10n.settingsThemeDark),
                       ),
                     ],
                     onChanged: (value) {
@@ -113,15 +115,15 @@ class SettingsScreen extends ConsumerWidget {
                     },
                   ).listItemAnimation(index: 1, baseDelay: 530),
                   32.verticalSpace,
-                  const SettingsSectionHeader(
-                    title: 'Language',
+                  SettingsSectionHeader(
+                    title: l10n.settingsLanguageSection,
                     icon: Icons.language_rounded,
                   ).fadeInSlide(delay: 580),
                   12.verticalSpace,
                   SettingsDropdownCard<String>(
                     icon: Icons.translate_rounded,
-                    title: 'App Language',
-                    subtitle: 'Choose your preferred language',
+                    title: l10n.settingsAppLanguage,
+                    subtitle: l10n.settingsAppLanguageSubtitle,
                     value: settings.locale.languageCode,
                     items: AppLocalizations.supportedLocales
                         .map(
@@ -138,19 +140,17 @@ class SettingsScreen extends ConsumerWidget {
                     },
                   ).listItemAnimation(index: 1, baseDelay: 630),
                   32.verticalSpace,
-                  const SettingsSectionHeader(
-                    title: 'Data',
+                  SettingsSectionHeader(
+                    title: l10n.settingsDataSection,
                     icon: Icons.cloud_sync_rounded,
                   ).fadeInSlide(delay: 780),
                   12.verticalSpace,
                   SettingsDangerCard(
                     icon: Icons.delete_forever_rounded,
-                    title: 'Wipe All Data',
-                    subtitle: 'Irreversible. Permanent vault deletion.',
-                    confirmTitle: 'Wipe All Data?',
-                    confirmMessage:
-                        'This will permanently delete all your vault data. '
-                        'This action cannot be undone.',
+                    title: l10n.settingsWipeAllData,
+                    subtitle: l10n.settingsWipeAllDataSubtitle,
+                    confirmTitle: l10n.settingsWipeAllDataConfirmTitle,
+                    confirmMessage: l10n.settingsWipeAllDataConfirmMessage,
                     onConfirmed: () async {
                       await ref
                           .read(passwordsProvider.notifier)

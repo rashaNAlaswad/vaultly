@@ -1,23 +1,20 @@
 {
   "@@locale": "en",
-
   "cancel": "Cancel",
+  "confirm": "Confirm",
   "save": "Save",
   "delete": "Delete",
   "add": "Add",
   "required": "Required",
   "all": "All",
   "regenerate": "Regenerate",
-
   "appName": "Vaultly",
   "appTagline": "Vaultly uses a Master PIN instead of a password for total privacy.",
-
   "emailLabel": "Secure Email Address",
   "emailHint": "name@example.com",
   "sendCode": "Send Verification Code",
   "emailRequired": "Please enter your email",
   "emailInvalid": "Please enter a valid email",
-
   "verifyEmail": "Verify Email",
   "securityCheck": "Security Check",
   "otpSentPrefix": "We sent a 6-digit code to ",
@@ -41,14 +38,12 @@
   },
   "resend": "Resend",
   "incorrectCode": "Incorrect code, try again",
-
   "createPinTitle": "Create your PIN",
   "createPinSubtitle": "Your PIN encrypts your vault. We never store it.",
   "confirmPinTitle": "Confirm your PIN",
   "confirmPinSubtitle": "Enter your PIN again to confirm.",
   "unlockPinTitle": "Enter your PIN",
   "unlockPinSubtitle": "Unlock your vault to continue.",
-
   "changePinVerifyTitle": "Enter current PIN",
   "changePinVerifySubtitle": "Confirm your identity before changing your PIN.",
   "changePinNewTitle": "Enter new PIN",
@@ -56,7 +51,6 @@
   "changePinConfirmTitle": "Confirm new PIN",
   "changePinConfirmSubtitle": "Enter your new PIN again to confirm.",
   "pinChanged": "PIN changed successfully.",
-
   "hello": "Hello!",
   "settings": "Settings",
   "deletePasswordTitle": "Delete password?",
@@ -77,7 +71,6 @@
   "vaultEmpty": "Your vault is empty",
   "vaultEmptySubtitle": "Tap + to add your first password\nand keep your life organized.",
   "createPinToAdd": "Create a PIN to add passwords to your vault",
-
   "newPassword": "New Password",
   "editPassword": "Edit Password",
   "savePassword": "Save password",
@@ -95,24 +88,42 @@
   "notesLabel": "Optional Notes",
   "passwordSaved": "Password saved!",
   "failedToSave": "Failed to save. Please try again.",
-
   "addTagTitle": "Add Tag",
   "tagNameHint": "e.g. Gaming",
   "tagNameLabel": "Tag Name",
   "categoryTags": "Category Tags",
   "addTagButton": "Add Tag",
-
   "strengthWeak": "WEAK",
   "strengthModerate": "MODERATE",
   "strengthSecure": "SECURE",
-
   "pageNotFound": "Page Not Found",
   "goToHome": "Go to Home",
-
   "vaultIdentity": "VAULT IDENTITY",
-
   "biometricTouchToUnlock": "TOUCH TO UNLOCK",
-  "biometricOrUsePin": "OR USE PIN",
+  "biometricOrUsePin": "OR USE YOUR PIN",
   "biometricPromptReason": "Use your fingerprint to unlock your vault",
-  "biometricUnlockSemanticLabel": "Unlock with fingerprint"
+  "biometricUnlockSemanticLabel": "Unlock with fingerprint",
+  "settingsAuthSection": "Authentication",
+  "settingsChangeMasterPin": "Change Master PIN",
+  "settingsChangeMasterPinSubtitle": "Update your 6-digit access code",
+  "settingsSetupPinFirst": "Set up a PIN first",
+  "settingsBiometricUnlock": "Biometric Unlock",
+  "settingsBiometricUnlockSubtitle": "Use Fingerprint",
+  "settingsAutoLockSection": "Auto-lock",
+  "settingsLockOnBackground": "Lock on Background",
+  "settingsLockOnBackgroundSubtitle": "Lock when app is minimized",
+  "settingsAppearanceSection": "Appearance",
+  "settingsTheme": "Theme",
+  "settingsThemeSubtitle": "Choose light, dark, or system default",
+  "settingsThemeSystem": "System",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsLanguageSection": "Language",
+  "settingsAppLanguage": "App Language",
+  "settingsAppLanguageSubtitle": "Choose your preferred language",
+  "settingsDataSection": "Data",
+  "settingsWipeAllData": "Wipe All Data",
+  "settingsWipeAllDataSubtitle": "Irreversible. Permanent vault deletion.",
+  "settingsWipeAllDataConfirmTitle": "Wipe All Data?",
+  "settingsWipeAllDataConfirmMessage": "This will permanently delete all your vault data. This action cannot be undone."
 }

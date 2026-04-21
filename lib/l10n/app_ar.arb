@@ -1,23 +1,20 @@
 {
   "@@locale": "ar",
-
   "cancel": "إلغاء",
+  "confirm": "تأكيد",
   "save": "حفظ",
   "delete": "حذف",
   "add": "إضافة",
   "required": "مطلوب",
   "all": "الكل",
   "regenerate": "إعادة توليد",
-
   "appName": "Vaultly",
   "appTagline": "يستخدم Vaultly رقم دخول بدلاً من كلمة المرور لضمان الخصوصية التامة.",
-
   "emailLabel": "البريد الإلكتروني الآمن",
   "emailHint": "name@example.com",
   "sendCode": "إرسال رمز التحقق",
   "emailRequired": "الرجاء إدخال البريد الإلكتروني",
   "emailInvalid": "الرجاء إدخال بريد إلكتروني صالح",
-
   "verifyEmail": "تحقق من البريد",
   "securityCheck": "التحقق الأمني",
   "otpSentPrefix": "أرسلنا رمزاً من 6 أرقام إلى ",
@@ -41,14 +38,12 @@
   },
   "resend": "إعادة الإرسال",
   "incorrectCode": "رمز غير صحيح، حاول مجدداً",
-
   "createPinTitle": "أنشئ رمز الدخول",
   "createPinSubtitle": "يقوم رمز دخول بتشفير خزنة كلماتك. لا نقوم بتخزينه أبداً.",
   "confirmPinTitle": "أكّد رمز الدخول",
   "confirmPinSubtitle": "أدخل رمز الدخول مرة أخرى للتأكيد.",
   "unlockPinTitle": "أدخل رمز الدخول",
   "unlockPinSubtitle": "افتح الخزنة للمتابعة.",
-
   "changePinVerifyTitle": "أدخل رمز الدخول الحالي",
   "changePinVerifySubtitle": "تحقق من هويتك قبل تغيير رمز الدخول.",
   "changePinNewTitle": "أدخل رمز الدخول الجديد",
@@ -56,7 +51,6 @@
   "changePinConfirmTitle": "أكّد رمز الدخول الجديد",
   "changePinConfirmSubtitle": "أدخل رمز الدخول الجديد مرة أخرى للتأكيد.",
   "pinChanged": "تم تغيير رمز الدخول بنجاح.",
-
   "hello": "مرحباً!",
   "settings": "الإعدادات",
   "deletePasswordTitle": "حذف كلمة المرور؟",
@@ -77,7 +71,6 @@
   "vaultEmpty": "الخزنة فارغة",
   "vaultEmptySubtitle": "اضغط + لإضافة أول كلمة مرور\nونظّم حياتك.",
   "createPinToAdd": "أنشئ رمز الدخول لإضافة كلمات مرور إلى الخزنة",
-
   "newPassword": "كلمة مرور جديدة",
   "editPassword": "تعديل كلمة المرور",
   "savePassword": "حفظ كلمة المرور",
@@ -95,24 +88,42 @@
   "notesLabel": "ملاحظات اختيارية",
   "passwordSaved": "تم حفظ كلمة المرور!",
   "failedToSave": "فشل الحفظ. الرجاء المحاولة مجدداً.",
-
   "addTagTitle": "إضافة وسم",
   "tagNameHint": "مثال: الألعاب",
   "tagNameLabel": "اسم الوسم",
   "categoryTags": "وسوم الفئة",
   "addTagButton": "إضافة وسم",
-
   "strengthWeak": "ضعيف",
   "strengthModerate": "متوسط",
   "strengthSecure": "آمن",
-
   "pageNotFound": "الصفحة غير موجودة",
   "goToHome": "العودة للرئيسية",
-
   "vaultIdentity": "هوية الخزنة",
-
   "biometricTouchToUnlock": "المس للفتح",
-  "biometricOrUsePin": "أو استخدم الرقم السري",
+  "biometricOrUsePin": "أو استخدم رقمك السري",
   "biometricPromptReason": "استخدم بصمتك لفتح الخزنة",
-  "biometricUnlockSemanticLabel": "فتح ببصمة الإصبع"
+  "biometricUnlockSemanticLabel": "فتح ببصمة الإصبع",
+  "settingsAuthSection": "المصادقة",
+  "settingsChangeMasterPin": "تغيير رمز الدخول الرئيسي",
+  "settingsChangeMasterPinSubtitle": "تحديث رمز الوصول المكوّن من 6 أرقام",
+  "settingsSetupPinFirst": "أنشئ رمز الدخول أولاً",
+  "settingsBiometricUnlock": "الفتح بالبصمة",
+  "settingsBiometricUnlockSubtitle": "استخدم بصمة الإصبع",
+  "settingsAutoLockSection": "القفل التلقائي",
+  "settingsLockOnBackground": "القفل عند الخلفية",
+  "settingsLockOnBackgroundSubtitle": "القفل عند تصغير التطبيق",
+  "settingsAppearanceSection": "المظهر",
+  "settingsTheme": "السمة",
+  "settingsThemeSubtitle": "اختر الفاتح أو الداكن أو الافتراضي",
+  "settingsThemeSystem": "النظام",
+  "settingsThemeLight": "فاتح",
+  "settingsThemeDark": "داكن",
+  "settingsLanguageSection": "اللغة",
+  "settingsAppLanguage": "لغة التطبيق",
+  "settingsAppLanguageSubtitle": "اختر لغتك المفضّلة",
+  "settingsDataSection": "البيانات",
+  "settingsWipeAllData": "مسح جميع البيانات",
+  "settingsWipeAllDataSubtitle": "لا رجعة فيه. حذف دائم للخزنة.",
+  "settingsWipeAllDataConfirmTitle": "مسح جميع البيانات؟",
+  "settingsWipeAllDataConfirmMessage": "سيؤدي هذا إلى حذف جميع بيانات خزنتك بشكل دائم. لا يمكن التراجع عن هذا الإجراء."
 }

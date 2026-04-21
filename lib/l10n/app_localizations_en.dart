@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cancel => 'Cancel';
 
   @override
+  String get confirm => 'Confirm';
+
+  @override
   String get save => 'Save';
 
   @override
@@ -253,7 +256,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get biometricTouchToUnlock => 'TOUCH TO UNLOCK';
 
   @override
-  String get biometricOrUsePin => 'OR USE PIN';
+  String get biometricOrUsePin => 'OR USE YOUR PIN';
 
   @override
   String get biometricPromptReason =>
@@ -261,4 +264,76 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get biometricUnlockSemanticLabel => 'Unlock with fingerprint';
+
+  @override
+  String get settingsAuthSection => 'Authentication';
+
+  @override
+  String get settingsChangeMasterPin => 'Change Master PIN';
+
+  @override
+  String get settingsChangeMasterPinSubtitle =>
+      'Update your 6-digit access code';
+
+  @override
+  String get settingsSetupPinFirst => 'Set up a PIN first';
+
+  @override
+  String get settingsBiometricUnlock => 'Biometric Unlock';
+
+  @override
+  String get settingsBiometricUnlockSubtitle => 'Use Fingerprint';
+
+  @override
+  String get settingsAutoLockSection => 'Auto-lock';
+
+  @override
+  String get settingsLockOnBackground => 'Lock on Background';
+
+  @override
+  String get settingsLockOnBackgroundSubtitle => 'Lock when app is minimized';
+
+  @override
+  String get settingsAppearanceSection => 'Appearance';
+
+  @override
+  String get settingsTheme => 'Theme';
+
+  @override
+  String get settingsThemeSubtitle => 'Choose light, dark, or system default';
+
+  @override
+  String get settingsThemeSystem => 'System';
+
+  @override
+  String get settingsThemeLight => 'Light';
+
+  @override
+  String get settingsThemeDark => 'Dark';
+
+  @override
+  String get settingsLanguageSection => 'Language';
+
+  @override
+  String get settingsAppLanguage => 'App Language';
+
+  @override
+  String get settingsAppLanguageSubtitle => 'Choose your preferred language';
+
+  @override
+  String get settingsDataSection => 'Data';
+
+  @override
+  String get settingsWipeAllData => 'Wipe All Data';
+
+  @override
+  String get settingsWipeAllDataSubtitle =>
+      'Irreversible. Permanent vault deletion.';
+
+  @override
+  String get settingsWipeAllDataConfirmTitle => 'Wipe All Data?';
+
+  @override
+  String get settingsWipeAllDataConfirmMessage =>
+      'This will permanently delete all your vault data. This action cannot be undone.';
 }

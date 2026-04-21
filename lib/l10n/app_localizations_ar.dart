@@ -12,6 +12,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cancel => 'إلغاء';
 
   @override
+  String get confirm => 'تأكيد';
+
+  @override
   String get save => 'حفظ';
 
   @override
@@ -252,11 +255,82 @@ class AppLocalizationsAr extends AppLocalizations {
   String get biometricTouchToUnlock => 'المس للفتح';
 
   @override
-  String get biometricOrUsePin => 'أو استخدم الرقم السري';
+  String get biometricOrUsePin => 'أو استخدم رقمك السري';
 
   @override
   String get biometricPromptReason => 'استخدم بصمتك لفتح الخزنة';
 
   @override
   String get biometricUnlockSemanticLabel => 'فتح ببصمة الإصبع';
+
+  @override
+  String get settingsAuthSection => 'المصادقة';
+
+  @override
+  String get settingsChangeMasterPin => 'تغيير رمز الدخول الرئيسي';
+
+  @override
+  String get settingsChangeMasterPinSubtitle =>
+      'تحديث رمز الوصول المكوّن من 6 أرقام';
+
+  @override
+  String get settingsSetupPinFirst => 'أنشئ رمز الدخول أولاً';
+
+  @override
+  String get settingsBiometricUnlock => 'الفتح بالبصمة';
+
+  @override
+  String get settingsBiometricUnlockSubtitle => 'استخدم بصمة الإصبع';
+
+  @override
+  String get settingsAutoLockSection => 'القفل التلقائي';
+
+  @override
+  String get settingsLockOnBackground => 'القفل عند الخلفية';
+
+  @override
+  String get settingsLockOnBackgroundSubtitle => 'القفل عند تصغير التطبيق';
+
+  @override
+  String get settingsAppearanceSection => 'المظهر';
+
+  @override
+  String get settingsTheme => 'السمة';
+
+  @override
+  String get settingsThemeSubtitle => 'اختر الفاتح أو الداكن أو الافتراضي';
+
+  @override
+  String get settingsThemeSystem => 'النظام';
+
+  @override
+  String get settingsThemeLight => 'فاتح';
+
+  @override
+  String get settingsThemeDark => 'داكن';
+
+  @override
+  String get settingsLanguageSection => 'اللغة';
+
+  @override
+  String get settingsAppLanguage => 'لغة التطبيق';
+
+  @override
+  String get settingsAppLanguageSubtitle => 'اختر لغتك المفضّلة';
+
+  @override
+  String get settingsDataSection => 'البيانات';
+
+  @override
+  String get settingsWipeAllData => 'مسح جميع البيانات';
+
+  @override
+  String get settingsWipeAllDataSubtitle => 'لا رجعة فيه. حذف دائم للخزنة.';
+
+  @override
+  String get settingsWipeAllDataConfirmTitle => 'مسح جميع البيانات؟';
+
+  @override
+  String get settingsWipeAllDataConfirmMessage =>
+      'سيؤدي هذا إلى حذف جميع بيانات خزنتك بشكل دائم. لا يمكن التراجع عن هذا الإجراء.';
 }

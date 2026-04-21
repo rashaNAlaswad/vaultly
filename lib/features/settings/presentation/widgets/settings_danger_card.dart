@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/helpers/responsive_helper.dart';
 import '../../../../core/themes/text_styles.dart';
 import '../../../../core/utils/utils.dart';
+import '../../../../l10n/app_localizations.dart';
 import 'settings_icon_avatar.dart';
 
 class SettingsDangerCard extends StatelessWidget {
@@ -25,6 +26,7 @@ class SettingsDangerCard extends StatelessWidget {
 
   Future<void> _showConfirmation(BuildContext context) async {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
     final confirmed = await Utils.showDefaultDialog(
       context,
       Column(
@@ -44,12 +46,12 @@ class SettingsDangerCard extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: Text('Cancel', style: TextStyles.captionMuted),
+            child: Text(l10n.cancel, style: TextStyles.captionMuted),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
             child: Text(
-              'Confirm',
+              l10n.confirm,
               style: TextStyles.captionMuted.copyWith(
                 color: colorScheme.error,
               ),
