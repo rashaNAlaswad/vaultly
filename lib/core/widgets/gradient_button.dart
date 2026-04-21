@@ -102,34 +102,30 @@ class _GradientButtonState extends State<GradientButton> {
                     decoration: widget.enabled
                         ? enabledDecoration
                         : disabledDecoration,
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 200),
-                      child: Row(
-                        key: const ValueKey('label'),
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            widget.label,
-                            style: widget.enabled
-                                ? TextStyles.buttonLabel.copyWith(
-                                    color: colorScheme.onPrimary,
-                                  )
-                                : TextStyles.buttonLabelDisabled.copyWith(
-                                    color: colorScheme.onSurfaceVariant,
-                                  ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.label,
+                          style: widget.enabled
+                              ? TextStyles.buttonLabel.copyWith(
+                                  color: colorScheme.onPrimary,
+                                )
+                              : TextStyles.buttonLabelDisabled.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                        ),
+                        if (widget.icon != null) ...[
+                          12.horizontalSpace,
+                          Icon(
+                            widget.icon,
+                            color: widget.enabled
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurfaceVariant,
+                            size: 20,
                           ),
-                          if (widget.icon != null) ...[
-                            12.horizontalSpace,
-                            Icon(
-                              widget.icon,
-                              color: widget.enabled
-                                  ? colorScheme.onPrimary
-                                  : colorScheme.onSurfaceVariant,
-                              size: 20,
-                            ),
-                          ],
                         ],
-                      ),
+                      ],
                     ),
                   ),
           ),
