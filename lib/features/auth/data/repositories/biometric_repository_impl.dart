@@ -12,7 +12,8 @@ class BiometricRepositoryImpl implements BiometricRepository {
     final isSupported = await _auth.isDeviceSupported();
     if (!isSupported) return false;
     final available = await _auth.getAvailableBiometrics();
-    return available.contains(BiometricType.fingerprint);
+    return available.contains(BiometricType.fingerprint) ||
+        available.contains(BiometricType.strong);
   }
 
   @override
