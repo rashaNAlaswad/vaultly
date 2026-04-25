@@ -16,19 +16,18 @@ class EmailEntryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<void>>(sendOtpProvider, (_, state) {
+    String? submittedEmail;
+
+    ref.listen(sendOtpProvider, (_, state) {
       state.whenOrNull(
-        error: (error, _) => AppSnackBar.error(context, error.toString()),
+        data: (_) {
+          if (submittedEmail != null) {
+            context.push(AppRoutes.otpVerification, extra: submittedEmail);
+          }
+        },
+        error: (e, _) => AppSnackBar.error(context, e.toString()),
       );
     });
-
-    Future<void> onSubmit(String email) async {
-      await ref.read(sendOtpProvider.notifier).sendOtp(email);
-      final state = ref.read(sendOtpProvider);
-      if (context.mounted && !state.hasError) {
-        context.push(AppRoutes.otpVerification, extra: email);
-      }
-    }
 
     final state = ref.watch(sendOtpProvider);
 
@@ -59,7 +58,10 @@ class EmailEntryScreen extends ConsumerWidget {
                         40.verticalSpace,
                         EmailForm(
                           isLoading: state.isLoading,
-                          onSubmit: (email) async => await onSubmit(email),
+                          onSubmit: (email) {
+                            submittedEmail = email;
+                            ref.read(sendOtpProvider.notifier).sendOtp(email);
+                          },
                         ),
                       ],
                     ),
