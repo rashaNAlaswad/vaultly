@@ -26,7 +26,7 @@ final class PasswordRepositoryProvider
         argument: null,
         retry: null,
         name: r'passwordRepositoryProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -55,7 +55,7 @@ final class PasswordRepositoryProvider
 }
 
 String _$passwordRepositoryHash() =>
-    r'0483adcb5ddc342f74eea291c6b86231997aa69e';
+    r'289f2c506a37787c5817be6c434cdacc87d345c2';
 
 @ProviderFor(userTagsRepository)
 final userTagsRepositoryProvider = UserTagsRepositoryProvider._();
@@ -74,7 +74,7 @@ final class UserTagsRepositoryProvider
         argument: null,
         retry: null,
         name: r'userTagsRepositoryProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -103,4 +103,4 @@ final class UserTagsRepositoryProvider
 }
 
 String _$userTagsRepositoryHash() =>
-    r'81fcdc0612a824afdb72926630b19ed239f14152';
+    r'48321ad902e827687f9017911b71f3a6d09ded1d';
