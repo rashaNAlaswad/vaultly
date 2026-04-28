@@ -6,11 +6,9 @@ class VaultSearchBar extends StatelessWidget {
   const VaultSearchBar({
     super.key,
     required this.controller,
-    this.onChanged,
   });
 
   final TextEditingController controller;
-  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,6 @@ class VaultSearchBar extends StatelessWidget {
       child: AppTextField(
         controller: controller,
         hint: 'Search your vault',
-        onChanged: onChanged,
         prefixIcon: Icon(
           Icons.search_rounded,
           color: colorScheme.onSurfaceVariant,
