@@ -165,7 +165,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vaultEmptySubtitle => 'اضغط + لإضافة أول كلمة مرور\nونظّم حياتك.';
 
   @override
-  String get createPinToAdd => 'أنشئ رمز الدخول لإضافة كلمات مرور إلى الخزنة';
+  String get createPinToAdd => 'أنشأ رمز الدخول لإضافة كلمات مرور إلى الخزنة';
 
   @override
   String get newPassword => 'كلمة مرور جديدة';
