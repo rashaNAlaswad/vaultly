@@ -11,18 +11,23 @@ import '../../widgets/ambient_blob.dart';
 import '../widgets/email_form.dart';
 import '../widgets/hero_section.dart';
 
-class EmailEntryScreen extends ConsumerWidget {
+class EmailEntryScreen extends ConsumerStatefulWidget {
   const EmailEntryScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    String? submittedEmail;
+  ConsumerState<EmailEntryScreen> createState() => _EmailEntryScreenState();
+}
 
+class _EmailEntryScreenState extends ConsumerState<EmailEntryScreen> {
+  String? _submittedEmail;
+
+  @override
+  Widget build(BuildContext context) {
     ref.listen(sendOtpProvider, (_, state) {
       state.whenOrNull(
         data: (_) {
-          if (submittedEmail != null) {
-            context.push(AppRoutes.otpVerification, extra: submittedEmail);
+          if (_submittedEmail != null) {
+            context.push(AppRoutes.otpVerification, extra: _submittedEmail);
           }
         },
         error: (e, _) => AppSnackBar.error(context, e.toString()),
@@ -59,7 +64,7 @@ class EmailEntryScreen extends ConsumerWidget {
                         EmailForm(
                           isLoading: state.isLoading,
                           onSubmit: (email) {
-                            submittedEmail = email;
+                            _submittedEmail = email;
                             ref.read(sendOtpProvider.notifier).sendOtp(email);
                           },
                         ),
