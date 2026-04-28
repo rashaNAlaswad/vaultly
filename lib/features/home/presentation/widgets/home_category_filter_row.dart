@@ -19,20 +19,23 @@ class HomeCategoryFilterRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Wrap(
-        spacing: 8.w,
-        children: categories
-            .map(
-              (category) => CategoryChip(
-                label: category == 'All' ? l10n.all : category,
-                isSelected: selected == category,
-                onTap: () => onChanged(category),
-                semanticPrefix: 'Filter',
-              ),
-            )
-            .toList(),
+    return SizedBox(
+      height: 36.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          final category = categories[index];
+          return Padding(
+            padding: EdgeInsets.only(right: 8.w),
+            child: CategoryChip(
+              label: category == 'All' ? l10n.all : category,
+              isSelected: selected == category,
+              onTap: () => onChanged(category),
+              semanticPrefix: 'Filter',
+            ),
+          );
+        },
       ),
     );
   }
