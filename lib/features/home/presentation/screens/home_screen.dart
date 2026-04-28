@@ -81,16 +81,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ).fadeInSlide(delay: 150),
                       ],
                       20.verticalSpace,
-                      RepaintBoundary(
-                        child: ValueListenableBuilder<String>(
-                          valueListenable: _categoryNotifier,
-                          builder: (context, selected, _) =>
-                              HomeCategoryFilterRow(
-                                categories: filterCategories,
-                                selected: selected,
-                                onChanged: (c) => _categoryNotifier.value = c,
-                              ),
-                        ),
+                      ValueListenableBuilder<String>(
+                        valueListenable: _categoryNotifier,
+                        builder: (context, selected, _) =>
+                            HomeCategoryFilterRow(
+                              categories: filterCategories,
+                              selected: selected,
+                              onChanged: (c) => _categoryNotifier.value = c,
+                            ),
                       ).fadeInSlide(delay: 250),
                       20.verticalSpace,
                     ]),
@@ -101,10 +99,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   searchListenable: _searchController,
                   categoryListenable: _categoryNotifier,
                   onDelete: (id) => _delete(id),
-                  onTap: (PasswordEntry entry) => context.push(
-                    AppRoutes.passwordDetail,
-                    extra: entry,
-                  ),
+                  onTap: (PasswordEntry entry) =>
+                      context.push(AppRoutes.passwordDetail, extra: entry),
                 ),
                 SliverToBoxAdapter(child: 100.verticalSpace),
               ],
