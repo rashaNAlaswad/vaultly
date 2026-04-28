@@ -21,7 +21,6 @@ class VaultFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reduceMotion = MediaQuery.disableAnimationsOf(context);
     final colorScheme = Theme.of(context).colorScheme;
 
     return Semantics(
@@ -29,14 +28,12 @@ class VaultFab extends StatelessWidget {
       button: true,
       enabled: enabled,
       child: Tooltip(
-        message: enabled ? '' : 'Create a PIN to add passwords',
+        message: enabled ? '' : AppLocalizations.of(context).createPinToAdd,
         triggerMode: TooltipTriggerMode.longPress,
         child: GestureDetector(
           onTap: () => _handleTap(context),
           child: AnimatedOpacity(
-            duration: reduceMotion
-                ? Duration.zero
-                : const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             opacity: enabled ? 1.0 : 0.55,
             child: Container(
               width: 60.w,
@@ -72,9 +69,7 @@ class VaultFab extends StatelessWidget {
                     : null,
               ),
               child: AnimatedSwitcher(
-                duration: reduceMotion
-                    ? Duration.zero
-                    : const Duration(milliseconds: 350),
+                duration: const Duration(milliseconds: 350),
                 transitionBuilder: (child, animation) => FadeTransition(
                   opacity: animation,
                   child: ScaleTransition(scale: animation, child: child),
