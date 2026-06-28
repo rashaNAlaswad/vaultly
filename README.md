@@ -18,7 +18,9 @@ A secure, cross-platform password manager built with Flutter. Store, organize, a
 - **Dark / Light / System Theme** — User-selectable at runtime
 - **Wipe Vault** — Secure data wipe from settings
 
----
+## Video
+
+https://github.com/user-attachments/assets/2f2d5bd1-0449-4487-92bf-7df4c93c26fe
 
 ## Tech Stack
 
